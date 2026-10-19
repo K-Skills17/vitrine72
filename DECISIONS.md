@@ -23,4 +23,4 @@
 | `golive_earliest_at = payment_date + 8 calendar days` | Spec says "day 8 after payment"; using calendar days not business days (spec is explicit). |
 | Annual holidays list seeded for 2026–2027; flagged in NEEDS for operator confirmation | Reduces blocking; operator must verify before first production intake. |
 | Before/after slider hidden unless client supplies paired images in intake | Avoids showing one-sided images; better UX. |
-| Portfolio `biodonth.com.br`, `studioafrorosas.com.br`, `gymera.com` included; `yohanny-kamilly.vercel.app` gated behind `enabled: false` in portfolio.json | Spec requirement. |
+| Portfolio `biodonth.com.br`, `studioafrorosas.com.br`, `gymeraactive.com` included; `yohanny-kamilly.vercel.app` gated behind `enabled: false` in portfolio.json | Spec requirement. |
