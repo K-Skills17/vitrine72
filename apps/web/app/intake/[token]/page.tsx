@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { CircleCheck } from "lucide-react";
 import { createServiceClient } from "@/lib/supabase/server";
 import { IntakeForm } from "@/components/intake/IntakeForm";
 
@@ -30,7 +31,9 @@ export default async function IntakePage({ params }: Props) {
     return (
       <main className="min-h-screen bg-brand-dark flex items-center justify-center px-4">
         <div className="max-w-lg text-center space-y-4">
-          <div className="text-5xl" aria-hidden>✅</div>
+          <div className="flex justify-center" aria-hidden>
+            <CircleCheck className="w-14 h-14 text-green-400" />
+          </div>
           <h1 className="text-2xl font-display font-bold text-white">
             Briefing enviado!
           </h1>

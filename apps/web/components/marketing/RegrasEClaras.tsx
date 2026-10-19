@@ -1,23 +1,24 @@
+import { RefreshCw, Timer, CalendarCheck, ShieldCheck } from "lucide-react";
 import { CORE_OFFER, RULES } from "@vitrine72/core";
 
 const RULES_LIST = [
   {
-    icon: "🔄",
+    Icon: RefreshCw,
     title: "1 rodada de revisão",
     desc: `Após receber a prévia, você tem ${RULES.revisionWindowHours}h para solicitar ajustes. Uma rodada de revisão está incluída.`,
   },
   {
-    icon: "⏱️",
+    Icon: Timer,
     title: `${CORE_OFFER.previewBusinessDays} dias úteis contam do briefing completo`,
     desc: "O prazo começa quando você termina de preencher o formulário, não quando paga.",
   },
   {
-    icon: "📅",
+    Icon: CalendarCheck,
     title: `Site vai ao ar a partir do dia ${RULES.goLiveMinDays}`,
     desc: "O site é publicado no mínimo 8 dias após a confirmação do pagamento, após sua aprovação.",
   },
   {
-    icon: "📋",
+    Icon: ShieldCheck,
     title: "Domínio no seu nome",
     desc: "O domínio é registrado no seu CPF ou CNPJ. É seu para sempre, mesmo que cancele o plano.",
   },
@@ -42,9 +43,7 @@ export function RegrasEClaras() {
               key={r.title}
               className="flex gap-4 p-6 bg-brand-dark rounded-xl border border-white/5"
             >
-              <span className="text-2xl flex-shrink-0" aria-hidden>
-                {r.icon}
-              </span>
+              <r.Icon className="w-6 h-6 text-brand-gold flex-shrink-0 mt-0.5" aria-hidden />
               <div>
                 <h3 className="text-white font-semibold">{r.title}</h3>
                 <p className="text-gray-400 text-sm mt-1 leading-relaxed">

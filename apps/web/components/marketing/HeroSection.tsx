@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { CORE_OFFER } from "@vitrine72/core";
 
 interface Props {
@@ -42,10 +43,10 @@ export function HeroSection({ checkoutUrl }: Props) {
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 pt-4 text-sm text-gray-400">
-          <span>✓ Prévia em {CORE_OFFER.previewBusinessDays} dias úteis</span>
-          <span>✓ Mobile e Google-ready</span>
-          <span>✓ Domínio no seu CPF/CNPJ</span>
-          <span>✓ WhatsApp integrado</span>
+          <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-gold" aria-hidden /> Prévia em {CORE_OFFER.previewBusinessDays} dias úteis</span>
+          <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-gold" aria-hidden /> Mobile e Google-ready</span>
+          <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-gold" aria-hidden /> Domínio no seu CPF/CNPJ</span>
+          <span className="flex items-center gap-1"><Check className="w-4 h-4 text-brand-gold" aria-hidden /> WhatsApp integrado</span>
         </div>
       </div>
     </section>

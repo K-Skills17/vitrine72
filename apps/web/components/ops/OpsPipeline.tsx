@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { TriangleAlert } from "lucide-react";
 import type { Project } from "@/lib/supabase/types";
 const STATUS_COLORS: Record<string, string> = {
   paid: "bg-gray-700",
@@ -77,7 +78,7 @@ export function OpsPipeline({ projects }: Props) {
                     {previewDue
                       ? previewDue.toLocaleDateString("pt-BR")
                       : "–"}
-                    {previewUrgent && " ⚠"}
+                    {previewUrgent && <TriangleAlert className="inline w-4 h-4 text-red-400 ml-1" aria-label="Urgente" />}
                   </td>
                   <td className="py-2 pr-4 text-gray-400">
                     {goLive ? goLive.toLocaleDateString("pt-BR") : "–"}

@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
+import { PartyPopper } from "lucide-react";
 import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -31,8 +32,8 @@ export default async function ObrigadoPage({ searchParams }: Props) {
   return (
     <main className="min-h-screen bg-brand-dark flex items-center justify-center px-4">
       <div className="max-w-lg w-full text-center space-y-6">
-        <div className="text-5xl" aria-hidden>
-          🎉
+        <div className="flex justify-center" aria-hidden>
+          <PartyPopper className="w-14 h-14 text-brand-gold" />
         </div>
         <h1 className="text-3xl font-display font-bold text-white">
           Pagamento confirmado!

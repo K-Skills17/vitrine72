@@ -1,33 +1,34 @@
+import { Smartphone, MessageCircle, Search, Bot, FileText, Globe } from "lucide-react";
 import { CORE_OFFER } from "@vitrine72/core";
 
 const FEATURES = [
   {
-    icon: "📱",
+    Icon: Smartphone,
     title: "Mobile primeiro",
     desc: "Layout otimizado para celular, onde seus clientes estão.",
   },
   {
-    icon: "💬",
+    Icon: MessageCircle,
     title: "Botão de WhatsApp",
     desc: "Botão fixo de contato para o cliente chamar diretamente.",
   },
   {
-    icon: "🔍",
+    Icon: Search,
     title: "Google-ready",
     desc: "Estrutura técnica para aparecer no Google e no Google Meu Negócio.",
   },
   {
-    icon: "🤖",
+    Icon: Bot,
     title: "Preparado para IA",
     desc: "Linguagem simples e estrutura que permite que assistentes de IA recomendem seu negócio.",
   },
   {
-    icon: "📄",
+    Icon: FileText,
     title: `Até ${CORE_OFFER.pages} páginas`,
     desc: "Home, serviços, sobre, FAQ e contato. O suficiente para converter visitas em clientes.",
   },
   {
-    icon: "🌐",
+    Icon: Globe,
     title: "Domínio no seu nome",
     desc: "O domínio fica no seu CPF ou CNPJ — é seu, para sempre.",
   },
@@ -53,9 +54,7 @@ export function OQueVemNoSite() {
               key={f.title}
               className="flex gap-4 items-start p-5 bg-brand-dark-2 rounded-xl border border-white/5"
             >
-              <span className="text-2xl flex-shrink-0" aria-hidden>
-                {f.icon}
-              </span>
+              <f.Icon className="w-6 h-6 text-brand-gold flex-shrink-0 mt-0.5" aria-hidden />
               <div>
                 <h3 className="text-white font-semibold">{f.title}</h3>
                 <p className="text-gray-400 text-sm mt-1 leading-relaxed">

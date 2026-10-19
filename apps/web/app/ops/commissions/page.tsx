@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { createServiceClient } from "@/lib/supabase/server";
+import { CircleCheck, Clock } from "lucide-react";
 import type { CommissionEntry, Seller, Partner } from "@/lib/supabase/types";
 
 export const metadata: Metadata = { title: "Comissões | Ops" };
@@ -71,9 +72,9 @@ export default async function CommissionsPage() {
                 <td className="py-2 pr-3 text-gray-400">{e.due_at}</td>
                 <td className="py-2 pr-3">
                   {e.paid_at ? (
-                    <span className="text-green-400">✓</span>
+                    <CircleCheck className="w-4 h-4 text-green-400" aria-label="Pago" />
                   ) : (
-                    <span className="text-yellow-400">Pendente</span>
+                    <span className="flex items-center gap-1 text-yellow-400 text-xs"><Clock className="w-3 h-3" aria-hidden />Pendente</span>
                   )}
                 </td>
               </tr>

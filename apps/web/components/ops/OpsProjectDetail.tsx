@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CircleCheck, CircleX } from "lucide-react";
 import { canTransition } from "@vitrine72/core";
 import type { ProjectStatus } from "@vitrine72/core";
 import type {
@@ -156,8 +157,10 @@ export function OpsProjectDetail({
       {qaReport && (
         <Section title="Relatório QA">
           <div className="flex items-center gap-3">
-            <span className={qaReport.passed ? "text-green-400" : "text-red-400"}>
-              {qaReport.passed ? "✓ Passou" : "✗ Falhou"}
+            <span className={`flex items-center gap-1 ${qaReport.passed ? "text-green-400" : "text-red-400"}`}>
+              {qaReport.passed
+                ? <><CircleCheck className="w-4 h-4" aria-hidden /> Passou</>
+                : <><CircleX className="w-4 h-4" aria-hidden /> Falhou</>}
             </span>
             <span className="text-gray-500 text-sm">
               Performance: {qaReport.lighthouse_performance ?? "–"} |
