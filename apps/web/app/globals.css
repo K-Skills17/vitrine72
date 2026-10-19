@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-inter: "Inter", system-ui, sans-serif;
-  --font-plus-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
-}
-
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-brand-dark text-white antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 
   a {
-    @apply transition-colors duration-150;
+    @apply transition-colors duration-200;
   }
 }
 
@@ -21,6 +21,73 @@
   .input-field {
     @apply w-full bg-brand-dark-3 border border-white/10 text-white placeholder-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-gold/60 transition;
   }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #edd89a 0%, #c5a368 45%, #a8843c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-xl text-base overflow-hidden transition-all duration-300;
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(197, 163, 104, 0.4);
+  }
+  .btn-gold:active {
+    transform: translateY(0);
+  }
+
+  .btn-outline-gold {
+    @apply inline-flex items-center justify-center gap-2 border border-brand-gold/50 text-brand-gold font-semibold px-8 py-4 rounded-xl text-base transition-all duration-300;
+  }
+  .btn-outline-gold:hover {
+    @apply border-brand-gold;
+    background: rgba(197, 163, 104, 0.08);
+  }
+
+  .divider-gold {
+    @apply block w-14 h-px;
+    background: linear-gradient(90deg, transparent, #c5a368, transparent);
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: 0;
+  }
+
+  .section-label {
+    @apply inline-block text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold/80 mb-4;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @layer utilities {
@@ -32,5 +99,15 @@
   }
   .border-gold {
     border-color: #c5a368;
+  }
+  .animate-shimmer {
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+  .animate-glow-pulse {
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out both;
   }
 }

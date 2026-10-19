@@ -1,5 +1,6 @@
 import { Smartphone, MessageCircle, Search, Bot, FileText, Globe } from "lucide-react";
 import { CORE_OFFER } from "@vitrine72/core";
+import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 
 const FEATURES = [
   {
@@ -20,7 +21,7 @@ const FEATURES = [
   {
     Icon: Bot,
     title: "Preparado para IA",
-    desc: "Linguagem simples e estrutura que permite que assistentes de IA recomendem seu negócio.",
+    desc: "Linguagem e estrutura que permitem que assistentes de IA recomendem seu negócio.",
   },
   {
     Icon: FileText,
@@ -36,34 +37,38 @@ const FEATURES = [
 
 export function OQueVemNoSite() {
   return (
-    <section id="o-que-vem" className="py-20 px-4 bg-brand-dark">
+    <section id="o-que-vem" className="py-28 px-6 bg-brand-dark">
       <div className="max-w-5xl mx-auto">
-        <h2
-          data-copy="provisional"
-          className="text-3xl md:text-4xl font-display font-bold text-white text-center mb-4"
-        >
-          O que vem no site
-        </h2>
-        <p className="text-center text-gray-400 mb-12">
-          Tudo que um negócio local precisa para aparecer online e receber
-          clientes pelo WhatsApp.
-        </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Reveal className="text-center mb-16">
+          <span className="section-label">Incluso no pacote</span>
+          <h2
+            data-copy="provisional"
+            className="text-4xl md:text-5xl font-display font-bold text-white mt-1"
+          >
+            O que vem no site
+          </h2>
+          <span className="divider-gold mt-6" />
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+            Tudo que um negócio local precisa para aparecer online e receber
+            clientes pelo WhatsApp.
+          </p>
+        </Reveal>
+
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="flex gap-4 items-start p-5 bg-brand-dark-2 rounded-xl border border-white/5"
-            >
-              <f.Icon className="w-6 h-6 text-brand-gold flex-shrink-0 mt-0.5" aria-hidden />
-              <div>
-                <h3 className="text-white font-semibold">{f.title}</h3>
-                <p className="text-gray-400 text-sm mt-1 leading-relaxed">
-                  {f.desc}
-                </p>
+            <RevealItem key={f.title}>
+              <div className="group flex gap-4 items-start p-6 bg-brand-dark-2 rounded-2xl border border-white/6 hover:border-brand-gold/25 transition-all duration-300 hover:bg-brand-dark-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center group-hover:bg-brand-gold/15 transition-colors duration-300">
+                  <f.Icon className="w-5 h-5 text-brand-gold" aria-hidden />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold">{f.title}</h3>
+                  <p className="text-gray-400 text-sm mt-1.5 leading-relaxed">{f.desc}</p>
+                </div>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { RefreshCw, Timer, CalendarCheck, ShieldCheck } from "lucide-react";
 import { CORE_OFFER, RULES } from "@vitrine72/core";
+import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 
 const RULES_LIST = [
   {
@@ -9,7 +10,7 @@ const RULES_LIST = [
   },
   {
     Icon: Timer,
-    title: `${CORE_OFFER.previewBusinessDays} dias úteis contam do briefing completo`,
+    title: `${CORE_OFFER.previewBusinessDays} dias úteis contam do briefing`,
     desc: "O prazo começa quando você termina de preencher o formulário, não quando paga.",
   },
   {
@@ -26,33 +27,37 @@ const RULES_LIST = [
 
 export function RegrasEClaras() {
   return (
-    <section id="regras" className="py-20 px-4 bg-brand-dark-2">
+    <section id="regras" className="py-28 px-6 bg-brand-dark-2">
       <div className="max-w-5xl mx-auto">
-        <h2
-          data-copy="provisional"
-          className="text-3xl md:text-4xl font-display font-bold text-white text-center mb-4"
-        >
-          Regras claras
-        </h2>
-        <p className="text-center text-gray-400 mb-12">
-          Transparência total para você saber o que esperar.
-        </p>
-        <div className="grid sm:grid-cols-2 gap-6">
+        <Reveal className="text-center mb-16">
+          <span className="section-label">Transparência</span>
+          <h2
+            data-copy="provisional"
+            className="text-4xl md:text-5xl font-display font-bold text-white mt-1"
+          >
+            Regras claras
+          </h2>
+          <span className="divider-gold mt-6" />
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+            Sem letras miúdas. Você sabe exatamente o que esperar antes de contratar.
+          </p>
+        </Reveal>
+
+        <RevealGroup className="grid sm:grid-cols-2 gap-5">
           {RULES_LIST.map((r) => (
-            <div
-              key={r.title}
-              className="flex gap-4 p-6 bg-brand-dark rounded-xl border border-white/5"
-            >
-              <r.Icon className="w-6 h-6 text-brand-gold flex-shrink-0 mt-0.5" aria-hidden />
-              <div>
-                <h3 className="text-white font-semibold">{r.title}</h3>
-                <p className="text-gray-400 text-sm mt-1 leading-relaxed">
-                  {r.desc}
-                </p>
+            <RevealItem key={r.title}>
+              <div className="flex gap-5 p-7 bg-brand-dark rounded-2xl border border-white/6 hover:border-brand-gold/20 transition-colors duration-300">
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center">
+                  <r.Icon className="w-5 h-5 text-brand-gold" aria-hidden />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold leading-snug">{r.title}</h3>
+                  <p className="text-gray-400 text-sm mt-2 leading-relaxed">{r.desc}</p>
+                </div>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

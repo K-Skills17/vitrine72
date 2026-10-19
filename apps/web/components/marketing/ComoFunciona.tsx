@@ -1,4 +1,5 @@
 import { CORE_OFFER } from "@vitrine72/core";
+import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 
 const STEPS = [
   {
@@ -8,8 +9,8 @@ const STEPS = [
   },
   {
     number: "02",
-    title: "Formulário de briefing",
-    desc: "Preenche o formulário com os dados do seu negócio, fotos e preferências. Leva em média 15 minutos.",
+    title: "Briefing em 15 minutos",
+    desc: "Preenche o formulário com os dados do seu negócio, fotos e preferências. Simples e rápido.",
   },
   {
     number: "03",
@@ -20,28 +21,42 @@ const STEPS = [
 
 export function ComoFunciona() {
   return (
-    <section id="como-funciona" className="py-20 px-4 bg-brand-dark-2">
+    <section id="como-funciona" className="py-28 px-6 bg-brand-dark-2">
       <div className="max-w-5xl mx-auto">
-        <h2
-          data-copy="provisional"
-          className="text-3xl md:text-4xl font-display font-bold text-white text-center mb-12"
-        >
-          Como funciona
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <Reveal className="text-center mb-20">
+          <span className="section-label">Processo</span>
+          <h2
+            data-copy="provisional"
+            className="text-4xl md:text-5xl font-display font-bold text-white mt-1"
+          >
+            Como funciona
+          </h2>
+          <span className="divider-gold mt-6" />
+        </Reveal>
+
+        <RevealGroup className="grid md:grid-cols-3 gap-8 relative">
+          {/* Connector line — desktop only */}
+          <div
+            aria-hidden
+            className="hidden md:block absolute top-[52px] left-[calc(16.666%+24px)] right-[calc(16.666%+24px)] h-px"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, rgba(197,163,104,0.3) 20%, rgba(197,163,104,0.3) 80%, transparent)",
+            }}
+          />
+
           {STEPS.map((step) => (
-            <div
-              key={step.number}
-              className="bg-brand-dark-3 rounded-2xl p-6 space-y-3 border border-white/5"
-            >
-              <span className="text-brand-gold font-display font-bold text-4xl">
-                {step.number}
-              </span>
-              <h3 className="text-white font-semibold text-lg">{step.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
-            </div>
+            <RevealItem key={step.number}>
+              <div className="relative bg-brand-dark rounded-2xl p-8 border border-white/6 hover:border-brand-gold/20 transition-colors duration-300 group">
+                <span className="block font-display font-bold text-7xl leading-none text-gradient-gold mb-6 select-none">
+                  {step.number}
+                </span>
+                <h3 className="text-white font-semibold text-lg mb-3">{step.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );
