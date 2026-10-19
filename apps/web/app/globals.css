@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-plus-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-white antialiased;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full bg-brand-dark-3 border border-white/10 text-white placeholder-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-gold/60 transition;
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: #c5a368;
+  }
+  .bg-gold {
+    background-color: #c5a368;
+  }
+  .border-gold {
+    border-color: #c5a368;
+  }
+}

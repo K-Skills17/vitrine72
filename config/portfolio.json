@@ -1,0 +1,38 @@
+{
+  "_comment": "Portfolio sites. NEEDS #11: Yohanny fix. NEEDS #12: screenshots.",
+  "sites": [
+    {
+      "slug": "biodonth",
+      "name": "Biodonth",
+      "url": "https://biodonth.com.br",
+      "vertical": "estetica",
+      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_BIODONTH",
+      "enabled": true
+    },
+    {
+      "slug": "studioafrorosas",
+      "name": "Studio Afro Rosas",
+      "url": "https://studioafrorosas.com.br",
+      "vertical": "estetica",
+      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_STUDIOAFROROSAS",
+      "enabled": true
+    },
+    {
+      "slug": "gymera",
+      "name": "Gymera",
+      "url": "https://gymera.com",
+      "vertical": "fisioterapia-pilates",
+      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_GYMERA",
+      "enabled": true
+    },
+    {
+      "slug": "yohanny",
+      "name": "Yohanny Kamilly",
+      "url": "https://yohanny-kamilly.vercel.app",
+      "vertical": "estetica",
+      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_YOHANNY",
+      "enabled": false,
+      "_reason": "NEEDS #11: site not yet on custom domain"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "vitrine72",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "lint": "pnpm --filter web lint && pnpm -r --filter './packages/*' lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "e2e": "pnpm --filter web e2e",
+    "generate": "ts-node -P scripts/tsconfig.json scripts/generate.ts",
+    "qa": "ts-node -P scripts/tsconfig.json scripts/qa.ts",
+    "deploy": "ts-node -P scripts/tsconfig.json scripts/deploy.ts",
+    "seed": "ts-node -P scripts/tsconfig.json scripts/seed.ts"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}

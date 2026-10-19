@@ -1,0 +1,26 @@
+{
+  "_comment": "Payment provider config. NEEDS #21: switch provider to 'asaas' if Kiwify rejects service products.",
+  "provider": "kiwify",
+  "kiwify": {
+    "products": {
+      "SITE_5P": "PLACEHOLDER_KIWIFY_PRODUCT_SITE_5P",
+      "ANCHOR_SITE_GBP_BOT": "PLACEHOLDER_KIWIFY_PRODUCT_ANCHOR",
+      "LANDING_1P": "PLACEHOLDER_KIWIFY_PRODUCT_LANDING",
+      "GBP_SETUP": "PLACEHOLDER_KIWIFY_PRODUCT_GBP",
+      "AI_AGENT_SETUP": "PLACEHOLDER_KIWIFY_PRODUCT_AI_AGENT",
+      "EXTRA_PAGES": "PLACEHOLDER_KIWIFY_PRODUCT_EXTRA_PAGES",
+      "CATALOG": "PLACEHOLDER_KIWIFY_PRODUCT_CATALOG"
+    },
+    "checkoutBaseUrl": "https://pay.kiwify.com.br"
+  },
+  "asaas": {
+    "paymentLinks": {
+      "SITE_5P_CARD": "PLACEHOLDER_ASAAS_LINK_SITE_5P_CARD",
+      "SITE_5P_PIX": "PLACEHOLDER_ASAAS_LINK_SITE_5P_PIX",
+      "ANCHOR_CARD": "PLACEHOLDER_ASAAS_LINK_ANCHOR_CARD",
+      "ANCHOR_PIX": "PLACEHOLDER_ASAAS_LINK_ANCHOR_PIX",
+      "LANDING_1P": "PLACEHOLDER_ASAAS_LINK_LANDING",
+      "MANUT": "PLACEHOLDER_ASAAS_LINK_MANUT"
+    }
+  }
+}
