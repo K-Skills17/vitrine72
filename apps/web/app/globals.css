@@ -2,55 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-brand-dark text-white antialiased;
-    font-feature-settings: "kern" 1, "liga" 1;
-  }
-
-  a {
-    @apply transition-colors duration-200;
-  }
+/* ─── Theme tokens ─────────────────────────────────────────────────────────── */
+/* RGB channel format (no rgb() wrapper) so Tailwind opacity modifiers work.  */
+/* --gold-accent is fixed bright gold (for backgrounds like buttons, badges).  */
+:root {
+  /* Dark theme — default */
+  --surface-base: 17 17 17;
+  --surface-raised: 26 26 26;
+  --surface-overlay: 36 36 36;
+  --ink-primary: 255 255 255;
+  --ink-muted: 156 163 175;
+  --ink-subtle: 107 114 128;
+  --ink-faint: 75 85 99;
+  --gold-rgb: 197 163 104;
+  --gold-accent: #c5a368;
+  --gold-gradient-from: 237 216 154;
+  --gold-gradient-to: 168 132 60;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-soft: rgba(255, 255, 255, 0.10);
+  --nav-glass-bg: rgba(17, 17, 17, 0.90);
+  --hero-fade: linear-gradient(to bottom, transparent, #111111);
+  --cta-bg: linear-gradient(135deg, #1a1508 0%, #161205 30%, #111111 70%, #111111 100%);
+  --cta-glow: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(197, 163, 104, 0.10) 0%, transparent 70%);
+  --anchor-card-bg: linear-gradient(145deg, #1f1b14 0%, #1a1a1a 100%);
+  --placeholder-color: rgb(75, 85, 99);
 }
 
+[data-theme="light"] {
+  --surface-base: 248 246 242;
+  --surface-raised: 255 255 255;
+  --surface-overlay: 242 238 232;
+  --ink-primary: 26 26 26;
+  --ink-muted: 74 70 70;
+  --ink-subtle: 107 101 101;
+  --ink-faint: 154 144 144;
+  /* Darker gold for text contrast on light backgrounds (WCAG AA) */
+  --gold-rgb: 138 94 26;
+  /* --gold-accent stays #c5a368 — bright gold always looks good on white/cream */
+  --gold-gradient-from: 180 130 50;
+  --gold-gradient-to: 100 62 10;
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-soft: rgba(0, 0, 0, 0.12);
+  --nav-glass-bg: rgba(248, 246, 242, 0.92);
+  --hero-fade: linear-gradient(to bottom, transparent, #f8f6f2);
+  --cta-bg: linear-gradient(135deg, #fdf8ef 0%, #faf2e0 30%, #f8f6f2 70%, #f8f6f2 100%);
+  --cta-glow: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(138, 94, 26, 0.07) 0%, transparent 70%);
+  --anchor-card-bg: linear-gradient(145deg, #fdf8ef 0%, #ffffff 100%);
+  --placeholder-color: rgb(154, 144, 144);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply antialiased;
+    background-color: rgb(var(--surface-base));
+    color: rgb(var(--ink-primary));
+    font-feature-settings: "kern" 1, "liga" 1;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  a { @apply transition-colors duration-200; }
+}
+
+/* ─── Components ────────────────────────────────────────────────────────────── */
 @layer components {
+  /* Used by marketing intake/edit forms */
   .input-field {
+    @apply w-full text-sm rounded-lg px-3 py-2.5 focus:outline-none transition;
+    background: rgb(var(--surface-overlay));
+    color: rgb(var(--ink-primary));
+    border: 1px solid var(--border-soft);
+  }
+  .input-field::placeholder { color: var(--placeholder-color); }
+  .input-field:focus { border-color: rgb(var(--gold-rgb) / 0.6); }
+
+  /* Ops input — hardcoded dark, not themed */
+  .input-field-dark {
     @apply w-full bg-brand-dark-3 border border-white/10 text-white placeholder-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-gold/60 transition;
   }
 
   .text-gradient-gold {
-    background: linear-gradient(135deg, #edd89a 0%, #c5a368 45%, #a8843c 100%);
+    background: linear-gradient(
+      135deg,
+      rgb(var(--gold-gradient-from)) 0%,
+      rgb(var(--gold-rgb)) 45%,
+      rgb(var(--gold-gradient-to)) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  /* Gold CTA button — always bright #c5a368, dark text, both themes */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-xl text-base overflow-hidden transition-all duration-300;
+    @apply relative inline-flex items-center justify-center gap-2 font-bold text-base overflow-hidden transition-all duration-300 rounded-xl px-8 py-4;
+    background: var(--gold-accent);
+    color: #111111;
   }
   .btn-gold:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 40px rgba(197, 163, 104, 0.4);
   }
-  .btn-gold:active {
-    transform: translateY(0);
-  }
+  .btn-gold:active { transform: translateY(0); }
 
   .btn-outline-gold {
-    @apply inline-flex items-center justify-center gap-2 border border-brand-gold/50 text-brand-gold font-semibold px-8 py-4 rounded-xl text-base transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-base transition-all duration-300 rounded-xl px-8 py-4;
+    border: 1px solid rgb(var(--gold-rgb) / 0.5);
+    color: rgb(var(--gold-rgb));
   }
   .btn-outline-gold:hover {
-    @apply border-brand-gold;
-    background: rgba(197, 163, 104, 0.08);
+    border-color: rgb(var(--gold-rgb));
+    background: rgb(var(--gold-rgb) / 0.08);
   }
 
   .divider-gold {
     @apply block w-14 h-px;
-    background: linear-gradient(90deg, transparent, #c5a368, transparent);
+    background: linear-gradient(90deg, transparent, rgb(var(--gold-rgb)), transparent);
+  }
+
+  .section-label {
+    @apply inline-block text-xs font-semibold uppercase tracking-[0.2em] mb-4;
+    color: rgb(var(--gold-rgb) / 0.8);
   }
 
   .grain {
@@ -69,12 +143,9 @@
     border-radius: inherit;
     z-index: 0;
   }
-
-  .section-label {
-    @apply inline-block text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold/80 mb-4;
-  }
 }
 
+/* ─── Keyframes ─────────────────────────────────────────────────────────────── */
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -90,24 +161,12 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
 @layer utilities {
-  .text-gold {
-    color: #c5a368;
-  }
-  .bg-gold {
-    background-color: #c5a368;
-  }
-  .border-gold {
-    border-color: #c5a368;
-  }
-  .animate-shimmer {
-    background-size: 200% auto;
-    animation: shimmer 3s linear infinite;
-  }
-  .animate-glow-pulse {
-    animation: glow-pulse 4s ease-in-out infinite;
-  }
-  .animate-fadeInUp {
-    animation: fadeInUp 0.6s ease-out both;
-  }
+  .text-gold { color: rgb(var(--gold-rgb)); }
+  .bg-gold { background-color: var(--gold-accent); }
+  .border-gold { border-color: rgb(var(--gold-rgb)); }
+  .animate-shimmer { background-size: 200% auto; animation: shimmer 3s linear infinite; }
+  .animate-glow-pulse { animation: glow-pulse 4s ease-in-out infinite; }
+  .animate-fadeInUp { animation: fadeInUp 0.6s ease-out both; }
 }

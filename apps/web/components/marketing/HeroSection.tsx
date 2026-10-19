@@ -35,14 +35,14 @@ export function HeroSection({ checkoutUrl }: Props) {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden grain">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 overflow-hidden grain bg-surface-base">
       {/* Background radial glow */}
       <div
         aria-hidden
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full animate-glow-pulse pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(197,163,104,0.12) 0%, rgba(197,163,104,0.04) 50%, transparent 70%)",
+            "radial-gradient(circle, rgb(var(--gold-rgb) / 0.12) 0%, rgb(var(--gold-rgb) / 0.04) 50%, transparent 70%)",
         }}
       />
 
@@ -60,7 +60,7 @@ export function HeroSection({ checkoutUrl }: Props) {
         <motion.h1
           variants={item}
           data-copy="provisional"
-          className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-[1.08] tracking-tight mt-2"
+          className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-ink-primary leading-[1.08] tracking-tight mt-2"
         >
           Seu negócio na internet{" "}
           <br className="hidden sm:block" />
@@ -72,7 +72,7 @@ export function HeroSection({ checkoutUrl }: Props) {
         <motion.p
           variants={item}
           data-copy="provisional"
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mt-2 leading-relaxed"
+          className="text-lg md:text-xl text-ink-muted max-w-2xl mx-auto mt-2 leading-relaxed"
         >
           Site profissional até 5 páginas — mobile-first, Google Meu Negócio e
           botão de WhatsApp. Clientes te encontram, você só atende.
@@ -86,9 +86,9 @@ export function HeroSection({ checkoutUrl }: Props) {
             Quero meu site agora
             <ArrowRight className="w-5 h-5" aria-hidden />
           </a>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-ink-subtle">
             A partir de{" "}
-            <span className="text-white font-semibold">
+            <span className="text-ink-primary font-semibold">
               R$ {CORE_OFFER.pricePix.toLocaleString("pt-BR")}
             </span>{" "}
             no Pix
@@ -100,7 +100,7 @@ export function HeroSection({ checkoutUrl }: Props) {
           className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-12"
         >
           {TRUST_ITEMS.map((text) => (
-            <span key={text} className="flex items-center gap-2 text-sm text-gray-500">
+            <span key={text} className="flex items-center gap-2 text-sm text-ink-subtle">
               <Check className="w-4 h-4 text-brand-gold flex-shrink-0" aria-hidden />
               {text}
             </span>
@@ -112,9 +112,7 @@ export function HeroSection({ checkoutUrl }: Props) {
       <div
         aria-hidden
         className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-        style={{
-          background: "linear-gradient(to bottom, transparent, #111111)",
-        }}
+        style={{ background: "var(--hero-fade)" }}
       />
     </section>
   );

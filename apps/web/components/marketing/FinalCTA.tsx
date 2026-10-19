@@ -11,40 +11,27 @@ export function FinalCTA({ checkoutUrl }: Props) {
   const waUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "PLACEHOLDER_WHATSAPP"}`;
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
-      {/* Gold gradient background */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #1a1508 0%, #161205 30%, #111111 70%, #111111 100%)",
-        }}
-      />
-
+    <section className="relative py-32 px-6 overflow-hidden" style={{ background: "var(--cta-bg)" }}>
       {/* Radial glow */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(197,163,104,0.1) 0%, transparent 70%)",
-        }}
+        style={{ background: "var(--cta-glow)" }}
       />
 
-      {/* Border top/bottom */}
+      {/* Border lines */}
       <div
         aria-hidden
         className="absolute top-0 inset-x-0 h-px"
         style={{
-          background: "linear-gradient(90deg, transparent, rgba(197,163,104,0.4), transparent)",
+          background: "linear-gradient(90deg, transparent, rgb(var(--gold-rgb) / 0.4), transparent)",
         }}
       />
       <div
         aria-hidden
         className="absolute bottom-0 inset-x-0 h-px"
         style={{
-          background: "linear-gradient(90deg, transparent, rgba(197,163,104,0.2), transparent)",
+          background: "linear-gradient(90deg, transparent, rgb(var(--gold-rgb) / 0.2), transparent)",
         }}
       />
 
@@ -53,13 +40,13 @@ export function FinalCTA({ checkoutUrl }: Props) {
           <span className="section-label">Próximo passo</span>
           <h2
             data-copy="provisional"
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mt-1 leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-ink-primary mt-1 leading-tight"
           >
             Seu negócio merece{" "}
             <span className="text-gradient-gold italic">estar online</span>
           </h2>
           <span className="divider-gold mt-8" />
-          <p className="text-gray-400 text-lg mt-4 mb-10">
+          <p className="text-ink-muted text-lg mt-4 mb-10">
             Prévia em {CORE_OFFER.previewBusinessDays} dias úteis. Sem enrolação.
           </p>
 

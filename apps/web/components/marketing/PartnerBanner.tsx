@@ -5,7 +5,7 @@ interface Props {
 
 export function PartnerBanner({ partnerName, freeCycles }: Props) {
   return (
-    <div className="bg-brand-gold text-brand-dark text-center py-3 px-4 text-sm font-semibold">
+    <div className="text-center py-3 px-4 text-sm font-semibold text-brand-dark" style={{ background: "var(--gold-accent)" }}>
       Oferta especial de{" "}
       <strong>{partnerName}</strong>: ganhe {freeCycles} meses de
       manutenção grátis ao comprar pelo link.

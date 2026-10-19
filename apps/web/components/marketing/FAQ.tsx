@@ -56,7 +56,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-28 px-6 bg-brand-dark">
+    <section id="faq" className="py-28 px-6 bg-surface-base">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -67,7 +67,7 @@ export function FAQ() {
           <span className="section-label">Dúvidas</span>
           <h2
             data-copy="provisional"
-            className="text-4xl md:text-5xl font-display font-bold text-white mt-1"
+            className="text-4xl md:text-5xl font-display font-bold text-ink-primary mt-1"
           >
             Perguntas frequentes
           </h2>
@@ -79,18 +79,23 @@ export function FAQ() {
             {FAQS.map((item, i) => (
               <div
                 key={i}
-                className="rounded-2xl border border-white/6 overflow-hidden transition-colors duration-200"
+                className="rounded-2xl border overflow-hidden transition-colors duration-200"
                 style={{
-                  background: open === i ? "rgba(197,163,104,0.04)" : "rgba(26,26,26,1)",
-                  borderColor: open === i ? "rgba(197,163,104,0.2)" : undefined,
+                  background: open === i
+                    ? `rgb(var(--gold-rgb) / 0.04)`
+                    : `rgb(var(--surface-raised))`,
+                  borderColor: open === i
+                    ? `rgb(var(--gold-rgb) / 0.2)`
+                    : `var(--border-subtle)`,
                 }}
               >
                 <button
-                  className="w-full text-left px-6 py-5 flex justify-between items-center gap-4 text-white font-medium hover:text-white/90 transition-colors"
+                  className="w-full text-left px-6 py-5 flex justify-between items-center gap-4 transition-colors"
+                  style={{ color: "rgb(var(--ink-primary))" }}
                   onClick={() => setOpen(open === i ? null : i)}
                   aria-expanded={open === i}
                 >
-                  <span className="text-sm md:text-base leading-snug">{item.q}</span>
+                  <span className="text-sm md:text-base leading-snug font-medium">{item.q}</span>
                   <motion.span
                     animate={{ rotate: open === i ? 180 : 0 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}
@@ -110,7 +115,7 @@ export function FAQ() {
                       transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                       className="overflow-hidden"
                     >
-                      <p className="px-6 pb-5 text-gray-400 text-sm leading-relaxed">{item.a}</p>
+                      <p className="px-6 pb-5 text-ink-muted text-sm leading-relaxed">{item.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

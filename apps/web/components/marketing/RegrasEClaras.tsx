@@ -27,18 +27,18 @@ const RULES_LIST = [
 
 export function RegrasEClaras() {
   return (
-    <section id="regras" className="py-28 px-6 bg-brand-dark-2">
+    <section id="regras" className="py-28 px-6 bg-surface-raised">
       <div className="max-w-5xl mx-auto">
         <Reveal className="text-center mb-16">
           <span className="section-label">Transparência</span>
           <h2
             data-copy="provisional"
-            className="text-4xl md:text-5xl font-display font-bold text-white mt-1"
+            className="text-4xl md:text-5xl font-display font-bold text-ink-primary mt-1"
           >
             Regras claras
           </h2>
           <span className="divider-gold mt-6" />
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+          <p className="text-ink-muted mt-4 max-w-xl mx-auto">
             Sem letras miúdas. Você sabe exatamente o que esperar antes de contratar.
           </p>
         </Reveal>
@@ -46,13 +46,13 @@ export function RegrasEClaras() {
         <RevealGroup className="grid sm:grid-cols-2 gap-5">
           {RULES_LIST.map((r) => (
             <RevealItem key={r.title}>
-              <div className="flex gap-5 p-7 bg-brand-dark rounded-2xl border border-white/6 hover:border-brand-gold/20 transition-colors duration-300">
+              <div className="flex gap-5 p-7 bg-surface-base rounded-2xl border border-subtle hover:border-soft transition-colors duration-300">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center">
                   <r.Icon className="w-5 h-5 text-brand-gold" aria-hidden />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold leading-snug">{r.title}</h3>
-                  <p className="text-gray-400 text-sm mt-2 leading-relaxed">{r.desc}</p>
+                  <h3 className="text-ink-primary font-semibold leading-snug">{r.title}</h3>
+                  <p className="text-ink-muted text-sm mt-2 leading-relaxed">{r.desc}</p>
                 </div>
               </div>
             </RevealItem>
