@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Palette — overridden inline by layout.tsx */
+  --color-primary: #1565c0;
+  --color-secondary: #f5f8ff;
+  --color-accent: #ff6f00;
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+
+  /* Fonts — overridden inline by layout.tsx */
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* Focus ring — accessible */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Utility classes */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-200;
+  background-color: var(--color-primary);
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-accent {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-200;
+  background-color: var(--color-accent);
+}
+.btn-accent:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.section-padding {
+  @apply py-16 px-4 md:py-24;
+}
+
+.container-narrow {
+  @apply max-w-5xl mx-auto;
+}
+
+.container-wide {
+  @apply max-w-7xl mx-auto;
+}

@@ -1,0 +1,64 @@
+{
+  "projectId": "dev-placeholder",
+  "slug": "exemplo",
+  "vertical": "generico",
+  "businessName": "Empresa Exemplo",
+  "address": "Rua Exemplo, 123 - Vila Madalena, São Paulo - SP",
+  "phone": "11999999999",
+  "hours": "Seg–Sex 9h–18h\nSáb 9h–13h",
+  "hoursArray": ["Seg–Sex 9h–18h", "Sáb 9h–13h"],
+  "neighborhoods": ["Vila Madalena", "Pinheiros", "Jardins"],
+  "services": [
+    { "name": "Serviço A", "description": "Descrição do serviço A.", "price": "A partir de R$ 150" },
+    { "name": "Serviço B", "description": "Descrição do serviço B.", "price": null },
+    { "name": "Serviço C", "description": "Descrição do serviço C.", "price": "R$ 80" }
+  ],
+  "faqs": [
+    { "q": "Como faço para agendar?", "a": "Entre em contato pelo WhatsApp ou preencha o formulário." },
+    { "q": "Qual a forma de pagamento?", "a": "Aceitamos PIX, cartão e dinheiro." },
+    { "q": "Atende na minha região?", "a": "Atendemos Vila Madalena, Pinheiros, Jardins e região." }
+  ],
+  "gbpLink": null,
+  "instagramLink": null,
+  "primaryAction": "whatsapp",
+  "primaryActionUrl": "https://wa.me/5511999999999?text=Ol%C3%A1%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es.",
+  "palette": {
+    "id": "clean-blue",
+    "primary": "#1565c0",
+    "secondary": "#f5f8ff",
+    "accent": "#ff6f00",
+    "background": "#ffffff",
+    "text": "#1a1a1a"
+  },
+  "fontPair": {
+    "id": "inter-inter",
+    "display": "Inter",
+    "body": "Inter",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+  },
+  "layoutVariant": 1,
+  "photos": [],
+  "logoPath": null,
+  "gbpData": null,
+  "copyBlocks": {
+    "heroHeadline": "Serviços de qualidade em São Paulo",
+    "heroSubheadline": "Atendemos Vila Madalena, Pinheiros e Jardins com agilidade e transparência.",
+    "aboutText": "Somos uma empresa comprometida com a satisfação dos nossos clientes.",
+    "serviceDescriptions": {
+      "Serviço A": "O Serviço A oferece uma solução completa para sua necessidade.",
+      "Serviço B": "O Serviço B é ideal para quem busca praticidade e resultado.",
+      "Serviço C": "O Serviço C resolve seu problema com eficiência e segurança."
+    },
+    "faqAnswers": {
+      "Como faço para agendar?": "Entre em contato pelo WhatsApp ou preencha o formulário de contato abaixo.",
+      "Qual a forma de pagamento?": "Aceitamos PIX, cartão de crédito/débito e dinheiro.",
+      "Atende na minha região?": "Atendemos Vila Madalena, Pinheiros, Jardins e toda a região central de São Paulo."
+    },
+    "sourceFacts": {}
+  },
+  "selfEditSheetUrl": null,
+  "updatedAt": "2026-01-01",
+  "animationProfile": "standard",
+  "signatureElementEnabled": false,
+  "jsonLd": {}
+}
