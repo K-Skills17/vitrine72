@@ -3,6 +3,11 @@ import { createHmac } from "crypto";
 import { handleApprovedPayment, handleRefund } from "@/lib/webhooks/project-creation";
 import { createServiceClient } from "@/lib/supabase/server";
 
+// MP sends a GET request to validate the webhook URL
+export function GET() {
+  return NextResponse.json({ ok: true });
+}
+
 export const runtime = "nodejs";
 
 /**
