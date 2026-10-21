@@ -69,10 +69,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "invalid json" }, { status: 400 });
   }
 
-  // MP notification payload: { action, api_version, data: { id }, ... }
+  // MP notification payload: { action, api_version, data: { id }, live_mode, ... }
   const action = notification["action"] as string | undefined;
   const dataObj = notification["data"] as Record<string, unknown> | undefined;
   const dataId = dataObj?.["id"] as string | undefined;
+  const liveMode = notification["live_mode"] as boolean | undefined;
+
+  // Ignore test/sandbox notifications (MP sends these for URL validation)
+  if (liveMode === false) {
+    return NextResponse.json({ ok: true });
+  }
 
   if (!dataId) {
     return NextResponse.json({ ok: true }); // not a payment notification
