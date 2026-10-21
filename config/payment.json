@@ -1,6 +1,6 @@
 {
-  "_comment": "Payment provider config. NEEDS #21: switch provider to 'asaas' if Kiwify rejects service products.",
-  "provider": "kiwify",
+  "_comment": "Payment provider config. Active provider: mercadopago.",
+  "provider": "mercadopago",
   "kiwify": {
     "products": {
       "SITE_5P": "PLACEHOLDER_KIWIFY_PRODUCT_SITE_5P",
@@ -21,6 +21,16 @@
       "ANCHOR_PIX": "PLACEHOLDER_ASAAS_LINK_ANCHOR_PIX",
       "LANDING_1P": "PLACEHOLDER_ASAAS_LINK_LANDING",
       "MANUT": "PLACEHOLDER_ASAAS_LINK_MANUT"
+    }
+  },
+  "mercadopago": {
+    "paymentLinks": {
+      "SITE_5P_CARD": "PLACEHOLDER_MP_LINK_SITE_5P_CARD",
+      "SITE_5P_PIX": "PLACEHOLDER_MP_LINK_SITE_5P_PIX",
+      "ANCHOR_CARD": "PLACEHOLDER_MP_LINK_ANCHOR_CARD",
+      "ANCHOR_PIX": "PLACEHOLDER_MP_LINK_ANCHOR_PIX",
+      "LANDING_1P": "PLACEHOLDER_MP_LINK_LANDING",
+      "MANUT": "PLACEHOLDER_MP_LINK_MANUT"
     }
   }
 }

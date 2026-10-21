@@ -12,7 +12,7 @@ import { randomUUID } from "crypto";
 
 export interface ApprovedPaymentData {
   providerRef: string;
-  provider: "kiwify" | "asaas";
+  provider: "kiwify" | "asaas" | "mercadopago";
   eventId: string;
   sku: string;
   grossAmount: number;
@@ -169,7 +169,7 @@ export async function handleApprovedPayment(
 
 export async function handleRefund(params: {
   eventId: string;
-  provider: "kiwify" | "asaas";
+  provider: "kiwify" | "asaas" | "mercadopago";
   providerRef: string;
   eventType: "refund" | "chargeback";
 }): Promise<void> {

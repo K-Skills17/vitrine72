@@ -130,7 +130,7 @@ export type Project = {
   seller_id: string | null;
   partner_id: string | null;
   source: string | null; // "seller:x", "partner:y", "inbound", etc.
-  payment_provider: "kiwify" | "asaas";
+  payment_provider: "kiwify" | "asaas" | "mercadopago";
   payment_provider_ref: string;
   gross_amount: number;
   payment_method: "pix" | "card";
@@ -151,7 +151,7 @@ export type Payment = {
   id: string;
   created_at: string;
   project_id: string;
-  provider: "kiwify" | "asaas";
+  provider: "kiwify" | "asaas" | "mercadopago";
   provider_ref: string;
   amount: number;
   method: "pix" | "card";
@@ -294,7 +294,7 @@ export type Draw = {
 export type WebhookEvent = {
   id: string;
   created_at: string;
-  provider: "kiwify" | "asaas";
+  provider: "kiwify" | "asaas" | "mercadopago";
   event_id: string;
   event_type: string;
   processed: boolean;
