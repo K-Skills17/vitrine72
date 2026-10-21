@@ -6,3 +6,5 @@ generated/
 *.tsbuildinfo
 .lhci-tmp/
 dist/
+
+.vercel
