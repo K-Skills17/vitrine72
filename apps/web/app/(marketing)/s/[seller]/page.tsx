@@ -41,10 +41,8 @@ export default async function SellerPage({ params }: Props) {
   );
   if (!seller) notFound();
 
-  const checkoutUrl =
-    seller.asaasLinks.SITE_5P_PIX ??
-    seller.asaasLinks.SITE_5P_CARD ??
-    "#";
+  const coreUrl = "/api/checkout?sku=SITE_5P";
+  const anchorUrl = "/api/checkout?sku=ANCHOR_SITE_GBP_BOT";
 
   return (
     <>
@@ -57,14 +55,14 @@ export default async function SellerPage({ params }: Props) {
       />
       <SiteNav />
       <main>
-        <HeroSection partnerBanner={null} checkoutUrl={checkoutUrl} />
+        <HeroSection partnerBanner={null} checkoutUrl={coreUrl} />
         <ComoFunciona />
         <OQueVemNoSite />
         <Portfolio />
-        <Preco partnerBonus={false} checkoutUrl={checkoutUrl} />
+        <Preco partnerBonus={false} coreUrl={coreUrl} anchorUrl={anchorUrl} />
         <RegrasEClaras />
         <FAQ />
-        <FinalCTA checkoutUrl={checkoutUrl} />
+        <FinalCTA checkoutUrl={coreUrl} />
       </main>
       <SiteFooter />
     </>

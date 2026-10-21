@@ -11,7 +11,8 @@ import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 
 interface Props {
   partnerBonus: boolean;
-  checkoutUrl: string | null;
+  coreUrl: string | null;
+  anchorUrl: string | null;
 }
 
 const ANCHOR_FEATURES = [
@@ -30,8 +31,9 @@ const CORE_FEATURES = [
   "1 rodada de revisão",
 ];
 
-export function Preco({ partnerBonus, checkoutUrl }: Props) {
-  const ctaUrl = checkoutUrl ?? "#";
+export function Preco({ partnerBonus, coreUrl, anchorUrl }: Props) {
+  const coreCtaUrl = coreUrl ?? "#";
+  const anchorCtaUrl = anchorUrl ?? "#";
 
   return (
     <section id="preco" className="py-28 px-6 bg-surface-base">
@@ -102,7 +104,7 @@ export function Preco({ partnerBonus, checkoutUrl }: Props) {
                   ))}
                 </ul>
 
-                <a href={ctaUrl} className="btn-gold w-full justify-center mt-auto">
+                <a href={anchorCtaUrl} className="btn-gold w-full justify-center mt-auto">
                   Quero o pacote completo
                   <ArrowRight className="w-4 h-4" aria-hidden />
                 </a>
@@ -140,7 +142,7 @@ export function Preco({ partnerBonus, checkoutUrl }: Props) {
                 ))}
               </ul>
 
-              <a href={ctaUrl} className="btn-outline-gold w-full justify-center mt-auto">
+              <a href={coreCtaUrl} className="btn-outline-gold w-full justify-center mt-auto">
                 Quero só o site
               </a>
             </div>
@@ -193,7 +195,7 @@ export function Preco({ partnerBonus, checkoutUrl }: Props) {
         <Reveal>
           <p className="text-center text-ink-subtle text-sm">
             Começando do zero?{" "}
-            <a href={ctaUrl} className="text-brand-gold hover:underline">
+            <a href={coreCtaUrl} className="text-brand-gold hover:underline">
               Landing page 1 página por R$ {DOWNSELL.price.toLocaleString("pt-BR")}
             </a>
           </p>

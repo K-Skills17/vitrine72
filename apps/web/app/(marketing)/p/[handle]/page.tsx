@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import partners from "@/../../config/partners.json";
-import paymentConfig from "@/../../config/payment.json";
 import { HeroSection } from "@/components/marketing/HeroSection";
 import { ComoFunciona } from "@/components/marketing/ComoFunciona";
 import { OQueVemNoSite } from "@/components/marketing/OQueVemNoSite";
@@ -47,13 +46,12 @@ export default async function PartnerPage({ params }: Props) {
   );
   if (!partner) notFound();
 
-  // Set source cookie (30 days) — done via response headers in middleware
-  // The cookie is set client-side via a small component for RSC compatibility
-  const checkoutUrl = buildCheckoutUrl(partner, "SITE_5P");
+  // Source cookie set client-side so it's present when /api/checkout is called
+  const coreUrl = "/api/checkout?sku=SITE_5P";
+  const anchorUrl = "/api/checkout?sku=ANCHOR_SITE_GBP_BOT";
 
   return (
     <>
-      {/* Source cookie set by SourceCookieSetter client component */}
       <SetSourceCookie source={`partner:${handle}`} />
       <SiteNav />
       <main>
@@ -61,31 +59,18 @@ export default async function PartnerPage({ params }: Props) {
           partnerName={partner.name}
           freeCycles={partner.bonusCycles ?? PARTNER_BONUS.freeCycles}
         />
-        <HeroSection partnerBanner={partner} checkoutUrl={checkoutUrl} />
+        <HeroSection partnerBanner={partner} checkoutUrl={coreUrl} />
         <ComoFunciona />
         <OQueVemNoSite />
         <Portfolio />
-        <Preco partnerBonus checkoutUrl={checkoutUrl} />
+        <Preco partnerBonus coreUrl={coreUrl} anchorUrl={anchorUrl} />
         <RegrasEClaras />
         <FAQ />
-        <FinalCTA checkoutUrl={checkoutUrl} />
+        <FinalCTA checkoutUrl={coreUrl} />
       </main>
       <SiteFooter />
     </>
   );
-}
-
-function buildCheckoutUrl(partner: PartnerConfig, sku: string): string {
-  const cfg = paymentConfig as typeof paymentConfig;
-  if (cfg.provider === "kiwify") {
-    const productId =
-      (cfg.kiwify.products as Record<string, string>)[sku] ?? "";
-    return `${cfg.kiwify.checkoutBaseUrl}/${productId}?aff=${partner.kiwifyAffiliateId}`;
-  }
-  // Asaas fallback
-  const link =
-    (cfg.asaas.paymentLinks as Record<string, string>)[`${sku}_PIX`] ?? "#";
-  return `${link}?src=${partner.handle}`;
 }
 
 // Client component to set the source cookie

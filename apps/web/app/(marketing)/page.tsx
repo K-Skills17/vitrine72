@@ -28,14 +28,18 @@ export default function HomePage() {
       />
       <SiteNav />
       <main>
-        <HeroSection partnerBanner={null} checkoutUrl={null} />
+        <HeroSection partnerBanner={null} checkoutUrl="/api/checkout?sku=SITE_5P" />
         <ComoFunciona />
         <OQueVemNoSite />
         <Portfolio />
-        <Preco partnerBonus={false} checkoutUrl={null} />
+        <Preco
+          partnerBonus={false}
+          coreUrl="/api/checkout?sku=SITE_5P"
+          anchorUrl="/api/checkout?sku=ANCHOR_SITE_GBP_BOT"
+        />
         <RegrasEClaras />
         <FAQ />
-        <FinalCTA checkoutUrl={null} />
+        <FinalCTA checkoutUrl="/api/checkout?sku=SITE_5P" />
       </main>
       <SiteFooter />
     </>
