@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrine72.com.br";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
 
 export function GET(): NextResponse {
   const robots = `User-agent: *

@@ -32,7 +32,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return NextResponse.redirect(new URL("/#preco", req.url));
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrine72.com.br";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
 
   const body = {
     items: [

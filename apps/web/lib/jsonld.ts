@@ -5,7 +5,7 @@
 
 export function generateMarketingJsonLd() {
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrine72.com.br";
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
   const phone = process.env.NEXT_PUBLIC_WHATSAPP;
   const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
   const legalName = process.env.LEGAL_NAME ?? "Vitrine72";

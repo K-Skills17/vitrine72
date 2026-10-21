@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     siteName: businessName,
     title: businessName,
     description: config.copyBlocks.heroSubheadline,
-    url: `https://${slug}.vitrine72.com.br`,
+    url: `https://${slug}.vitrini72.com.br`,
   },
-  metadataBase: new URL(`https://${slug}.vitrine72.com.br`),
+  metadataBase: new URL(`https://${slug}.vitrini72.com.br`),
   alternates: {
-    canonical: `https://${slug}.vitrine72.com.br`,
+    canonical: `https://${slug}.vitrini72.com.br`,
   },
   robots: {
     index: true,

@@ -205,7 +205,7 @@ async function writeSiteFiles(
   fs.mkdirSync(outputDir, { recursive: true });
 
   // robots.txt
-  const sitemapUrl = `https://${config.slug}.vitrine72.com.br/sitemap.xml`;
+  const sitemapUrl = `https://${config.slug}.vitrini72.com.br/sitemap.xml`;
   fs.writeFileSync(
     path.join(outputDir, "robots.txt"),
     `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nSitemap: ${sitemapUrl}\n`
@@ -233,7 +233,7 @@ async function writeSiteFiles(
         ? `https://instagram.com/${config.instagramLink.replace("@", "")}`
         : null,
     ].filter(Boolean) as string[],
-    url: `https://${config.slug}.vitrine72.com.br`,
+    url: `https://${config.slug}.vitrini72.com.br`,
     updatedAt: config.updatedAt,
   });
 
@@ -293,7 +293,7 @@ Atualizado em: ${config.updatedAt}
 }
 
 function generateSitemap(config: GeneratedSiteConfig, vertical: VerticalConfig): string {
-  const base = `https://${config.slug}.vitrine72.com.br`;
+  const base = `https://${config.slug}.vitrini72.com.br`;
   const pages = vertical.pages;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -359,7 +359,7 @@ function generateAiCatalog(config: GeneratedSiteConfig): Record<string, unknown>
 }
 
 function generateWebMcp(config: GeneratedSiteConfig): Record<string, unknown> {
-  const baseUrl = `https://${config.slug}.vitrine72.com.br`;
+  const baseUrl = `https://${config.slug}.vitrini72.com.br`;
   return {
     schema: "webmcp/v1",
     name: `${config.businessName} — Assistente`,

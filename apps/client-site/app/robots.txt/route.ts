@@ -1,7 +1,7 @@
 import { config } from "@/lib/config";
 
 export function GET() {
-  const base = `https://${config.slug}.vitrine72.com.br`;
+  const base = `https://${config.slug}.vitrini72.com.br`;
   const body = `User-agent: *
 Allow: /
 

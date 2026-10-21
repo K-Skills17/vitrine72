@@ -1,7 +1,7 @@
 import { config } from "@/lib/config";
 
 export function GET() {
-  const baseUrl = `https://${config.slug}.vitrine72.com.br`;
+  const baseUrl = `https://${config.slug}.vitrini72.com.br`;
   const manifest = {
     schema: "webmcp/v1",
     name: `${config.businessName} — Assistente`,

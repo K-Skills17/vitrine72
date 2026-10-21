@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrine72.com.br";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP ?? "PLACEHOLDER_WHATSAPP";
 const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "PLACEHOLDER_CONTACT_EMAIL";
 

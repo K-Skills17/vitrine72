@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "Seu site pronto em 72 horas úteis. Site até 5 páginas para negócios locais em São Paulo. Mobile, WhatsApp, Google-ready.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrine72.com.br"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br"
   ),
   openGraph: {
     type: "website",

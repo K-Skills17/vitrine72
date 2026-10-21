@@ -1,7 +1,7 @@
 import { config } from "@/lib/config";
 
 export function GET() {
-  const base = `https://${config.slug}.vitrine72.com.br`;
+  const base = `https://${config.slug}.vitrini72.com.br`;
   const pages = [
     { slug: "", priority: "1.0" },
     { slug: "servicos", priority: "0.9" },
