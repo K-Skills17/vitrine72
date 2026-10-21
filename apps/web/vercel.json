@@ -1,6 +1,6 @@
 {
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && pnpm build",
+  "buildCommand": "pnpm build",
   "crons": [
     {
       "path": "/api/cron/intake-reminders",
