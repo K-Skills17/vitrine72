@@ -207,6 +207,189 @@ export function checkNoProvisionalCopy(siteDir: string): CheckResult {
   return { name: "no-provisional-copy", passed: true, message: "OK" };
 }
 
+// ─── Conversion & content quality checks ─────────────────────────────────────
+
+const GENERIC_HERO_PHRASES = [
+  "bem-vindo",
+  "welcome",
+  "olá",
+  "sua empresa",
+  "nossa empresa",
+  "estamos aqui",
+  "somos uma empresa",
+  "conheça nossos",
+  "saiba mais",
+  "__placeholder",
+];
+
+export function checkHeroHeadline(config: GeneratedSiteConfig): CheckResult {
+  const h = config.copyBlocks?.heroHeadline ?? "";
+  if (!h || h.length < 20) {
+    return {
+      name: "hero-headline",
+      passed: false,
+      message: `Hero headline too short or missing (${h.length} chars, min 20)`,
+    };
+  }
+  const lower = h.toLowerCase();
+  const generic = GENERIC_HERO_PHRASES.find((p) => lower.includes(p));
+  if (generic) {
+    return {
+      name: "hero-headline",
+      passed: false,
+      message: `Hero headline is generic: contains "${generic}"`,
+    };
+  }
+  return { name: "hero-headline", passed: true, message: `OK (${h.length} chars)` };
+}
+
+export function checkHeroSubheadline(config: GeneratedSiteConfig): CheckResult {
+  const sub = config.copyBlocks?.heroSubheadline ?? "";
+  if (!sub || sub.length < 30) {
+    return {
+      name: "hero-subheadline",
+      passed: false,
+      message: `Hero subheadline too short or missing (${sub.length} chars, min 30)`,
+    };
+  }
+  if (sub.toLowerCase().includes("__placeholder")) {
+    return { name: "hero-subheadline", passed: false, message: "Hero subheadline is a placeholder" };
+  }
+  return { name: "hero-subheadline", passed: true, message: `OK (${sub.length} chars)` };
+}
+
+export function checkLocalSignals(config: GeneratedSiteConfig): CheckResult {
+  const hasNeighborhood = (config.neighborhoods ?? []).length > 0;
+  const hasAddressInCopy =
+    config.address &&
+    (
+      JSON.stringify(config.copyBlocks ?? {}).toLowerCase().includes(
+        config.address.split(",")[0].toLowerCase()
+      ) ||
+      (config.neighborhoods ?? []).some((n) =>
+        JSON.stringify(config.copyBlocks ?? {}).toLowerCase().includes(n.toLowerCase())
+      )
+    );
+
+  if (!hasNeighborhood && !hasAddressInCopy) {
+    return {
+      name: "local-signals",
+      passed: false,
+      message: "No neighborhood or address found — site will not rank for local searches",
+    };
+  }
+  return {
+    name: "local-signals",
+    passed: true,
+    message: `${(config.neighborhoods ?? []).length} neighborhood(s) defined`,
+  };
+}
+
+export function checkPrimaryCTA(config: GeneratedSiteConfig): CheckResult {
+  const url = config.primaryActionUrl ?? "";
+  const isWhatsApp = url.startsWith("https://wa.me/") || url.startsWith("https://api.whatsapp.com/");
+  const isTel = url.startsWith("tel:");
+  if (!isWhatsApp && !isTel) {
+    return {
+      name: "primary-cta",
+      passed: false,
+      message: `primaryActionUrl is not a WhatsApp or tel link: "${url}"`,
+    };
+  }
+  return { name: "primary-cta", passed: true, message: `CTA: ${config.primaryAction}` };
+}
+
+export function checkServicesComplete(config: GeneratedSiteConfig): CheckResult {
+  const services = config.services ?? [];
+  if (services.length < 2) {
+    return {
+      name: "services-complete",
+      passed: false,
+      message: `Only ${services.length} service(s) defined (min 2)`,
+    };
+  }
+  const empty = services.filter(
+    (s) => !s.description || s.description.trim().length < 10 || s.description.includes("__placeholder")
+  );
+  if (empty.length > 0) {
+    return {
+      name: "services-complete",
+      passed: false,
+      message: `${empty.length} service(s) have empty/placeholder descriptions: ${empty.map((s) => s.name).join(", ")}`,
+    };
+  }
+  return { name: "services-complete", passed: true, message: `${services.length} services OK` };
+}
+
+export function checkFAQsPresent(config: GeneratedSiteConfig): CheckResult {
+  const faqs = config.faqs ?? [];
+  if (faqs.length < 2) {
+    return {
+      name: "faqs-present",
+      passed: false,
+      message: `Only ${faqs.length} FAQ(s) (min 2 required for SEO)`,
+    };
+  }
+  const answers = config.copyBlocks?.faqAnswers ?? {};
+  const emptyAnswers = faqs.filter((f) => {
+    const a = answers[f.q] ?? "";
+    return a.length < 20 || a.includes("__placeholder");
+  });
+  if (emptyAnswers.length > 0) {
+    return {
+      name: "faqs-present",
+      passed: false,
+      message: `${emptyAnswers.length} FAQ answer(s) are empty or placeholders`,
+    };
+  }
+  return { name: "faqs-present", passed: true, message: `${faqs.length} FAQs with answers OK` };
+}
+
+export function checkReviewsUsed(config: GeneratedSiteConfig): CheckResult {
+  if (!config.gbpData || config.gbpData.reviewCount === 0) {
+    return { name: "reviews-used", passed: true, message: "No GBP data — skipped" };
+  }
+  if (config.gbpData.reviewCount >= 5 && config.gbpData.rating >= 4) {
+    // If we have good reviews, at least 1 must appear in copy (check sourceFacts or about text)
+    const reviewAuthors = config.gbpData.reviews.map((r) => r.author.split(" ")[0].toLowerCase());
+    const allCopy = JSON.stringify(config.copyBlocks ?? {}).toLowerCase();
+    const usedInCopy =
+      reviewAuthors.some((a) => allCopy.includes(a)) ||
+      (config.copyBlocks?.sourceFacts &&
+        Object.values(config.copyBlocks.sourceFacts).flat().some((f) =>
+          typeof f === "string" && f.toLowerCase().includes("avalia")
+        ));
+
+    if (!usedInCopy) {
+      return {
+        name: "reviews-used",
+        passed: false,
+        message: `Business has ${config.gbpData.reviewCount} reviews (${config.gbpData.rating}★) but none are referenced in copy — missed conversion opportunity`,
+      };
+    }
+  }
+  return {
+    name: "reviews-used",
+    passed: true,
+    message: `GBP: ${config.gbpData.rating}★ (${config.gbpData.reviewCount} reviews) used`,
+  };
+}
+
+export function checkAboutText(config: GeneratedSiteConfig): CheckResult {
+  const about = config.copyBlocks?.aboutText ?? "";
+  if (!about || about.length < 80) {
+    return {
+      name: "about-text",
+      passed: false,
+      message: `About text too short or missing (${about.length} chars, min 80)`,
+    };
+  }
+  if (about.toLowerCase().includes("__placeholder")) {
+    return { name: "about-text", passed: false, message: "About text is a placeholder" };
+  }
+  return { name: "about-text", passed: true, message: `OK (${about.length} chars)` };
+}
+
 // ─── Aggregate ────────────────────────────────────────────────────────────────
 
 export async function runAllChecks(
@@ -219,6 +402,7 @@ export async function runAllChecks(
   }
 ): Promise<QAResult> {
   const checks: CheckResult[] = [
+    // Technical
     checkRobotsTxt(siteDir),
     checkLlmsTxt(siteDir),
     checkSitemapXml(siteDir),
@@ -228,6 +412,15 @@ export async function runAllChecks(
     checkMinPhotos(config),
     checkJsonLd(siteDir),
     checkNoProvisionalCopy(siteDir),
+    // Conversion & content quality
+    checkHeroHeadline(config),
+    checkHeroSubheadline(config),
+    checkLocalSignals(config),
+    checkPrimaryCTA(config),
+    checkServicesComplete(config),
+    checkFAQsPresent(config),
+    checkReviewsUsed(config),
+    checkAboutText(config),
   ];
 
   // Lighthouse checks
