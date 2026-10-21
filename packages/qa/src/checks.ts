@@ -207,6 +207,128 @@ export function checkNoProvisionalCopy(siteDir: string): CheckResult {
   return { name: "no-provisional-copy", passed: true, message: "OK" };
 }
 
+// ─── AI optimization checks ───────────────────────────────────────────────────
+
+export function checkAiCatalog(siteDir: string): CheckResult {
+  const catalogPath = path.join(siteDir, "ai-catalog.json");
+  if (!fs.existsSync(catalogPath)) {
+    return { name: "ai-catalog", passed: false, message: "Missing ai-catalog.json" };
+  }
+  try {
+    const catalog = JSON.parse(fs.readFileSync(catalogPath, "utf-8")) as Record<string, unknown>;
+    const required = ["schema", "businessName", "location", "contact", "services", "hours"];
+    const missing = required.filter((k) => !catalog[k]);
+    if (missing.length > 0) {
+      return { name: "ai-catalog", passed: false, message: `ai-catalog.json missing fields: ${missing.join(", ")}` };
+    }
+    const services = catalog["services"] as unknown[];
+    if (!Array.isArray(services) || services.length === 0) {
+      return { name: "ai-catalog", passed: false, message: "ai-catalog.json has no services" };
+    }
+    return { name: "ai-catalog", passed: true, message: `OK (${services.length} services)` };
+  } catch {
+    return { name: "ai-catalog", passed: false, message: "ai-catalog.json is not valid JSON" };
+  }
+}
+
+export function checkWebMcp(siteDir: string): CheckResult {
+  const mcpPath = path.join(siteDir, "webmcp.json");
+  if (!fs.existsSync(mcpPath)) {
+    return { name: "webmcp", passed: false, message: "Missing webmcp.json" };
+  }
+  try {
+    const mcp = JSON.parse(fs.readFileSync(mcpPath, "utf-8")) as Record<string, unknown>;
+    if (!mcp["tools"] || !Array.isArray(mcp["tools"]) || (mcp["tools"] as unknown[]).length < 3) {
+      return { name: "webmcp", passed: false, message: "webmcp.json must have at least 3 tool definitions" };
+    }
+    if (!mcp["catalogEndpoint"]) {
+      return { name: "webmcp", passed: false, message: "webmcp.json missing catalogEndpoint" };
+    }
+    return { name: "webmcp", passed: true, message: `OK (${(mcp["tools"] as unknown[]).length} tools)` };
+  } catch {
+    return { name: "webmcp", passed: false, message: "webmcp.json is not valid JSON" };
+  }
+}
+
+export function checkLlmsTxtDepth(siteDir: string, config: GeneratedSiteConfig): CheckResult {
+  const llmsPath = path.join(siteDir, "llms.txt");
+  if (!fs.existsSync(llmsPath)) {
+    return { name: "llms-txt-depth", passed: false, message: "Missing llms.txt" };
+  }
+  const content = fs.readFileSync(llmsPath, "utf-8");
+  if (content.length < 300) {
+    return { name: "llms-txt-depth", passed: false, message: `llms.txt too thin (${content.length} chars, min 300)` };
+  }
+  const hasServices = content.toLowerCase().includes("serviço") || content.toLowerCase().includes("service");
+  const hasContact = content.includes(config.phone) || content.toLowerCase().includes("whatsapp");
+  const hasLocation = config.neighborhoods.some((n) => content.toLowerCase().includes(n.toLowerCase()));
+  if (!hasServices || !hasContact || !hasLocation) {
+    return {
+      name: "llms-txt-depth",
+      passed: false,
+      message: `llms.txt missing: ${[!hasServices && "services", !hasContact && "contact", !hasLocation && "location"].filter(Boolean).join(", ")}`,
+    };
+  }
+  return { name: "llms-txt-depth", passed: true, message: `OK (${content.length} chars)` };
+}
+
+// ─── UI/UX & performance checks ───────────────────────────────────────────────
+
+export function checkAnimationProfile(config: GeneratedSiteConfig): CheckResult {
+  const profile = config.animationProfile;
+  if (!profile) {
+    return { name: "animation-profile", passed: false, message: "animationProfile not set in config" };
+  }
+  return { name: "animation-profile", passed: true, message: `Profile: ${profile} (${config.photos.length} photos)` };
+}
+
+export function checkSignatureElement(config: GeneratedSiteConfig): CheckResult {
+  // generico vertical has no signature element by design — skip
+  if (config.vertical === "generico") {
+    return { name: "signature-element", passed: true, message: "Not required for generico vertical" };
+  }
+  if (!config.signatureElementEnabled) {
+    return {
+      name: "signature-element",
+      passed: false,
+      message: `Vertical-specific signature element not enabled — add more photos or check signatureElementHidden (photos: ${config.photos.length})`,
+    };
+  }
+  return { name: "signature-element", passed: true, message: "Enabled" };
+}
+
+export function checkColorContrast(config: GeneratedSiteConfig): CheckResult {
+  // Rough WCAG AA check: luminance ratio of text vs background
+  const textHex = config.palette.text;
+  const bgHex = config.palette.background;
+  const ratio = approximateContrastRatio(textHex, bgHex);
+  if (ratio < 4.5) {
+    return {
+      name: "color-contrast",
+      passed: false,
+      message: `Text/background contrast ratio ~${ratio.toFixed(1)} (WCAG AA requires 4.5)`,
+    };
+  }
+  return { name: "color-contrast", passed: true, message: `Contrast ratio ~${ratio.toFixed(1)} OK` };
+}
+
+function hexToRelativeLuminance(hex: string): number {
+  const clean = hex.replace("#", "");
+  const r = parseInt(clean.slice(0, 2), 16) / 255;
+  const g = parseInt(clean.slice(2, 4), 16) / 255;
+  const b = parseInt(clean.slice(4, 6), 16) / 255;
+  const linearize = (c: number) => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  return 0.2126 * linearize(r) + 0.7152 * linearize(g) + 0.0722 * linearize(b);
+}
+
+function approximateContrastRatio(hex1: string, hex2: string): number {
+  const l1 = hexToRelativeLuminance(hex1);
+  const l2 = hexToRelativeLuminance(hex2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 // ─── Conversion & content quality checks ─────────────────────────────────────
 
 const GENERIC_HERO_PHRASES = [
@@ -412,6 +534,14 @@ export async function runAllChecks(
     checkMinPhotos(config),
     checkJsonLd(siteDir),
     checkNoProvisionalCopy(siteDir),
+    // AI optimization
+    checkAiCatalog(siteDir),
+    checkWebMcp(siteDir),
+    checkLlmsTxtDepth(siteDir, config),
+    // UI/UX & performance
+    checkAnimationProfile(config),
+    checkSignatureElement(config),
+    checkColorContrast(config),
     // Conversion & content quality
     checkHeroHeadline(config),
     checkHeroSubheadline(config),

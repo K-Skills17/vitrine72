@@ -3,7 +3,7 @@
  * Falls back to template copy with visible placeholders if no key.
  */
 
-import type { CopyBlocks, GeneratedSiteConfig } from "./types.js";
+import type { CopyBlocks, GeneratedSiteConfig, VerticalConfig } from "./types.js";
 
 const BANNED_PHRASES: string[] = (() => {
   try {
@@ -27,7 +27,8 @@ const SYSTEM_PROMPT = `Você é um redator especialista em sites locais brasilei
 8. Copy conciso e direto.`;
 
 export async function draftCopy(
-  config: GeneratedSiteConfig
+  config: GeneratedSiteConfig,
+  vertical?: VerticalConfig
 ): Promise<CopyBlocks> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
@@ -39,7 +40,7 @@ export async function draftCopy(
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
     const client = new Anthropic({ apiKey });
 
-    const contextSummary = buildContextSummary(config);
+    const contextSummary = buildContextSummary(config, vertical);
 
     const response = await client.messages.create({
       model: "claude-sonnet-4-6",
@@ -85,7 +86,7 @@ export async function draftCopy(
   }
 }
 
-function buildContextSummary(config: GeneratedSiteConfig): string {
+function buildContextSummary(config: GeneratedSiteConfig, vertical?: VerticalConfig): string {
   const lines = [
     `Negócio: ${config.businessName}`,
     `Endereço: ${config.address}`,
@@ -94,6 +95,13 @@ function buildContextSummary(config: GeneratedSiteConfig): string {
     `Serviços: ${config.services.map((s) => `${s.name}${s.price ? ` (${s.price})` : ""}`).join(", ")}`,
     `Ação principal: ${config.primaryAction}`,
   ];
+
+  if (vertical?.designPrinciples?.length) {
+    lines.push(`\nPrincípios de design para este nicho (aplicar na copy):\n${vertical.designPrinciples.map((p) => `- ${p}`).join("\n")}`);
+  }
+  if (vertical?.conversionPatterns?.length) {
+    lines.push(`\nPadrões de conversão do nicho (referência para CTAs e estrutura):\n${vertical.conversionPatterns.map((p) => `- ${p}`).join("\n")}`);
+  }
 
   if (config.gbpData) {
     lines.push(

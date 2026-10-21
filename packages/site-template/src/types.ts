@@ -38,6 +38,14 @@ export interface VerticalConfig {
   palettes: ColorPalette[];
   signatureElement: string | null;
   signatureElementHidden?: string;
+  /** Design/UX principles that make top sites in this niche stand out */
+  designPrinciples: string[];
+  /** Conversion patterns that work specifically for this niche */
+  conversionPatterns: string[];
+  /** Animation patterns appropriate for the niche's emotional tone */
+  animationHints: string[];
+  /** Mobile-specific UX patterns critical for this niche */
+  mobilePatterns: string[];
 }
 
 export interface GeneratedSiteConfig {
@@ -65,6 +73,10 @@ export interface GeneratedSiteConfig {
   copyBlocks: CopyBlocks;
   selfEditSheetUrl: string | null;
   updatedAt: string;
+  /** "minimal" | "standard" | "rich" — drives animation complexity in the template */
+  animationProfile: "minimal" | "standard" | "rich";
+  /** Whether the vertical's signature element has enough content to be enabled */
+  signatureElementEnabled: boolean;
 }
 
 export interface GBPData {

@@ -80,10 +80,15 @@ export async function generateSite(input: GeneratorInput): Promise<GeneratedSite
       ? (intake.selfEditSheetUrl as string) ?? null
       : null,
     updatedAt: new Date().toISOString().slice(0, 10),
+    animationProfile: photos.length >= 10 ? "rich" : photos.length >= 5 ? "standard" : "minimal",
+    signatureElementEnabled:
+      vertical.signatureElement !== null &&
+      !vertical.signatureElementHidden &&
+      photos.length >= 6,
   };
 
-  // Draft copy
-  config.copyBlocks = await draftCopy(config);
+  // Draft copy (pass vertical for niche-aware prompting)
+  config.copyBlocks = await draftCopy(config, vertical);
 
   // Write the site files
   await writeSiteFiles(config, vertical, outputDir);
@@ -244,6 +249,18 @@ async function writeSiteFiles(
     generateSitemap(config, vertical)
   );
 
+  // ai-catalog.json — structured data for AI crawlers
+  fs.writeFileSync(
+    path.join(outputDir, "ai-catalog.json"),
+    JSON.stringify(generateAiCatalog(config), null, 2)
+  );
+
+  // webmcp.json — MCP manifest for AI agent discovery
+  fs.writeFileSync(
+    path.join(outputDir, "webmcp.json"),
+    JSON.stringify(generateWebMcp(config), null, 2)
+  );
+
   // Validate copy: no banned phrases, no placeholders
   validateCopy(config);
 }
@@ -289,6 +306,89 @@ ${pages
   )
   .join("\n")}
 </urlset>`;
+}
+
+function generateAiCatalog(config: GeneratedSiteConfig): Record<string, unknown> {
+  return {
+    schema: "vitrine72/ai-catalog/v1",
+    generatedAt: config.updatedAt,
+    businessName: config.businessName,
+    vertical: config.vertical,
+    description: config.copyBlocks.heroSubheadline || config.copyBlocks.heroHeadline,
+    location: {
+      address: config.address,
+      neighborhoods: config.neighborhoods,
+      city: "São Paulo",
+      state: "SP",
+      country: "BR",
+    },
+    contact: {
+      whatsapp: config.phone,
+      primaryCTA: config.primaryAction,
+      primaryCTAUrl: config.primaryActionUrl,
+    },
+    hours: config.hours,
+    services: config.services.map((s) => ({
+      name: s.name,
+      description: config.copyBlocks.serviceDescriptions[s.name] || s.description,
+      price: s.price,
+    })),
+    faqs: config.faqs.map((f) => ({
+      question: f.q,
+      answer: config.copyBlocks.faqAnswers[f.q] || f.a,
+    })),
+    ratings: config.gbpData
+      ? {
+          google: {
+            score: config.gbpData.rating,
+            count: config.gbpData.reviewCount,
+            placeId: config.gbpData.placeId,
+          },
+        }
+      : null,
+    socialLinks: {
+      google: config.gbpLink,
+      instagram: config.instagramLink,
+    },
+    capabilities: {
+      languages: ["pt-BR"],
+      regions: config.neighborhoods.map((n) => `${n}, São Paulo`),
+      bookingViaWhatsApp: config.primaryAction === "whatsapp",
+    },
+  };
+}
+
+function generateWebMcp(config: GeneratedSiteConfig): Record<string, unknown> {
+  const baseUrl = `https://${config.slug}.vitrine72.com.br`;
+  return {
+    schema: "webmcp/v1",
+    name: `${config.businessName} — Assistente`,
+    description: `Informações sobre ${config.businessName}: serviços, localização, horários e contato.`,
+    catalogEndpoint: `${baseUrl}/ai-catalog.json`,
+    llmsEndpoint: `${baseUrl}/llms.txt`,
+    tools: [
+      {
+        name: "get_business_info",
+        description: `Retorna informações gerais sobre ${config.businessName}: endereço, horários e área atendida.`,
+        inputSchema: { type: "object", properties: {}, required: [] },
+      },
+      {
+        name: "get_services",
+        description: "Retorna lista de serviços disponíveis com descrições e preços.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+      },
+      {
+        name: "get_contact",
+        description: "Retorna WhatsApp e link de contato direto.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+      },
+      {
+        name: "get_faqs",
+        description: "Retorna perguntas frequentes e respostas sobre os serviços.",
+        inputSchema: { type: "object", properties: {}, required: [] },
+      },
+    ],
+  };
 }
 
 function validateCopy(config: GeneratedSiteConfig): void {
