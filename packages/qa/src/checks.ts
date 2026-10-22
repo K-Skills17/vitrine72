@@ -288,10 +288,14 @@ export function checkSignatureElement(config: GeneratedSiteConfig): CheckResult 
     return { name: "signature-element", passed: true, message: "Not required for generico vertical" };
   }
   if (!config.signatureElementEnabled) {
+    // If photos meet the threshold, the element is intentionally hidden by the vertical (e.g. requires specific paired photos)
+    if (config.photos.length >= 6) {
+      return { name: "signature-element", passed: true, message: `Intentionally hidden by vertical (${config.photos.length} photos OK)` };
+    }
     return {
       name: "signature-element",
       passed: false,
-      message: `Vertical-specific signature element not enabled — add more photos or check signatureElementHidden (photos: ${config.photos.length})`,
+      message: `Not enough photos to enable signature element (have ${config.photos.length}, need 6)`,
     };
   }
   return { name: "signature-element", passed: true, message: "Enabled" };

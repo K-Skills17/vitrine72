@@ -8,7 +8,7 @@ import type { CopyBlocks, GeneratedSiteConfig, VerticalConfig } from "./types.js
 const BANNED_PHRASES: string[] = (() => {
   try {
     return (
-      require("../../config/banned-phrases.json") as { phrases: string[] }
+      require("../../../config/banned-phrases.json") as { phrases: string[] }
     ).phrases;
   } catch {
     return [];
@@ -42,35 +42,50 @@ export async function draftCopy(
 
     const contextSummary = buildContextSummary(config, vertical);
 
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: 3000,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
+    const faqKeys = config.faqs.map((f) => `"${f.q}"`).join(", ");
+    const userPrompt = `Dados do negócio:\n${contextSummary}\n\nGere o JSON com os campos:\n- heroHeadline: string\n- heroSubheadline: string\n- aboutText: string\n- serviceDescriptions: objeto com key=nome exato do serviço, value=string com 2 parágrafos separados por \\n\\n\n- faqAnswers: objeto com EXATAMENTE estas chaves (copie palavra por palavra): ${faqKeys}. Não invente perguntas diferentes.\n- sourceFacts: objeto registrando quais dados foram usados em cada bloco\n\nResponda APENAS com JSON válido, sem texto adicional.`;
+
+    const messages: { role: "user" | "assistant"; content: string }[] = [
+      { role: "user", content: userPrompt },
+    ];
+
+    let parsed: Partial<CopyBlocks> | null = null;
+
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const response = await client.messages.create({
+        model: "claude-sonnet-4-6",
+        max_tokens: 3000,
+        system: SYSTEM_PROMPT,
+        messages,
+      });
+
+      const text = response.content[0].type === "text" ? response.content[0].text : "";
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) break;
+
+      const candidate = JSON.parse(jsonMatch[0]) as Partial<CopyBlocks>;
+      const allText = JSON.stringify(candidate).toLowerCase();
+      const foundBanned = BANNED_PHRASES.find((p) => allText.includes(p.toLowerCase()));
+
+      if (!foundBanned) {
+        parsed = candidate;
+        break;
+      }
+
+      if (attempt === 0) {
+        console.warn(`Banned phrase "${foundBanned}" detected — retrying with explicit instruction.`);
+        messages.push({ role: "assistant", content: text });
+        messages.push({
           role: "user",
-          content: `Dados do negócio:\n${contextSummary}\n\nGere o JSON com os campos: heroHeadline, heroSubheadline, aboutText, serviceDescriptions (objeto com key=serviceName, value=descrição 2 parágrafos), faqAnswers (objeto com key=pergunta, value=resposta). Para cada bloco de texto, registre em sourceFacts quais dados foram usados.`,
-        },
-      ],
-    });
-
-    const text =
-      response.content[0].type === "text" ? response.content[0].text : "";
-
-    // Extract JSON from response
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) return generateFallbackCopy(config);
-
-    const parsed = JSON.parse(jsonMatch[0]) as Partial<CopyBlocks>;
-
-    // Validate: check for banned phrases
-    const allText = JSON.stringify(parsed).toLowerCase();
-    for (const phrase of BANNED_PHRASES) {
-      if (allText.includes(phrase.toLowerCase())) {
-        console.warn(`Banned phrase detected: "${phrase}". Falling back.`);
-        return generateFallbackCopy(config);
+          content: `O texto acima contém frases proibidas (ex: "${foundBanned}"). Reescreva o JSON completo substituindo todas as frases proibidas por alternativas diretas e específicas ao negócio. Não use: ${BANNED_PHRASES.join(", ")}.`,
+        });
+      } else {
+        console.warn(`Banned phrase still present after retry — using output anyway.`);
+        parsed = candidate;
       }
     }
+
+    if (!parsed) return generateFallbackCopy(config);
 
     return {
       heroHeadline: parsed.heroHeadline ?? `__PLACEHOLDER_HERO_HEADLINE__`,

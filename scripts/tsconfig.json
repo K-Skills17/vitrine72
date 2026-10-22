@@ -1,8 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "Node",
     "rootDir": ".",
     "outDir": "./dist",
     "baseUrl": "..",
@@ -11,6 +9,10 @@
       "@vitrine72/site-template": ["packages/site-template/src/index.ts"],
       "@vitrine72/qa": ["packages/qa/src/index.ts"]
     }
+  },
+  "ts-node": {
+    "experimentalResolver": true,
+    "transpileOnly": true
   },
   "include": ["./**/*.ts", "../packages/*/src/**/*.ts", "../config/**/*.json"]
 }

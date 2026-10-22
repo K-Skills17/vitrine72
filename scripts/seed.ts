@@ -13,7 +13,7 @@ dotenv.config({ path: path.resolve(__dirname, "../apps/web/.env.local") });
 
 const FIXTURES = [
   {
-    id: "fixture-estetica-001",
+    id: "00000000-0000-0000-0000-000000000001",
     sku: "SITE_5P",
     vertical: "estetica",
     businessName: "Studio Bella Vita",
@@ -51,7 +51,7 @@ const FIXTURES = [
     },
   },
   {
-    id: "fixture-solar-002",
+    id: "00000000-0000-0000-0000-000000000002",
     sku: "ANCHOR_SITE_GBP_BOT",
     vertical: "energia-solar",
     businessName: "Solar Sul Energia",
@@ -85,7 +85,7 @@ const FIXTURES = [
     },
   },
   {
-    id: "fixture-pilates-003",
+    id: "00000000-0000-0000-0000-000000000003",
     sku: "SITE_5P",
     vertical: "fisioterapia-pilates",
     businessName: "Studio Movimento e Saúde",
@@ -144,7 +144,7 @@ async function main() {
         intake_token: intakeToken,
         source: "inbound",
         payment_provider: "kiwify",
-        payment_provider_ref: `fixture_${fixture.id}`,
+        payment_provider_ref: `fixture_${fixture.id.slice(-1)}`,
         gross_amount: fixture.sku === "SITE_5P" ? 1997 : 3497,
         payment_method: "pix",
         payment_date: paymentDate.toISOString().slice(0, 10),

@@ -13,7 +13,7 @@ import { generateLocalBusinessJsonLd } from "./jsonld.js";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const BANNED_PHRASES: string[] = (() => {
   try {
-    return (require("../../config/banned-phrases.json") as { phrases: string[] }).phrases;
+    return (require("../../../config/banned-phrases.json") as { phrases: string[] }).phrases;
   } catch {
     return [];
   }
@@ -61,7 +61,10 @@ export async function generateSite(input: GeneratorInput): Promise<GeneratedSite
     gbpLink: (intake.gbpLink as string) ?? null,
     instagramLink: (intake.instagramLink as string) ?? null,
     primaryAction: (intake.primaryAction as string) ?? "whatsapp",
-    primaryActionUrl: (intake.primaryActionUrl as string) ?? "",
+    primaryActionUrl: normalizePrimaryUrl(
+      (intake.primaryAction as string) ?? "whatsapp",
+      (intake.primaryActionUrl as string) ?? ""
+    ),
     palette,
     fontPair,
     layoutVariant,
@@ -89,6 +92,26 @@ export async function generateSite(input: GeneratorInput): Promise<GeneratedSite
 
   // Draft copy (pass vertical for niche-aware prompting)
   config.copyBlocks = await draftCopy(config, vertical);
+
+  // Populate service.description from copyBlocks
+  for (const service of config.services) {
+    const desc = config.copyBlocks.serviceDescriptions[service.name] as unknown;
+    if (typeof desc === "string" && desc.length >= 10) {
+      service.description = desc;
+    } else if (typeof desc === "object" && desc !== null) {
+      const obj = desc as Record<string, string>;
+      const combined = [obj["paragrafo1"], obj["paragrafo2"]].filter(Boolean).join("\n\n");
+      if (combined.length >= 10) service.description = combined;
+    }
+  }
+
+  // Populate faq.a from copyBlocks
+  for (const faq of config.faqs) {
+    const answer = config.copyBlocks.faqAnswers[faq.q];
+    if (answer && answer.length >= 20) {
+      faq.a = answer;
+    }
+  }
 
   // Write the site files
   await writeSiteFiles(config, vertical, outputDir);
@@ -190,6 +213,17 @@ function slugify(name: string): string {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function normalizePrimaryUrl(action: string, url: string): string {
+  if (action === "whatsapp" && url) {
+    if (!url.startsWith("https://wa.me/") && !url.startsWith("https://api.whatsapp.com/")) {
+      const digits = url.replace(/\D/g, "");
+      const normalized = digits.startsWith("55") ? digits : `55${digits}`;
+      return `https://wa.me/${normalized}`;
+    }
+  }
+  return url;
 }
 
 function parseHours(hours: string): string[] {

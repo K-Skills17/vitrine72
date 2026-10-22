@@ -195,9 +195,10 @@ export function Preco({ partnerBonus, coreUrl, anchorUrl }: Props) {
         <Reveal>
           <p className="text-center text-ink-subtle text-sm">
             Começando do zero?{" "}
-            <a href={coreCtaUrl} className="text-brand-gold hover:underline">
+            <a href="/api/checkout?sku=LANDING_1P" className="text-brand-gold hover:underline">
               Landing page 1 página por R$ {DOWNSELL.price.toLocaleString("pt-BR")}
             </a>
+            {" "}ou em até {DOWNSELL.installmentsMax}x no cartão*
           </p>
         </Reveal>
       </div>

@@ -114,42 +114,46 @@ async function main() {
   fs.copyFileSync(configPath, path.join(deployDir, "site-config.json"));
   console.log("Injected site-config.json");
 
-  // 7. Install + build
-  console.log("\nInstalling dependencies…");
-  execSync("pnpm install --frozen-lockfile", {
-    cwd: deployDir,
-    stdio: "inherit",
-  });
+  // 7. Ensure Vercel project exists and write .vercel/project.json
+  const vercelProjectJson = await ensureVercelProject(projectName, vercelToken);
+  fs.mkdirSync(path.join(deployDir, ".vercel"), { recursive: true });
+  fs.writeFileSync(
+    path.join(deployDir, ".vercel", "project.json"),
+    JSON.stringify(vercelProjectJson, null, 2)
+  );
 
-  console.log("\nBuilding Next.js app…");
-  execSync("pnpm build", {
-    cwd: deployDir,
-    stdio: "inherit",
-    env: {
-      ...process.env,
-      NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    },
-  });
-
-  // 8. Deploy via Vercel CLI
-  const teamFlag = vercelTeam ? `--scope ${vercelTeam}` : "";
+  // 8. Deploy source to Vercel (builds remotely on Linux — avoids Windows symlink issues)
   const prodFlag = isProduction ? "--prod" : "";
 
-  console.log("\nDeploying to Vercel…");
+  console.log("\nUploading to Vercel (remote build)…");
   const deployOutput = execSync(
-    `vercel deploy --prebuilt --token ${vercelToken} ${teamFlag} ${prodFlag} --name ${projectName} --yes`,
+    `vercel deploy --token ${vercelToken} ${prodFlag} --yes`,
     {
       cwd: deployDir,
       encoding: "utf-8",
     }
   ).trim();
 
-  // Last non-empty line is the deployment URL
-  const deploymentUrl = deployOutput
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l.startsWith("https://"))
-    .pop();
+  // Parse deployment URL from Vercel CLI output (v54+ outputs JSON)
+  let deploymentUrl: string | undefined;
+
+  // Try JSON parse first (Vercel CLI v54+)
+  const jsonMatch = deployOutput.match(/\{[\s\S]*"url"\s*:\s*"(https:\/\/[^"]+)"/);
+  if (jsonMatch) {
+    deploymentUrl = jsonMatch[1];
+  }
+
+  // Fallback: find aliased URL (shorter, canonical URL)
+  if (!deploymentUrl) {
+    const aliasMatch = deployOutput.match(/Aliased\s+(https:\/\/[^\s]+)/);
+    if (aliasMatch) deploymentUrl = aliasMatch[1];
+  }
+
+  // Final fallback: any https:// URL in output
+  if (!deploymentUrl) {
+    const urlMatch = deployOutput.match(/https:\/\/[^\s"]+\.vercel\.app/);
+    if (urlMatch) deploymentUrl = urlMatch[0];
+  }
 
   if (!deploymentUrl) {
     console.error("Could not parse deployment URL from Vercel output:\n", deployOutput);
@@ -182,12 +186,56 @@ async function main() {
     metadata: { url: deploymentUrl },
   });
 
-  // 10. Clean up temp dir
-  fs.rmSync(deployDir, { recursive: true });
+  // 10. Clean up temp dir (best-effort — Windows may hold file locks)
+  try {
+    fs.rmSync(deployDir, { recursive: true, force: true });
+  } catch {
+    console.warn(`Could not clean up ${deployDir} — remove manually if needed.`);
+  }
 
   console.log(
     `\n✓ Done. ${isProduction ? "Site is live" : "Preview ready"}: ${deploymentUrl}\n`
   );
+}
+
+async function ensureVercelProject(
+  name: string,
+  token: string
+): Promise<{ projectId: string; orgId: string }> {
+  // Try to find existing project by name
+  const listRes = await fetch(
+    `https://api.vercel.com/v9/projects?search=${encodeURIComponent(name)}&limit=5`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  if (listRes.ok) {
+    const listData = await listRes.json() as { projects?: Array<{ id: string; name: string; accountId: string }> };
+    const existing = listData.projects?.find((p) => p.name === name);
+    if (existing) {
+      console.log(`Using existing Vercel project: ${existing.id}`);
+      return { projectId: existing.id, orgId: existing.accountId };
+    }
+  }
+
+  // Create new project (ssoProtection: null = publicly accessible previews)
+  const createRes = await fetch("https://api.vercel.com/v9/projects", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ name, framework: "nextjs", ssoProtection: null }),
+  });
+  if (!createRes.ok) {
+    throw new Error(`Failed to create Vercel project: ${await createRes.text()}`);
+  }
+  const project = await createRes.json() as { id: string; accountId: string };
+  console.log(`Created Vercel project: ${project.id}`);
+
+  // Ensure SSO protection is off (some accounts re-enable it by default)
+  await fetch(`https://api.vercel.com/v9/projects/${project.id}`, {
+    method: "PATCH",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ ssoProtection: null }),
+  });
+
+  return { projectId: project.id, orgId: project.accountId };
 }
 
 function copyDirExcluding(src: string, dest: string, exclude: string[]) {

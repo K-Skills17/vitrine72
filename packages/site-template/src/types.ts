@@ -108,5 +108,5 @@ export interface CopyBlocks {
   aboutText: string;
   serviceDescriptions: Record<string, string>;
   faqAnswers: Record<string, string>;
-  sourceFacts: Record<string, string[]>;
+  sourceFacts: Record<string, unknown>;
 }

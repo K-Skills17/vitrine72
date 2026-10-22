@@ -71,6 +71,8 @@ export const DOWNSELL = {
   sku: "LANDING_1P",
   label: "Landing page 1 página",
   price: 997,
+  installmentsMax: 12,
+  installmentInterestBuyer: true,
 } as const;
 
 // ─── Maintenance ────────────────────────────────────────────────────────────

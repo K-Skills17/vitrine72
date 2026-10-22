@@ -51,7 +51,7 @@ export interface CopyBlocks {
   aboutText: string;
   serviceDescriptions: Record<string, string>;
   faqAnswers: Record<string, string>;
-  sourceFacts: Record<string, string[]>;
+  sourceFacts: Record<string, unknown>;
 }
 
 export interface SiteConfig {
@@ -81,7 +81,7 @@ export interface SiteConfig {
   updatedAt: string;
   animationProfile: AnimationProfile;
   signatureElementEnabled: boolean;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown>[];
 }
 
 export const config = rawConfig as SiteConfig;
