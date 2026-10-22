@@ -25,28 +25,39 @@ export function IntakeStepContract({ onSubmit, onBack, submitting }: Props) {
         <p className="font-semibold text-white">Resumo das condições:</p>
         <ul className="space-y-2 list-disc list-inside">
           <li>
-            Prévia em até {CORE_OFFER.previewBusinessDays} dias úteis após o
-            recebimento do briefing completo.
+            Prévia em até <strong className="text-white">{CORE_OFFER.previewBusinessDays} dias úteis</strong>{" "}
+            após o recebimento do briefing completo.
           </li>
           <li>
-            {RULES.maxRevisionRounds} rodada de revisão incluída (
-            {RULES.revisionWindowHours}h para solicitar após a prévia).
+            <strong className="text-white">{RULES.maxRevisionRounds} rodada de revisão</strong> incluída —
+            você tem {RULES.revisionWindowHours}h para solicitar alterações após receber a prévia.
           </li>
           <li>
-            Site publicado a partir do dia {RULES.goLiveMinDays} após o
-            pagamento.
+            Site publicado a partir do <strong className="text-white">dia {RULES.goLiveMinDays}</strong> após
+            o pagamento (prazo de reflexão do CDC), mediante aprovação.
           </li>
           <li>
-            Domínio registrado no CPF/CNPJ do contratante.
+            Domínio registrado no <strong className="text-white">CPF/CNPJ do contratante</strong> — você é
+            o titular.
           </li>
           <li>
-            Manutenção: R$ {MAINTENANCE.pricePerCycle.toLocaleString("pt-BR")}/
-            {MAINTENANCE.cycleWeeks * 7} dias com até{" "}
-            {MAINTENANCE.editsPerCycle} edições incluídas.
+            Manutenção: <strong className="text-white">R$ {MAINTENANCE.pricePerCycle.toLocaleString("pt-BR")}</strong>{" "}
+            a cada {MAINTENANCE.cycleWeeks * 7} dias, com até {MAINTENANCE.editsPerCycle} edições por ciclo.
+          </li>
+          <li>
+            Cancelamento em até 7 dias corridos após o pagamento: reembolso integral (art. 49 CDC).
+            Após o início da produção: reembolso parcial conforme Termos de Serviço.
+          </li>
+          <li>
+            O contratante é responsável pela veracidade das informações e das imagens fornecidas.
           </li>
         </ul>
         <p className="text-gray-500 text-xs pt-2">
-          NEEDS #13: Texto completo do contrato pendente de revisão jurídica.
+          Leia o{" "}
+          <a href="/termos" target="_blank" className="text-brand-gold underline">
+            contrato completo
+          </a>{" "}
+          antes de aceitar.
         </p>
       </div>
 
