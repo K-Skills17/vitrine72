@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
+import Link from "next/link";
 import { ArrowRight, Globe, Bot, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -78,10 +79,10 @@ export default function SobrePage() {
                 por falta de atendimento. Resolvo esses três problemas com soluções
                 práticas e rápidas.
               </p>
-              <a href="/#preco" className="btn-gold inline-flex items-center gap-2 mt-2">
+              <Link href="/#preco" className="btn-gold inline-flex items-center gap-2 mt-2">
                 Ver planos
                 <ArrowRight className="w-4 h-4" aria-hidden />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
