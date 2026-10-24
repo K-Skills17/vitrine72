@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: "#portfolio", label: "Portfólio" },
   { href: "#preco", label: "Preços" },
   { href: "#faq", label: "FAQ" },
+  { href: "/sobre", label: "Sobre" },
 ];
 
 export function SiteNav() {
