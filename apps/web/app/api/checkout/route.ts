@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPrice } from "@vitrine72/core";
+import { getPrice, CORE_OFFER, ANCHOR_PACKAGE, DOWNSELL } from "@vitrine72/core";
 import type { Sku } from "@vitrine72/core";
 
 export const runtime = "nodejs";
@@ -27,10 +27,20 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   // Read attribution from cookie (set by partner/seller pages)
   const source = req.cookies.get("v72_source")?.value ?? null;
 
-  const price = getPrice(sku, "pix"); // pix price is the base; card payers pay installment interest
-  if (!price) {
+  // Pix uses the discounted pix price; card uses the higher card price so margin is preserved.
+  // MP Checkout Pro shows both options on its page — the buyer chooses.
+  const pixPrice = getPrice(sku, "pix");
+  const cardPrice = getPrice(sku, "card");
+  if (!pixPrice || !cardPrice) {
     return NextResponse.redirect(new URL("/#preco", req.url));
   }
+
+  // Max installments per SKU (buyer pays MP interest — juros do comprador)
+  const installmentsMax =
+    sku === "SITE_5P" ? CORE_OFFER.installmentsMax
+    : sku === "ANCHOR_SITE_GBP_BOT" ? ANCHOR_PACKAGE.installmentsMax
+    : sku === "LANDING_1P" ? DOWNSELL.installmentsMax
+    : 1;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
 
@@ -41,9 +51,15 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         title: SKU_LABELS[sku] ?? `Vitrine72 — ${sku}`,
         quantity: 1,
         currency_id: "BRL",
-        unit_price: price,
+        // Card price is the base for the preference; MP will offer Pix as a
+        // payment method with automatic discount configured in the MP dashboard.
+        unit_price: cardPrice,
       },
     ],
+    payment_methods: {
+      installments: installmentsMax,
+      default_installments: 1,
+    },
     external_reference: source ?? "inbound",
     back_urls: {
       success: `${siteUrl}/obrigado`,
