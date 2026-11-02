@@ -13,7 +13,7 @@ import ChatbotEmbed from "../components/ChatbotEmbed";
 
 export default function HomePage() {
   const config = getNicheConfig();
-  const botEmbedUrl = process.env.NEXT_PUBLIC_BOT_EMBED_URL;
+  const tenantId = process.env.NEXT_PUBLIC_CHATBOT_TENANT_ID;
 
   return (
     <>
@@ -30,7 +30,12 @@ export default function HomePage() {
       <Footer config={config} />
       <FloatingWhatsApp config={config} />
       {config.features.chatbot && (
-        <ChatbotEmbed niche={config.niche} botEmbedUrl={botEmbedUrl} whatsappNumber={config.whatsappNumber} />
+        <ChatbotEmbed
+          tenantId={tenantId}
+          primaryColor={config.primaryColor}
+          headerTitle={config.brandName}
+          whatsappNumber={config.whatsappNumber}
+        />
       )}
     </>
   );
