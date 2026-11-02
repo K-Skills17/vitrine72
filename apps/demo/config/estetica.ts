@@ -53,7 +53,7 @@ const estetica: NicheConfig = {
       description:
         "Volume e contorno precisos para lábios, maçãs do rosto e olheiras. Ácido hialurônico de alta qualidade.",
       imageUrl:
-        "https://images.unsplash.com/photo-1629909615957-be38d48fbbe4?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Preenchimento labial",
       qualifierPreselect: "Preenchimento",
     },
@@ -73,7 +73,7 @@ const estetica: NicheConfig = {
       description:
         "Limpeza profunda, extração e hidratação profissional. Pele renovada, sem impurezas e com viço.",
       imageUrl:
-        "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Limpeza de pele profissional",
       qualifierPreselect: "Limpeza de pele",
     },
