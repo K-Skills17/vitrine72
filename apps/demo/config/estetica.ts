@@ -53,7 +53,7 @@ const estetica: NicheConfig = {
       description:
         "Volume e contorno precisos para lábios, maçãs do rosto e olheiras. Ácido hialurônico de alta qualidade.",
       imageUrl:
-        "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1588776814546-1ffbb071f7d2?auto=format&fit=crop&w=800&q=80",
       imageAlt: "Preenchimento labial",
       qualifierPreselect: "Preenchimento",
     },
