@@ -30,7 +30,7 @@ export default function HomePage() {
       <Footer config={config} />
       <FloatingWhatsApp config={config} />
       {config.features.chatbot && (
-        <ChatbotEmbed niche={config.niche} botEmbedUrl={botEmbedUrl} />
+        <ChatbotEmbed niche={config.niche} botEmbedUrl={botEmbedUrl} whatsappNumber={config.whatsappNumber} />
       )}
     </>
   );
