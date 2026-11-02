@@ -167,6 +167,8 @@ const planejados: NicheConfig = {
   tier: 3,
   features: { qualifier: true, chatbot: true, multiPage: true, serviceFilter: true, lowFitMode: "tag" },
 
+  chatbotTenantId: "fe1c1d4e-c7f2-4dfb-9c67-6e00bda9135d",
+
   privacyPolicyExtra:
     "Este site utiliza um assistente virtual (chatbot) para atendimento. As conversas são processadas por serviço externo e não são armazenadas após o atendimento.",
 

@@ -13,7 +13,6 @@ import ChatbotEmbed from "../components/ChatbotEmbed";
 
 export default function HomePage() {
   const config = getNicheConfig();
-  const tenantId = process.env.NEXT_PUBLIC_CHATBOT_TENANT_ID;
 
   return (
     <>
@@ -31,7 +30,7 @@ export default function HomePage() {
       <FloatingWhatsApp config={config} />
       {config.features.chatbot && (
         <ChatbotEmbed
-          tenantId={tenantId}
+          tenantId={config.chatbotTenantId}
           primaryColor={config.primaryColor}
           headerTitle={config.brandName}
           whatsappNumber={config.whatsappNumber}

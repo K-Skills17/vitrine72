@@ -79,6 +79,7 @@ export interface NicheConfig {
     lowFitMode: "tag" | "soft";
   };
 
+  chatbotTenantId?: string;
   privacyPolicyExtra?: string;
   metaTitle: string;
   metaDescription: string;

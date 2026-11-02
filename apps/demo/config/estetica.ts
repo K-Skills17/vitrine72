@@ -167,6 +167,8 @@ const estetica: NicheConfig = {
   tier: 3,
   features: { qualifier: true, chatbot: true, multiPage: true, serviceFilter: true, lowFitMode: "tag" },
 
+  chatbotTenantId: "1e5ed8ef-4637-4756-be54-2c2a860f6498",
+
   privacyPolicyExtra:
     "Este site utiliza um assistente virtual (chatbot) para atendimento. As conversas são processadas por serviço externo e não são armazenadas após o atendimento.",
 
