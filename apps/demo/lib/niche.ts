@@ -1,16 +1,6 @@
 export type QualifierStep =
-  | {
-      id: string;
-      type: "text";
-      label: string;
-      placeholder: string;
-    }
-  | {
-      id: string;
-      type: "choice";
-      label: string;
-      options: string[];
-    };
+  | { id: string; type: "text"; label: string; placeholder: string }
+  | { id: string; type: "choice"; label: string; options: string[] };
 
 export interface QualifierConfig {
   steps: QualifierStep[];
@@ -24,7 +14,8 @@ export interface ServiceItem {
   id: string;
   name: string;
   description: string;
-  emoji: string;
+  imageUrl: string;
+  imageAlt: string;
   qualifierPreselect: string;
 }
 
@@ -39,12 +30,19 @@ export interface FAQItem {
   a: string;
 }
 
+export interface Stat {
+  value: string;
+  label: string;
+}
+
 export interface NicheConfig {
   niche: string;
   brandName: string;
   tagline: string;
   heroHeadline: string;
   heroSubheadline: string;
+  heroImageUrl: string;
+  heroImageAlt: string;
   whatsappNumber: string;
 
   primaryColor: string;
@@ -63,6 +61,12 @@ export interface NicheConfig {
   services: ServiceItem[];
   howItWorks: HowItWorksStep[];
   faqs: FAQItem[];
+
+  aboutHeadline: string;
+  aboutText: string;
+  aboutImageUrl: string;
+  aboutImageAlt: string;
+  stats: Stat[];
 
   qualifier: QualifierConfig;
 
@@ -84,9 +88,7 @@ let _config: NicheConfig | null = null;
 
 export function getNicheConfig(): NicheConfig {
   if (_config) return _config;
-
   const niche = process.env.NEXT_PUBLIC_NICHE ?? "estetica";
-
   if (niche === "planejados") {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     _config = require("../config/planejados").default as NicheConfig;
@@ -94,6 +96,5 @@ export function getNicheConfig(): NicheConfig {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     _config = require("../config/estetica").default as NicheConfig;
   }
-
   return _config!;
 }

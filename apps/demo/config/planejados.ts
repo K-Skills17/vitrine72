@@ -4,10 +4,14 @@ const planejados: NicheConfig = {
   niche: "planejados",
   brandName: "Atelier Madeira Planejados",
   tagline: "Móveis sob medida que transformam seu espaço",
-  heroHeadline: "Só clientes certos chegam até você — no WhatsApp",
+  heroHeadline: "Cada centímetro do seu espaço com propósito e elegância",
   heroSubheadline:
-    "O Atelier Madeira filtra quem está pesquisando de quem está pronto para investir. Você recebe a mensagem com ambiente, situação e orçamento já informados.",
+    "Projetos de móveis planejados desenvolvidos do zero para o seu imóvel. Do croqui à instalação, cuidamos de tudo.",
+  heroImageUrl:
+    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80",
+  heroImageAlt: "Cozinha planejada moderna",
   whatsappNumber: "5511953542831",
+
   primaryColor: "#8b5e3c",
   primaryLight: "#d4b896",
   primaryDark: "#5c3b21",
@@ -16,50 +20,61 @@ const planejados: NicheConfig = {
   surfaceColor: "#ffffff",
   textColor: "#1c1713",
   mutedColor: "#7a6652",
+
   fontDisplay: "Playfair Display",
   fontBody: "Inter",
   googleFontsUrl:
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap",
+    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap",
 
   services: [
     {
       id: "cozinha",
       name: "Cozinha",
       description:
-        "Projetos completos de cozinha planejada com aproveitamento máximo do espaço.",
-      emoji: "🍳",
+        "Projeto completo com aproveitamento máximo, bancadas sob medida e acabamentos que resistem ao uso diário.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Cozinha planejada moderna",
       qualifierPreselect: "Cozinha",
     },
     {
       id: "quarto",
       name: "Quarto / Closet",
       description:
-        "Guarda-roupas e closets sob medida para cada centímetro do seu quarto.",
-      emoji: "🛏️",
+        "Guarda-roupas e closets que aproveitam cada centímetro, com acabamento sofisticado e organização inteligente.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Quarto com guarda-roupa planejado",
       qualifierPreselect: "Quarto/Closet",
     },
     {
       id: "banheiro",
       name: "Banheiro",
       description:
-        "Gabinetes e nichos planejados para banheiros funcionais e elegantes.",
-      emoji: "🚿",
+        "Gabinetes, nichos e painéis que transformam banheiros em espaços de bem-estar com funcionalidade e estilo.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Banheiro com móveis planejados",
       qualifierPreselect: "Banheiro",
     },
     {
       id: "sala",
       name: "Sala de Estar / TV",
       description:
-        "Painéis, estantes e racks que valorizam o ambiente e organizam o espaço.",
-      emoji: "🛋️",
+        "Painéis, estantes e racks que valorizam o ambiente principal da casa com personalidade e praticidade.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Sala de estar com painel planejado",
       qualifierPreselect: "Sala",
     },
     {
       id: "casa-inteira",
       name: "Casa Inteira",
       description:
-        "Projeto integrado de todos os ambientes com identidade visual única.",
-      emoji: "🏠",
+        "Projeto integrado de todos os ambientes com identidade visual única e fluxo natural entre os espaços.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Casa toda planejada",
       qualifierPreselect: "Casa inteira",
     },
   ],
@@ -67,89 +82,79 @@ const planejados: NicheConfig = {
   howItWorks: [
     {
       step: "1",
-      title: "Você clica em 'Falar no WhatsApp'",
+      title: "Você clica em Falar no WhatsApp",
       description:
-        "Abre uma tela com 3 perguntas rápidas — basta tocar nas respostas, sem digitar.",
+        "Uma tela com 3 perguntas rápidas aparece. Basta tocar nas respostas — sem digitar nada.",
     },
     {
       step: "2",
-      title: "Você responde em menos de 30 segundos",
+      title: "Responde em menos de 30 segundos",
       description:
-        "Qual ambiente, situação do imóvel e faixa de investimento que está planejando.",
+        "Ambiente, situação do imóvel e faixa de investimento. Cada resposta com um toque.",
     },
     {
       step: "3",
-      title: "A mensagem chega pronta para você",
+      title: "Mensagem chega pronta no WhatsApp",
       description:
-        "O WhatsApp abre com tudo preenchido. Você já sabe o projeto e o orçamento antes de responder.",
+        "Você já recebe o perfil do cliente antes de responder. Só quem está pronto para investir chega até você.",
     },
   ],
 
   faqs: [
     {
       q: "Quais ambientes o Atelier Madeira atende?",
-      a: "Fazemos projetos completos de cozinha, quarto/closet, banheiro, sala de estar e projetos para a casa inteira. Cada peça é fabricada sob medida para o seu espaço.",
+      a: "Fazemos projetos de cozinha, quarto/closet, banheiro, sala de estar e projetos para a casa inteira. Cada peça fabricada sob medida para o seu espaço.",
     },
     {
       q: "Qual o prazo médio de entrega e instalação?",
-      a: "O prazo varia conforme o projeto. Em média, cozinhas e quartos levam de 30 a 45 dias após a medição e aprovação do projeto. Informamos o prazo exato na proposta.",
+      a: "Em média de 30 a 45 dias após aprovação do projeto. O prazo exato depende da complexidade e tamanho do projeto, informado na proposta.",
     },
     {
-      q: "Vocês fazem a medição e o projeto gratuitamente?",
-      a: "Sim, a visita técnica e o projeto 3D são incluídos no processo. Entre em contato pelo WhatsApp para agendar.",
+      q: "A visita técnica e o projeto 3D são cobrados?",
+      a: "Não. A visita técnica e o projeto 3D são incluídos no processo, sem custo adicional. Entre em contato pelo WhatsApp para agendar.",
     },
     {
-      q: "Atendem imóveis na planta?",
-      a: "Sim! Pode iniciar o projeto com a planta do imóvel e ajustamos as medições finais quando você receber as chaves.",
+      q: "Atendem imóveis na planta ou em construção?",
+      a: "Sim. Iniciamos o projeto com a planta do imóvel e ajustamos as medições finais quando você receber as chaves ou concluir a obra.",
     },
     {
-      q: "Quais materiais são utilizados?",
-      a: "Trabalhamos com MDF de alta qualidade, ferragens importadas e acabamentos em laminados, lacas e pinturas. Apresentamos as opções na visita de projeto.",
+      q: "Quais materiais e acabamentos são disponíveis?",
+      a: "Trabalhamos com MDF de alta qualidade, ferragens importadas e acabamentos em laminados, lacas e pinturas. Apresentamos todas as opções na visita de projeto.",
     },
+  ],
+
+  aboutHeadline: "Projetos que contam histórias",
+  aboutText:
+    "O Atelier Madeira nasceu da paixão por transformar espaços comuns em ambientes que refletem a personalidade de quem vive neles. Cada projeto é desenvolvido de forma única — porque acreditamos que o seu espaço merece móveis que sejam tão únicos quanto você.",
+  aboutImageUrl:
+    "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=800&q=80",
+  aboutImageAlt: "Fabricação de móveis planejados",
+  stats: [
+    { value: "500+", label: "Projetos entregues" },
+    { value: "15 anos", label: "De experiência" },
+    { value: "98%", label: "Clientes satisfeitos" },
   ],
 
   qualifier: {
     steps: [
-      {
-        id: "name",
-        type: "text",
-        label: "Qual é o seu primeiro nome?",
-        placeholder: "Ex: Carlos",
-      },
+      { id: "name", type: "text", label: "Qual é o seu primeiro nome?", placeholder: "Ex: Carlos" },
       {
         id: "service",
         type: "choice",
         label: "Qual ambiente?",
-        options: [
-          "Cozinha",
-          "Quarto/Closet",
-          "Banheiro",
-          "Sala",
-          "Casa inteira",
-          "Outro",
-        ],
+        options: ["Cozinha", "Quarto/Closet", "Banheiro", "Sala", "Casa inteira", "Outro"],
       },
       {
         id: "timing",
         type: "choice",
         label: "Situação do imóvel?",
-        options: [
-          "Na planta",
-          "Recebendo as chaves",
-          "Em reforma",
-          "Já moro",
-        ],
+        options: ["Na planta", "Recebendo as chaves", "Em reforma", "Já moro"],
       },
       {
         id: "budget",
         type: "choice",
         label: "Quanto pretende investir?",
-        options: [
-          "Até R$15 mil",
-          "R$15–30 mil",
-          "R$30–60 mil",
-          "Acima de R$60 mil",
-        ],
+        options: ["Até R$15 mil", "R$15–30 mil", "R$30–60 mil", "Acima de R$60 mil"],
       },
     ],
     messageTemplate:
@@ -160,20 +165,14 @@ const planejados: NicheConfig = {
   },
 
   tier: 3,
-  features: {
-    qualifier: true,
-    chatbot: true,
-    multiPage: true,
-    serviceFilter: true,
-    lowFitMode: "tag",
-  },
+  features: { qualifier: true, chatbot: true, multiPage: true, serviceFilter: true, lowFitMode: "tag" },
 
   privacyPolicyExtra:
-    "Este site utiliza um assistente virtual (chatbot) que pode coletar perguntas e interações para fins de atendimento. As conversas são processadas por um serviço externo e não são armazenadas após o atendimento.",
+    "Este site utiliza um assistente virtual (chatbot) para atendimento. As conversas são processadas por serviço externo e não são armazenadas após o atendimento.",
 
-  metaTitle: "Atelier Madeira Planejados — Site Demonstrativo",
+  metaTitle: "Atelier Madeira Planejados — Site Demonstrativo | Vitrine72",
   metaDescription:
-    "Demonstração Vitrine72: como só clientes qualificados chegam ao WhatsApp da sua empresa de móveis planejados.",
+    "Demonstração Vitrine72: site profissional para móveis planejados com qualificação automática de clientes no WhatsApp.",
 };
 
 export default planejados;

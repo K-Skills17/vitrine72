@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { NicheConfig } from "../lib/niche";
+import { ChevronDownIcon } from "./Icon";
 
 interface Props {
   config: NicheConfig;
@@ -21,16 +22,26 @@ export default function FAQ({ config }: Props) {
       <div style={{ maxWidth: "40rem", margin: "0 auto" }}>
         <h2
           style={{
-            marginBottom: "3rem",
+            marginBottom: "0.75rem",
             textAlign: "center",
             fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
             fontWeight: 700,
-            fontFamily: "var(--font-display), serif",
+            fontFamily: `"Playfair Display", serif`,
             color: "var(--color-text)",
           }}
         >
           Perguntas frequentes
         </h2>
+        <p
+          style={{
+            marginBottom: "3rem",
+            textAlign: "center",
+            fontSize: "0.95rem",
+            color: "var(--color-muted)",
+          }}
+        >
+          Tudo o que você precisa saber antes de entrar em contato
+        </p>
 
         <dl style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
           {config.faqs.map((item, i) => (
@@ -68,13 +79,11 @@ export default function FAQ({ config }: Props) {
                     style={{
                       marginLeft: "0.75rem",
                       flexShrink: 0,
-                      fontSize: "1.2rem",
-                      color: "var(--color-primary)",
-                      transform: openIndex === i ? "rotate(45deg)" : "none",
+                      transform: openIndex === i ? "rotate(180deg)" : "none",
                       transition: "transform 0.2s",
                     }}
                   >
-                    +
+                    <ChevronDownIcon size={18} color="var(--color-primary)" />
                   </span>
                 </button>
               </dt>

@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import type { NicheConfig } from "../lib/niche";
 import Qualifier from "./Qualifier";
+import { WhatsAppIcon, ArrowRightIcon } from "./Icon";
 
 interface Props {
   config: NicheConfig;
@@ -12,127 +15,147 @@ export default function Hero({ config }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <section
-      id="inicio"
-      style={{
-        minHeight: "92dvh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        padding: "5rem 1.25rem",
-        backgroundColor: "var(--color-bg)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Decorative blob */}
+    <section id="inicio" style={{ position: "relative", overflow: "hidden", minHeight: "88dvh", display: "flex", alignItems: "center" }}>
+      {/* Background image */}
+      <Image
+        src={config.heroImageUrl}
+        alt={config.heroImageAlt}
+        fill
+        priority
+        style={{ objectFit: "cover", objectPosition: "center" }}
+        sizes="100vw"
+      />
+
+      {/* Gradient overlay */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "30%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "22rem",
-          height: "22rem",
-          borderRadius: "9999px",
-          backgroundColor: "var(--color-primary)",
-          opacity: 0.12,
-          filter: "blur(60px)",
-          pointerEvents: "none",
+          inset: 0,
+          background: "linear-gradient(105deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%)",
         }}
       />
 
-      <p
+      {/* Content */}
+      <div
         style={{
-          marginBottom: "1rem",
-          fontSize: "0.8rem",
-          fontWeight: 700,
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "var(--color-primary)",
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "72rem",
+          margin: "0 auto",
+          padding: "4rem 1.5rem",
+          width: "100%",
         }}
       >
-        {config.brandName}
-      </p>
+        <div style={{ maxWidth: "36rem" }}>
+          <p
+            style={{
+              marginBottom: "0.75rem",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--color-primary-light)",
+              opacity: 0.9,
+            }}
+          >
+            {config.brandName}
+          </p>
 
-      <h1
-        style={{
-          maxWidth: "38rem",
-          marginBottom: "1.25rem",
-          fontSize: "clamp(2rem, 6vw, 3rem)",
-          fontWeight: 700,
-          lineHeight: 1.2,
-          fontFamily: `"${config.fontDisplay}", serif`,
-          color: "var(--color-text)",
-        }}
-      >
-        {config.heroHeadline}
-      </h1>
+          <h1
+            style={{
+              marginBottom: "1.25rem",
+              fontSize: "clamp(2rem, 5vw, 3.25rem)",
+              fontWeight: 700,
+              lineHeight: 1.15,
+              fontFamily: `"${config.fontDisplay}", serif`,
+              color: "#ffffff",
+            }}
+          >
+            {config.heroHeadline}
+          </h1>
 
-      <p
-        style={{
-          maxWidth: "30rem",
-          marginBottom: "2.5rem",
-          fontSize: "1rem",
-          lineHeight: 1.65,
-          color: "var(--color-muted)",
-        }}
-      >
-        {config.heroSubheadline}
-      </p>
+          <p
+            style={{
+              marginBottom: "2.5rem",
+              fontSize: "1.05rem",
+              lineHeight: 1.7,
+              color: "rgba(255,255,255,0.85)",
+            }}
+          >
+            {config.heroSubheadline}
+          </p>
 
-      <button
-        onClick={() => setOpen(true)}
-        data-testid="hero-cta-btn"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          borderRadius: "9999px",
-          padding: "1rem 2rem",
-          fontSize: "1rem",
-          fontWeight: 600,
-          color: "#fff",
-          backgroundColor: "var(--color-primary)",
-          border: "none",
-          cursor: "pointer",
-          boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
-          transition: "transform 0.15s",
-        }}
-        onMouseEnter={(e) =>
-          ((e.currentTarget as HTMLElement).style.transform = "scale(1.05)")
-        }
-        onMouseLeave={(e) =>
-          ((e.currentTarget as HTMLElement).style.transform = "scale(1)")
-        }
-      >
-        <WaIcon />
-        Falar no WhatsApp
-      </button>
+          {/* CTAs */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
+            <button
+              onClick={() => setOpen(true)}
+              data-testid="hero-cta-btn"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                borderRadius: "9999px",
+                padding: "0.9rem 2rem",
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                color: "#fff",
+                backgroundColor: "var(--color-primary)",
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                transition: "transform 0.15s, opacity 0.15s",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.9")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
+            >
+              <WhatsAppIcon size={20} color="#fff" />
+              Falar no WhatsApp
+            </button>
 
-      <p
-        style={{
-          marginTop: "0.75rem",
-          fontSize: "0.75rem",
-          color: "var(--color-muted)",
-        }}
-      >
-        Responda 3 perguntas rápidas — leva menos de 30 segundos
-      </p>
+            <Link
+              href="/servicos/"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                borderRadius: "9999px",
+                padding: "0.9rem 1.75rem",
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                color: "#fff",
+                border: "2px solid rgba(255,255,255,0.6)",
+                textDecoration: "none",
+                transition: "background 0.15s",
+                backgroundColor: "transparent",
+              }}
+              onMouseEnter={(e) =>
+                ((e.currentTarget as HTMLElement).style.backgroundColor =
+                  "rgba(255,255,255,0.1)")
+              }
+              onMouseLeave={(e) =>
+                ((e.currentTarget as HTMLElement).style.backgroundColor =
+                  "transparent")
+              }
+            >
+              Ver serviços
+              <ArrowRightIcon size={18} color="#fff" />
+            </Link>
+          </div>
+
+          <p
+            style={{
+              marginTop: "1rem",
+              fontSize: "0.75rem",
+              color: "rgba(255,255,255,0.6)",
+            }}
+          >
+            3 perguntas rápidas — menos de 30 segundos
+          </p>
+        </div>
+      </div>
 
       {open && <Qualifier config={config} onClose={() => setOpen(false)} />}
     </section>
-  );
-}
-
-function WaIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="white" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.526 5.854L.053 23.447a.75.75 0 0 0 .921.912l5.733-1.497A11.932 11.932 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.934 0-3.74-.526-5.284-1.44l-.378-.224-3.405.889.913-3.317-.248-.385A9.797 9.797 0 0 1 2.182 12c0-5.413 4.405-9.818 9.818-9.818 5.413 0 9.818 4.405 9.818 9.818 0 5.413-4.405 9.818-9.818 9.818z" />
-    </svg>
   );
 }

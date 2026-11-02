@@ -2,8 +2,10 @@ import { getNicheConfig } from "../lib/niche";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
+import ValueProps from "../components/ValueProps";
 import HowItWorks from "../components/HowItWorks";
 import ProofPlaceholder from "../components/ProofPlaceholder";
+import CTABanner from "../components/CTABanner";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
@@ -19,8 +21,10 @@ export default function HomePage() {
       <main>
         <Hero config={config} />
         <Services config={config} />
+        <ValueProps config={config} />
         <HowItWorks config={config} />
         <ProofPlaceholder />
+        <CTABanner config={config} />
         <FAQ config={config} />
       </main>
       <Footer config={config} />
