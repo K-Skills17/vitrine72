@@ -8,8 +8,9 @@ interface Props {
 }
 
 export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
-  // true once the Railway widget has fully built its own bubble in the DOM
   const [widgetReady, setWidgetReady] = useState(false);
+  // true when script fails or poll times out — fall back to clickable stub
+  const [loadFailed, setLoadFailed] = useState(false);
   const [stubOpen, setStubOpen] = useState(false);
 
   // ── Real widget (botEmbedUrl is set) ──────────────────────
@@ -23,19 +24,23 @@ export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
     document.body.appendChild(script);
 
     script.onload = () => {
-      // Poll until Railway's widget bubble appears in the DOM
       const poll = setInterval(() => {
         const bubble = document.getElementById("lk-chat-bubble");
         if (bubble) {
           clearInterval(poll);
           setWidgetReady(true);
         }
-      }, 100);
-      setTimeout(() => clearInterval(poll), 8000); // give up after 8 s
+      }, 200);
+      // After 25 s give up and fall back to clickable stub
+      setTimeout(() => {
+        clearInterval(poll);
+        setLoadFailed(true);
+      }, 25000);
     };
 
     script.onerror = () => {
       console.error("ChatbotEmbed: failed to load widget script from", botEmbedUrl);
+      setLoadFailed(true);
     };
 
     return () => {
@@ -58,9 +63,10 @@ export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
     return () => clearTimeout(timer);
   }, [widgetReady]);
 
-  // ── Auto-open stub once per session ────────────────────────
+  // ── Auto-open stub once per session (no URL, or load failed) ──
   useEffect(() => {
-    if (botEmbedUrl) return;
+    const isStubMode = !botEmbedUrl || loadFailed;
+    if (!isStubMode) return;
     if (sessionStorage.getItem("lk_chat_auto_opened")) return;
 
     const timer = setTimeout(() => {
@@ -69,26 +75,20 @@ export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [botEmbedUrl]);
+  }, [botEmbedUrl, loadFailed]);
 
-  // ── When real widget is ready, its own bubble takes over ───
-  // Our custom bubble is only shown when the Railway widget is NOT ready
-  // (either not configured, or still loading)
-  if (widgetReady) {
-    // Railway widget has its own bubble — nothing to render from our side
-    return null;
-  }
+  // Railway widget has its own bubble — nothing to render from our side
+  if (widgetReady) return null;
 
-  // ── Stub / loading bubble ──────────────────────────────────
+  const isLoading = !!botEmbedUrl && !loadFailed;
+  const isStub = !botEmbedUrl || loadFailed;
+
   return (
     <>
       <button
         aria-label={stubOpen ? "Fechar chat" : "Abrir chat"}
         onClick={() => {
-          if (!botEmbedUrl) {
-            setStubOpen((v) => !v);
-          }
-          // If botEmbedUrl is set but not ready yet, do nothing — script is loading
+          if (isStub) setStubOpen((v) => !v);
         }}
         style={{
           position: "fixed",
@@ -104,17 +104,16 @@ export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
           backgroundColor: "var(--color-primary)",
           boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
           border: "none",
-          cursor: botEmbedUrl ? "wait" : "pointer",
+          cursor: isLoading ? "wait" : "pointer",
           transition: "transform 0.15s",
-          opacity: botEmbedUrl ? 0.7 : 1,
+          opacity: isLoading ? 0.7 : 1,
         }}
         onMouseEnter={(e) => {
-          if (!botEmbedUrl) (e.currentTarget as HTMLElement).style.transform = "scale(1.08)";
+          if (isStub) (e.currentTarget as HTMLElement).style.transform = "scale(1.08)";
         }}
         onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")}
       >
-        {/* Spinning ring while loading, chat icon when stub */}
-        {botEmbedUrl ? (
+        {isLoading ? (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
             <path d="M12 2a10 10 0 0 1 10 10" style={{ opacity: 0.3 }} />
             <path d="M12 2a10 10 0 0 1 10 10">
@@ -132,8 +131,7 @@ export default function ChatbotEmbed({ niche, botEmbedUrl }: Props) {
         )}
       </button>
 
-      {/* Stub chat panel (shown when no Railway URL is configured) */}
-      {!botEmbedUrl && stubOpen && (
+      {isStub && stubOpen && (
         <div
           role="dialog"
           aria-label="Chat assistente"
