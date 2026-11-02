@@ -89,6 +89,14 @@ body {
   transform: scale(1.08);
 }
 
+/* Push the Railway chatbot bubble above the WhatsApp float button */
+#lk-chat-bubble {
+  bottom: 5.25rem !important;
+}
+#lk-chat-window {
+  bottom: 9.5rem !important;
+}
+
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
