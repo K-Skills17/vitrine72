@@ -7,7 +7,7 @@ const planejados: NicheConfig = {
   heroHeadline: "Só clientes certos chegam até você — no WhatsApp",
   heroSubheadline:
     "O Atelier Madeira filtra quem está pesquisando de quem está pronto para investir. Você recebe a mensagem com ambiente, situação e orçamento já informados.",
-  whatsappNumber: "PLACEHOLDER_WHATSAPP_PLANEJADOS",
+  whatsappNumber: "5511953542831",
   primaryColor: "#8b5e3c",
   primaryLight: "#d4b896",
   primaryDark: "#5c3b21",

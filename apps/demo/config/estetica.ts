@@ -7,7 +7,7 @@ const estetica: NicheConfig = {
   heroHeadline: "Só clientes certos chegam até você — no WhatsApp",
   heroSubheadline:
     "A Clínica Aurora filtra curiosos antes de abrir a conversa. Você fala com quem realmente quer fazer o procedimento.",
-  whatsappNumber: "PLACEHOLDER_WHATSAPP_ESTETICA",
+  whatsappNumber: "5511953542831",
   primaryColor: "#c97ea2",
   primaryLight: "#f3d6e8",
   primaryDark: "#8a4870",
