@@ -1,6 +1,6 @@
 {
   "buildCommand": "next build",
-  "outputDirectory": "out",
+  "outputDirectory": ".next",
   "installCommand": "pnpm install --frozen-lockfile",
   "headers": [
     {
