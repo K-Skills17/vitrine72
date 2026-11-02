@@ -74,18 +74,13 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
   }, [open]);
 
   const createSession = useCallback(async (): Promise<string> => {
-    const url = `${API_BASE}/${tenantId}/session`;
-    console.log("[ChatbotEmbed] createSession →", url);
-    const res = await fetch(url, {
+    const res = await fetch(`${API_BASE}/${tenantId}/session`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({}),
     });
-    console.log("[ChatbotEmbed] session response status:", res.status);
     const data = await res.json();
-    console.log("[ChatbotEmbed] session data:", data);
     const id = data.sessionId;
-    if (!id) throw new Error(`Session creation failed: ${JSON.stringify(data)}`);
     if (storageKey) localStorage.setItem(storageKey, id);
     setSessionId(id);
     return id;
@@ -115,10 +110,8 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
       } else {
         setMessages((prev) => [...prev, { content: "Desculpe, ocorreu um erro. Tente novamente.", role: "assistant" }]);
       }
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error("[ChatbotEmbed] sendMessage error:", err);
-      setMessages((prev) => [...prev, { content: `Erro: ${msg}`, role: "assistant" }]);
+    } catch {
+      setMessages((prev) => [...prev, { content: "Não foi possível conectar ao assistente. Tente novamente.", role: "assistant" }]);
     } finally {
       setLoading(false);
     }
