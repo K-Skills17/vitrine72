@@ -26,3 +26,43 @@ Items marked ✅ are resolved. All others block production.
 | 20 | MEI CNPJ and legal name for footer and terms | Legal pages | `PLACEHOLDER_CNPJ`, `PLACEHOLDER_LEGAL_NAME` |
 | 21 | Kiwify fallback decision: if service products not allowed, confirm switch to Asaas-only (`config/payment.json → provider: "asaas"`) | Payment routing | `config/payment.json` |
 | 22 | Groq or OpenAI endpoint URL for transcription | Audio transcription | `PLACEHOLDER_TRANSCRIPTION_URL` |
+
+---
+
+## Demo Sites — apps/demo (Estética + Planejados)
+
+| # | Item | Used for | Placeholder |
+|---|---|---|---|
+| B1 | Railway bot embed snippet URL + JSON schema the bot expects | `ChatbotEmbed.tsx` — `NEXT_PUBLIC_BOT_EMBED_URL` env var; bot-config/*.json stubs ready to fill | `PLACEHOLDER_BOT_EMBED_URL` |
+| B2 | Whether one Railway instance serves many clients (multi-tenant) or each client gets a dedicated instance | Determines `clientId` field in bot-config/*.json and CORS setup | bot-config/{niche}.json `corsAllowedOrigins` |
+| B3 | WhatsApp number for Estética demo | Qualifier redirect | `PLACEHOLDER_WHATSAPP_ESTETICA` in `config/estetica.ts` |
+| B4 | WhatsApp number for Planejados demo | Qualifier redirect | `PLACEHOLDER_WHATSAPP_PLANEJADOS` in `config/planejados.ts` |
+| B5 | DNS access — create `estetica.vitrini72.com.br` and `planejados.vitrini72.com.br` subdomains pointing to Vercel | Demo site URLs for cold calls | Two Vercel projects: `vitrine72-demo-estetica`, `vitrine72-demo-planejados` |
+| B6 | GA4 Measurement ID (optional) | Analytics events — no-op if missing | `NEXT_PUBLIC_GA4_ID` env var per Vercel project |
+| B7 | Meta Pixel ID (optional) | Analytics events — no-op if missing | `NEXT_PUBLIC_META_PIXEL_ID` env var per Vercel project |
+| B8 | Confirm budget ranges per niche (current defaults: estética R$500/1.5k/3k; planejados R$15k/30k/60k) | Qualifier options | `config/estetica.ts` and `config/planejados.ts` |
+| B9 | Real photos to replace placeholder blocks (labeled "Exemplo") | ProofPlaceholder section | `ProofPlaceholder.tsx` — swap dashed boxes for `<Image>` |
+| B10 | Intake tool for paying clients (Tally / Google Forms link) | Not part of demo build — needed for sales close | Separate from demo; note here for tracking |
+
+### Railway Bot Security Checklist (to implement on Railway side)
+- [ ] CORS restricted to each client domain only (no wildcard)
+- [ ] Rate limiting per IP (e.g., max 20 req/min)
+- [ ] Monthly spend cap on the LLM API key
+- [ ] Data-retention period defined for chat logs (e.g., 30 days)
+- [ ] Health endpoint exposed so ChatbotEmbed.tsx can verify bot is alive before loading widget
+
+### Vercel Deployment (after DNS + WhatsApp numbers are confirmed)
+```bash
+# Estética
+cd apps/demo
+NEXT_PUBLIC_NICHE=estetica vercel --prod
+
+# Planejados
+NEXT_PUBLIC_NICHE=planejados vercel --prod
+```
+Set env vars in each Vercel project:
+- `NEXT_PUBLIC_NICHE` = `estetica` or `planejados`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER` (or baked into config — already in config files)
+- `NEXT_PUBLIC_GA4_ID` (optional)
+- `NEXT_PUBLIC_META_PIXEL_ID` (optional)
+- `NEXT_PUBLIC_BOT_EMBED_URL` (from Railway, item B1)

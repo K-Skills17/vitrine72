@@ -1,0 +1,41 @@
+{
+  "_comment": "Bot config stub for Atelier Madeira Planejados. Fill with Railway bot JSON schema from NEEDS_FROM_KOMANDO.md item B1.",
+  "clientId": "PLACEHOLDER_CLIENT_ID_PLANEJADOS",
+  "botName": "Madeira",
+  "welcomeMessage": "Olá! Sou o assistente do Atelier Madeira Planejados. Quer saber mais sobre nossos projetos?",
+  "primaryColor": "#8b5e3c",
+  "niche": "planejados",
+  "services": [
+    "Cozinha",
+    "Quarto/Closet",
+    "Banheiro",
+    "Sala",
+    "Casa inteira"
+  ],
+  "faqs": [
+    {
+      "question": "Quais ambientes vocês fazem?",
+      "answer": "Fazemos cozinha, quarto/closet, banheiro, sala e projetos para a casa inteira. Qual ambiente você está pensando?"
+    },
+    {
+      "question": "Qual o prazo de entrega?",
+      "answer": "Em média de 30 a 45 dias após aprovação do projeto. O prazo exato depende do tamanho do projeto."
+    },
+    {
+      "question": "A visita é cobrada?",
+      "answer": "Não! A visita técnica e o projeto 3D são incluídos. Quer agendar?"
+    },
+    {
+      "question": "Atendem imóvel na planta?",
+      "answer": "Sim! Iniciamos o projeto com a planta e ajustamos quando você receber as chaves."
+    }
+  ],
+  "qualifierHandoff": {
+    "enabled": true,
+    "triggerPhrases": ["orçamento", "preço", "valor", "quero", "agendar", "visita", "projeto"],
+    "handoffMessage": "Para te passar um orçamento certinho, me conta rapidinho:",
+    "mode": "open_qualifier_sheet"
+  },
+  "fallbackMessage": "Não entendi. Pode reformular? Ou posso te conectar com a equipe pelo WhatsApp.",
+  "corsAllowedOrigins": ["PLACEHOLDER_PLANEJADOS_DOMAIN"]
+}

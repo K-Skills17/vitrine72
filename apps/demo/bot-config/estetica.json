@@ -1,0 +1,41 @@
+{
+  "_comment": "Bot config stub for Clínica Aurora Estética. Fill with Railway bot JSON schema from NEEDS_FROM_KOMANDO.md item B1.",
+  "clientId": "PLACEHOLDER_CLIENT_ID_ESTETICA",
+  "botName": "Aurora",
+  "welcomeMessage": "Olá! Sou a Aurora, assistente virtual da Clínica Aurora Estética. Como posso te ajudar hoje?",
+  "primaryColor": "#c97ea2",
+  "niche": "estetica",
+  "services": [
+    "Harmonização facial",
+    "Botox",
+    "Preenchimento",
+    "Bioestimulador",
+    "Limpeza de pele"
+  ],
+  "faqs": [
+    {
+      "question": "Quais procedimentos vocês fazem?",
+      "answer": "Realizamos harmonização facial, botox, preenchimento, bioestimuladores e limpeza de pele. Quer agendar uma avaliação?"
+    },
+    {
+      "question": "Os procedimentos são seguros?",
+      "answer": "Sim! Todos os procedimentos usam produtos com registro na ANVISA e são realizados por profissionais certificados."
+    },
+    {
+      "question": "Quanto custa?",
+      "answer": "O valor varia conforme o procedimento. Posso te conectar com a equipe para um orçamento personalizado!"
+    },
+    {
+      "question": "Como agendar?",
+      "answer": "Você pode agendar diretamente pelo WhatsApp. Posso te encaminhar agora — mas antes, me conta: o que você quer fazer?"
+    }
+  ],
+  "qualifierHandoff": {
+    "enabled": true,
+    "triggerPhrases": ["agendar", "quero fazer", "preço", "valor", "orçamento", "marcar"],
+    "handoffMessage": "Ótimo! Para te conectar com a equipe da forma certa, me conta rapidinho:",
+    "mode": "open_qualifier_sheet"
+  },
+  "fallbackMessage": "Não entendi bem. Pode reformular? Ou posso te conectar direto com a equipe pelo WhatsApp.",
+  "corsAllowedOrigins": ["PLACEHOLDER_ESTETICA_DOMAIN"]
+}
