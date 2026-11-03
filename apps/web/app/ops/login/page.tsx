@@ -22,7 +22,7 @@ export default function OpsLogin() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/ops`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/ops`,
       },
     });
 
