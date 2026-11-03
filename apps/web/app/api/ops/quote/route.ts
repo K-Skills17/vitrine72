@@ -1,7 +1,8 @@
 import { createHmac } from "crypto";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { createAnonClient } from "@/lib/supabase/server";
 import { getPrice, ALL_SKUS } from "@vitrine72/core";
+import { verifyOpsToken } from "@/app/api/ops/auth/route";
 import type { Sku } from "@vitrine72/core";
 
 export const runtime = "nodejs";
@@ -12,13 +13,9 @@ function signDiscount(sku: string, discount: number, expires: number, secret: st
 }
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
-  // Require ops session
-  const supabase = await createAnonClient();
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const allowlist = (process.env.OPS_EMAIL_ALLOWLIST ?? "").split(",").map((e) => e.trim());
-  if (!allowlist.includes(session.user.email ?? "")) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const cookieStore = await cookies();
+  if (!verifyOpsToken(cookieStore.get("ops_token")?.value)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const secret = process.env.DISCOUNT_SECRET;

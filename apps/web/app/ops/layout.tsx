@@ -1,27 +1,19 @@
 export const dynamic = "force-dynamic";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createAnonClient } from "@/lib/supabase/server";
 import { OpsNav } from "@/components/ops/OpsNav";
+import { verifyOpsToken } from "@/app/api/ops/auth/route";
 
 export default async function OpsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createAnonClient();
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const cookieStore = await cookies();
+  const token = cookieStore.get("ops_token")?.value;
 
-  if (!session) {
+  if (!verifyOpsToken(token)) {
     redirect("/ops/login");
-  }
-
-  // Check email allowlist
-  const allowlist = (process.env.OPS_EMAIL_ALLOWLIST ?? "").split(",").map((e) => e.trim());
-  if (!allowlist.includes(session.user.email ?? "")) {
-    await supabase.auth.signOut();
-    redirect("/ops/login?error=unauthorized");
   }
 
   return (
