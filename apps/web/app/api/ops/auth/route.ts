@@ -1,5 +1,4 @@
 import { timingSafeEqual } from "crypto";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { OPS_COOKIE, createOpsToken } from "@/lib/ops-auth";
 
@@ -26,20 +25,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Senha incorreta" }, { status: 401 });
   }
 
-  const cookieStore = await cookies();
-  cookieStore.set(OPS_COOKIE, createOpsToken(), {
+  const res = NextResponse.json({ ok: true });
+  res.cookies.set(OPS_COOKIE, createOpsToken(), {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
     maxAge: MAX_AGE,
     path: "/",
   });
-
-  return NextResponse.json({ ok: true });
+  return res;
 }
 
 export async function DELETE() {
-  const cookieStore = await cookies();
-  cookieStore.delete(OPS_COOKIE);
-  return NextResponse.json({ ok: true });
+  const res = NextResponse.json({ ok: true });
+  res.cookies.delete(OPS_COOKIE);
+  return res;
 }
