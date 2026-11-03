@@ -8,7 +8,7 @@ export default async function OpsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createAnonClient();
+  const supabase = await createAnonClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();

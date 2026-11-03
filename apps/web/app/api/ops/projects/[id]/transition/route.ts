@@ -12,7 +12,7 @@ export async function POST(
   const { id } = await params;
 
   // Auth check
-  const anonSupabase = createAnonClient();
+  const anonSupabase = await createAnonClient();
   const {
     data: { session },
   } = await anonSupabase.auth.getSession();

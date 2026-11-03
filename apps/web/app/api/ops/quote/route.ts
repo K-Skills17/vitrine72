@@ -13,7 +13,7 @@ function signDiscount(sku: string, discount: number, expires: number, secret: st
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   // Require ops session
-  const supabase = createAnonClient();
+  const supabase = await createAnonClient();
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const allowlist = (process.env.OPS_EMAIL_ALLOWLIST ?? "").split(",").map((e) => e.trim());

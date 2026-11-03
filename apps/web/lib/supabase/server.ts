@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import type { Database } from "./types";
 
 /** Anon client — reads session from cookies (for RSC layouts and API routes). */
-export function createAnonClient() {
-  const cookieStore = cookies();
+export async function createAnonClient() {
+  const cookieStore = await cookies();
   return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -14,10 +14,10 @@ export function createAnonClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: object }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2])
             );
           } catch {
             // Layout can't set cookies; the middleware handles refresh.
