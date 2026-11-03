@@ -2,7 +2,7 @@ import { createHmac } from "crypto";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getPrice, ALL_SKUS } from "@vitrine72/core";
-import { verifyOpsToken } from "@/app/api/ops/auth/route";
+import { verifyOpsToken, OPS_COOKIE } from "@/lib/ops-auth";
 import type { Sku } from "@vitrine72/core";
 
 export const runtime = "nodejs";
@@ -14,7 +14,7 @@ function signDiscount(sku: string, discount: number, expires: number, secret: st
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const cookieStore = await cookies();
-  if (!verifyOpsToken(cookieStore.get("ops_token")?.value)) {
+  if (!verifyOpsToken(cookieStore.get(OPS_COOKIE)?.value)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
