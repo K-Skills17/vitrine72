@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function OpsLogin() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,8 +21,7 @@ export default function OpsLogin() {
     setLoading(false);
 
     if (res.ok) {
-      router.push("/ops");
-      router.refresh();
+      window.location.href = "/ops";
     } else {
       const data = await res.json();
       setError(data.error ?? "Erro ao autenticar");
