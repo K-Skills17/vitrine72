@@ -4,6 +4,7 @@ const LINKS = [
   { href: "/ops", label: "Pipeline" },
   { href: "/ops/commissions", label: "Comissões" },
   { href: "/ops/edits", label: "Edições" },
+  { href: "/ops/quote", label: "Cotação" },
 ];
 
 export function OpsNav() {

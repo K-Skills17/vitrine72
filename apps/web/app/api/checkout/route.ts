@@ -1,6 +1,18 @@
+import { createHmac, timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getPrice, CORE_OFFER, ANCHOR_PACKAGE, DOWNSELL } from "@vitrine72/core";
 import type { Sku } from "@vitrine72/core";
+
+function verifyDiscount(sku: string, discount: number, expires: number, sig: string, secret: string): boolean {
+  if (Date.now() > expires) return false;
+  const payload = `${sku}:${discount}:${expires}`;
+  const expected = createHmac("sha256", secret).update(payload).digest("hex");
+  try {
+    return timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"));
+  } catch {
+    return false;
+  }
+}
 
 export const runtime = "nodejs";
 
@@ -27,10 +39,22 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   // Read attribution from cookie (set by partner/seller pages)
   const source = req.cookies.get("v72_source")?.value ?? null;
 
+  // Verify optional signed discount
+  const discountParam = Number(searchParams.get("discount") ?? 0);
+  const expiresParam = Number(searchParams.get("expires") ?? 0);
+  const sigParam = searchParams.get("sig") ?? "";
+  const secret = process.env.DISCOUNT_SECRET ?? "";
+  const discountPct =
+    discountParam > 0 && secret && verifyDiscount(sku, discountParam, expiresParam, sigParam, secret)
+      ? Math.min(50, discountParam)
+      : 0;
+
   // Pix uses the discounted pix price; card uses the higher card price so margin is preserved.
   // MP Checkout Pro shows both options on its page — the buyer chooses.
-  const pixPrice = getPrice(sku, "pix");
-  const cardPrice = getPrice(sku, "card");
+  const basePix = getPrice(sku, "pix");
+  const baseCard = getPrice(sku, "card");
+  const pixPrice = basePix ? Math.round(basePix * (1 - discountPct / 100)) : null;
+  const cardPrice = baseCard ? Math.round(baseCard * (1 - discountPct / 100)) : null;
   if (!pixPrice || !cardPrice) {
     return NextResponse.redirect(new URL("/#preco", req.url));
   }
