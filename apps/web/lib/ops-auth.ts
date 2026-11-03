@@ -1,18 +1,16 @@
 import { createHmac, timingSafeEqual } from "crypto";
 
-const COOKIE = "ops_token";
+export const OPS_COOKIE = "ops_token";
 
-export { COOKIE as OPS_COOKIE };
-
-function makeToken(secret: string): string {
-  return createHmac("sha256", secret).update("ops_session").digest("hex");
+function makeToken(password: string): string {
+  return createHmac("sha256", password).update("ops_session_v1").digest("hex");
 }
 
 export function verifyOpsToken(token: string | undefined): boolean {
-  const secret = process.env.OPS_SECRET ?? process.env.DISCOUNT_SECRET ?? "";
-  if (!token || !secret) return false;
+  const password = process.env.OPS_PASSWORD ?? "";
+  if (!token || !password) return false;
   try {
-    const expected = makeToken(secret);
+    const expected = makeToken(password);
     return timingSafeEqual(Buffer.from(token, "hex"), Buffer.from(expected, "hex"));
   } catch {
     return false;
@@ -20,6 +18,5 @@ export function verifyOpsToken(token: string | undefined): boolean {
 }
 
 export function createOpsToken(): string {
-  const secret = process.env.OPS_SECRET ?? process.env.DISCOUNT_SECRET ?? "";
-  return makeToken(secret);
+  return makeToken(process.env.OPS_PASSWORD ?? "");
 }
