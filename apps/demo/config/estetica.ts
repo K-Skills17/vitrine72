@@ -26,6 +26,9 @@ const estetica: NicheConfig = {
   googleFontsUrl:
     "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap",
 
+  heroVariant: "split-light",
+  servicesLayout: "minimal-list",
+
   services: [
     {
       id: "harmonizacao",

@@ -2,80 +2,83 @@ import type { NicheConfig } from "../lib/niche";
 
 const planejados: NicheConfig = {
   niche: "planejados",
-  brandName: "Atelier Madeira Planejados",
-  tagline: "Móveis sob medida que transformam seu espaço",
-  heroHeadline: "Cada centímetro do seu espaço com propósito e elegância",
+  brandName: "Atelier Madeira",
+  tagline: "Arquitetura de interiores sob medida",
+  heroHeadline: "Precisão milimétrica. Materiais que duram décadas.",
   heroSubheadline:
-    "Projetos de móveis planejados desenvolvidos do zero para o seu imóvel. Do croqui à instalação, cuidamos de tudo.",
+    "Projetos desenvolvidos com engenharia alemã e sensibilidade brasileira. Do croqui à instalação — sem intermediários.",
   heroImageUrl:
-    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80",
-  heroImageAlt: "Cozinha planejada moderna",
+    "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?auto=format&fit=crop&w=1600&q=85",
+  heroImageAlt: "Cozinha planejada de alto padrão",
   whatsappNumber: "5511953542831",
 
-  primaryColor: "#8b5e3c",
-  primaryLight: "#d4b896",
-  primaryDark: "#5c3b21",
-  accentColor: "#c4a35a",
-  bgColor: "#faf7f4",
-  surfaceColor: "#ffffff",
-  textColor: "#1c1713",
-  mutedColor: "#7a6652",
+  primaryColor: "#c9a96e",
+  primaryLight: "#2a2420",
+  primaryDark: "#a07c40",
+  accentColor: "#c9a96e",
+  bgColor: "#111110",
+  surfaceColor: "#1c1a18",
+  textColor: "#f0ece4",
+  mutedColor: "#7a7068",
 
-  fontDisplay: "Playfair Display",
-  fontBody: "Inter",
+  fontDisplay: "Space Grotesk",
+  fontBody: "DM Sans",
   googleFontsUrl:
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap",
+    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap",
+
+  heroVariant: "dark-fullscreen",
+  servicesLayout: "photo-grid",
 
   services: [
     {
       id: "cozinha",
       name: "Cozinha",
       description:
-        "Projeto completo com aproveitamento máximo, bancadas sob medida e acabamentos que resistem ao uso diário.",
+        "Bancadas em Silestone, ferragens Blum e MDF naval. Cada módulo dimensionado ao milímetro do seu imóvel.",
       imageUrl:
-        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Cozinha planejada moderna",
+        "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Cozinha planejada alto padrão",
       qualifierPreselect: "Cozinha",
     },
     {
-      id: "quarto",
-      name: "Quarto / Closet",
+      id: "closet",
+      name: "Closet & Dormitório",
       description:
-        "Guarda-roupas e closets que aproveitam cada centímetro, com acabamento sofisticado e organização inteligente.",
+        "Walk-in closets com iluminação integrada, cabideiros motorizados e gavetas com amortecimento soft-close.",
       imageUrl:
-        "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Quarto com guarda-roupa planejado",
-      qualifierPreselect: "Quarto/Closet",
-    },
-    {
-      id: "banheiro",
-      name: "Banheiro",
-      description:
-        "Gabinetes, nichos e painéis que transformam banheiros em espaços de bem-estar com funcionalidade e estilo.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Banheiro com móveis planejados",
-      qualifierPreselect: "Banheiro",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Closet planejado de alto padrão",
+      qualifierPreselect: "Closet/Dormitório",
     },
     {
       id: "sala",
-      name: "Sala de Estar / TV",
+      name: "Living & Estar",
       description:
-        "Painéis, estantes e racks que valorizam o ambiente principal da casa com personalidade e praticidade.",
+        "Painéis ripados, estantes embutidas e racks com passagem de cabos invisível. Arquitetura que organiza.",
       imageUrl:
-        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Sala de estar com painel planejado",
-      qualifierPreselect: "Sala",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Living planejado moderno",
+      qualifierPreselect: "Sala/Living",
     },
     {
-      id: "casa-inteira",
-      name: "Casa Inteira",
+      id: "home-office",
+      name: "Home Office",
       description:
-        "Projeto integrado de todos os ambientes com identidade visual única e fluxo natural entre os espaços.",
+        "Estações de trabalho ergonômicas com gestão de cabos, prateleiras estruturais e painéis acústicos embutidos.",
       imageUrl:
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
-      imageAlt: "Casa toda planejada",
-      qualifierPreselect: "Casa inteira",
+        "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Home office planejado",
+      qualifierPreselect: "Home Office",
+    },
+    {
+      id: "projeto-completo",
+      name: "Projeto Completo",
+      description:
+        "Todos os ambientes com identidade de materiais unificada. Um único projeto, um único interlocutor.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Projeto completo de interiores",
+      qualifierPreselect: "Projeto completo",
     },
   ],
 

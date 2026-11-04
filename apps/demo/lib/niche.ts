@@ -35,6 +35,9 @@ export interface Stat {
   label: string;
 }
 
+export type HeroVariant = "split-light" | "dark-fullscreen";
+export type ServicesLayout = "minimal-list" | "photo-grid";
+
 export interface NicheConfig {
   niche: string;
   brandName: string;
@@ -57,6 +60,9 @@ export interface NicheConfig {
   fontDisplay: string;
   fontBody: string;
   googleFontsUrl: string;
+
+  heroVariant?: HeroVariant;
+  servicesLayout?: ServicesLayout;
 
   services: ServiceItem[];
   howItWorks: HowItWorksStep[];
