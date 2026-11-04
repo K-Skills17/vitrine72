@@ -43,7 +43,7 @@ const STYLE_GROUP_PROFILES: Record<string, {
   "clean-clinical":    { heroStyle: "split-text-left",       cardStyle: "card-bordered", aboutStyle: "about-split" },
   "conversion-driven": { heroStyle: "fullscreen-photo",      cardStyle: "card-shadow",   aboutStyle: "about-credentials" },
   "editorial-expert":  { heroStyle: "editorial-asymmetric",  cardStyle: "card-minimal",  aboutStyle: "about-credentials" },
-  "vibrant-boutique":  { heroStyle: "fullscreen-photo",      cardStyle: "card-shadow",   aboutStyle: "about-split" },
+  "vibrant-boutique":  { heroStyle: "split-text-left",       cardStyle: "card-bordered", aboutStyle: "about-split" },
 };
 
 const DEFAULT_PROFILE = { heroStyle: "fullscreen-photo", cardStyle: "card-shadow", aboutStyle: "about-split" };
