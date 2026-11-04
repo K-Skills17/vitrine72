@@ -45,12 +45,11 @@ export default async function IntakePage({ params }: Props) {
     );
   }
 
-  // Load existing draft if any
-  const { data: existingSubmission } = await supabase
-    .from("intake_submissions")
-    .select("id, data")
-    .eq("project_id", project.id)
-    .maybeSingle();
+  // Load existing draft + active verticals in parallel
+  const [{ data: existingSubmission }, { data: verticalsData }] = await Promise.all([
+    supabase.from("intake_submissions").select("id, data").eq("project_id", project.id).maybeSingle(),
+    supabase.from("verticals").select("value, label").eq("active", true).order("label"),
+  ]);
 
   return (
     <main className="min-h-screen bg-brand-dark">
@@ -72,6 +71,7 @@ export default async function IntakePage({ params }: Props) {
             (existingSubmission?.data as Record<string, unknown>) ?? {}
           }
           submissionId={existingSubmission?.id ?? null}
+          verticals={verticalsData ?? undefined}
         />
       </div>
     </main>

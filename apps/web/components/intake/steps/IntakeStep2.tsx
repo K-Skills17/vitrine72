@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { VERTICALS, PRIMARY_ACTIONS, UPDATE_FREQUENCY } from "../IntakeForm";
+import { PRIMARY_ACTIONS, UPDATE_FREQUENCY, type VerticalOption } from "../IntakeForm";
 import { FormField } from "@/components/ui/FormField";
 
 const schema = z.object({
@@ -24,9 +24,10 @@ interface Props {
   data: Record<string, unknown>;
   onNext: (_update: Record<string, unknown>) => void;
   onBack: () => void;
+  verticals: VerticalOption[];
 }
 
-export function IntakeStep2({ data, onNext, onBack }: Props) {
+export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
   const [form, setForm] = useState<Partial<Step2Data>>({
     vertical: (data.vertical as string) ?? "",
     city: (data.city as string) ?? "São Paulo",

@@ -34,15 +34,19 @@ export const UPDATE_FREQUENCY = [
   { value: "raramente", label: "Raramente" },
 ] as const;
 
+export type VerticalOption = { value: string; label: string };
+
 interface Props {
   projectId: string;
   token: string;
   sku: string;
   existingData: Record<string, unknown>;
   submissionId: string | null;
+  verticals?: VerticalOption[];
 }
 
-export function IntakeForm({ projectId, token, existingData, submissionId }: Props) {
+export function IntakeForm({ projectId, token, existingData, submissionId, verticals: verticalsProp }: Props) {
+  const verticals = verticalsProp ?? VERTICALS;
   const [step, setStep] = useState(1);
   const [data, setData] = useState<Record<string, unknown>>(existingData);
   const [saving, setSaving] = useState(false);
@@ -125,7 +129,7 @@ export function IntakeForm({ projectId, token, existingData, submissionId }: Pro
       )}
 
       {step === 1 && <IntakeStep1 data={data} onNext={nextStep} />}
-      {step === 2 && <IntakeStep2 data={data} onNext={nextStep} onBack={prevStep} />}
+      {step === 2 && <IntakeStep2 data={data} onNext={nextStep} onBack={prevStep} verticals={verticals} />}
       {step === 3 && (
         <IntakeStep3
           data={data}
