@@ -101,7 +101,7 @@ export interface SiteConfig {
   updatedAt: string;
   animationProfile: AnimationProfile;
   signatureElementEnabled: boolean;
-  jsonLd?: Record<string, unknown>[];
+  jsonLd?: Record<string, unknown>[] | Record<string, unknown>;
 }
 
 export const config = rawConfig as SiteConfig;

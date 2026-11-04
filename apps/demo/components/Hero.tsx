@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import type { NicheConfig } from "../lib/niche";
 import Qualifier from "./Qualifier";
-import { WhatsAppIcon, ArrowRightIcon } from "./Icon";
+import { WhatsAppIcon } from "./Icon";
 
 interface Props {
   config: NicheConfig;
@@ -15,147 +14,171 @@ export default function Hero({ config }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <section id="inicio" style={{ position: "relative", overflow: "hidden", minHeight: "88dvh", display: "flex", alignItems: "center" }}>
-      {/* Background image */}
-      <Image
-        src={config.heroImageUrl}
-        alt={config.heroImageAlt}
-        fill
-        priority
-        style={{ objectFit: "cover", objectPosition: "center" }}
-        sizes="100vw"
-      />
-
-      {/* Gradient overlay */}
-      <div
-        aria-hidden="true"
+    <>
+      <section
+        id="inicio"
         style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(105deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%)",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          minHeight: "calc(100dvh - 64px)",
+          backgroundColor: "var(--color-bg)",
         }}
-      />
-
-      {/* Content */}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: "72rem",
-          margin: "0 auto",
-          padding: "4rem 1.5rem",
-          width: "100%",
-        }}
+        className="hero-grid"
       >
-        <div style={{ maxWidth: "36rem" }}>
+        {/* Left: editorial text panel */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "5rem 4rem 5rem 5rem",
+          }}
+          className="hero-text"
+        >
+          {/* Eyebrow */}
           <p
             style={{
-              marginBottom: "0.75rem",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              letterSpacing: "0.15em",
+              marginBottom: "1.5rem",
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              letterSpacing: "0.22em",
               textTransform: "uppercase",
-              color: "var(--color-primary-light)",
-              opacity: 0.9,
+              color: "var(--color-accent)",
             }}
           >
-            {config.brandName}
+            {config.tagline}
           </p>
 
+          {/* Headline */}
           <h1
             style={{
-              marginBottom: "1.25rem",
-              fontSize: "clamp(2rem, 5vw, 3.25rem)",
-              fontWeight: 700,
-              lineHeight: 1.15,
+              marginBottom: "1.5rem",
+              fontSize: "clamp(2.75rem, 5vw, 4.5rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
               fontFamily: `"${config.fontDisplay}", serif`,
-              color: "#ffffff",
+              color: "var(--color-text)",
+              letterSpacing: "-0.01em",
             }}
           >
             {config.heroHeadline}
           </h1>
 
+          {/* Thin gold line */}
+          <div style={{ width: "2.5rem", height: "1px", backgroundColor: "var(--color-accent)", marginBottom: "1.5rem" }} />
+
+          {/* Subheadline */}
           <p
             style={{
               marginBottom: "2.5rem",
-              fontSize: "1.05rem",
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.85)",
+              fontSize: "1rem",
+              lineHeight: 1.75,
+              color: "var(--color-muted)",
+              maxWidth: "28rem",
             }}
           >
             {config.heroSubheadline}
           </p>
 
-          {/* CTAs */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center" }}>
+          {/* CTA */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "flex-start" }}>
             <button
               onClick={() => setOpen(true)}
               data-testid="hero-cta-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                borderRadius: "9999px",
-                padding: "0.9rem 2rem",
-                fontSize: "0.95rem",
+                gap: "0.6rem",
+                padding: "1rem 2.25rem",
+                fontSize: "0.8rem",
                 fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
                 color: "#fff",
-                backgroundColor: "var(--color-primary)",
+                backgroundColor: "var(--color-text)",
                 border: "none",
                 cursor: "pointer",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
-                transition: "transform 0.15s, opacity 0.15s",
+                transition: "opacity 0.15s",
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.9")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.8")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
             >
-              <WhatsAppIcon size={20} color="#fff" />
-              Falar no WhatsApp
+              <WhatsAppIcon size={18} color="#fff" />
+              Agendar avaliação
             </button>
-
-            <Link
-              href="/servicos/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.4rem",
-                borderRadius: "9999px",
-                padding: "0.9rem 1.75rem",
-                fontSize: "0.95rem",
-                fontWeight: 600,
-                color: "#fff",
-                border: "2px solid rgba(255,255,255,0.6)",
-                textDecoration: "none",
-                transition: "background 0.15s",
-                backgroundColor: "transparent",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.backgroundColor =
-                  "rgba(255,255,255,0.1)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.backgroundColor =
-                  "transparent")
-              }
-            >
-              Ver serviços
-              <ArrowRightIcon size={18} color="#fff" />
-            </Link>
+            <p style={{ fontSize: "0.72rem", color: "var(--color-muted)", letterSpacing: "0.05em" }}>
+              Avaliação gratuita · Sem compromisso
+            </p>
           </div>
 
-          <p
+          {/* Trust strip */}
+          <div
             style={{
-              marginTop: "1rem",
-              fontSize: "0.75rem",
-              color: "rgba(255,255,255,0.6)",
+              marginTop: "3rem",
+              paddingTop: "2rem",
+              borderTop: "1px solid var(--color-primary-light)",
+              display: "flex",
+              gap: "2.5rem",
+              flexWrap: "wrap",
             }}
           >
-            3 perguntas rápidas — menos de 30 segundos
-          </p>
+            {[
+              { value: "1.500+", label: "Pacientes" },
+              { value: "8 anos", label: "Experiência" },
+              { value: "100%", label: "Produtos ANVISA" },
+            ].map((s) => (
+              <div key={s.label}>
+                <p
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    fontFamily: `"${config.fontDisplay}", serif`,
+                    color: "var(--color-text)",
+                    lineHeight: 1,
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  {s.value}
+                </p>
+                <p style={{ fontSize: "0.7rem", color: "var(--color-muted)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+
+        {/* Right: photo panel */}
+        <div style={{ position: "relative", overflow: "hidden" }} className="hero-photo">
+          <Image
+            src={config.heroImageUrl}
+            alt={config.heroImageAlt}
+            fill
+            priority
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+            sizes="50vw"
+          />
+          {/* Very subtle warm gradient on left edge to blend with text panel */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to right, ${config.bgColor}30 0%, transparent 15%)`,
+            }}
+          />
+        </div>
+      </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-text { padding: 3rem 1.5rem !important; }
+          .hero-photo { min-height: 55vw; }
+        }
+      `}</style>
 
       {open && <Qualifier config={config} onClose={() => setOpen(false)} />}
-    </section>
+    </>
   );
 }

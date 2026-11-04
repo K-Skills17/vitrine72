@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import type { NicheConfig } from "../lib/niche";
 import Qualifier from "./Qualifier";
@@ -53,96 +52,94 @@ export default function Services({ config, showAll = false }: Props) {
             margin: "0 auto 3rem",
           }}
         >
-          Clique no serviço de interesse e nossa equipe receberá suas informações antes de atender você
+          Cada procedimento é precedido de avaliação individual. Sem protocolos genéricos.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gap: "1.5rem",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-          }}
-        >
-          {displayed.map((service) => (
+        <div style={{ display: "flex", flexDirection: "column", borderTop: "1px solid var(--color-primary-light)" }}>
+          {displayed.map((service, i) => (
             <article
               key={service.id}
               style={{
-                borderRadius: "1rem",
-                overflow: "hidden",
-                border: "1px solid #f0f0f0",
-                backgroundColor: "#fff",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                display: "flex",
-                flexDirection: "column",
-                transition: "box-shadow 0.2s, transform 0.2s",
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+                gap: "1.5rem",
+                alignItems: "center",
+                padding: "2rem 0",
+                borderBottom: "1px solid var(--color-primary-light)",
+                cursor: "pointer",
+                transition: "opacity 0.15s",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 28px rgba(0,0,0,0.1)";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
-                (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.75")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
+              onClick={() => openQualifier(service.qualifierPreselect)}
             >
-              {/* Service image */}
-              <div style={{ position: "relative", height: "200px", overflow: "hidden" }}>
-                <Image
-                  src={service.imageUrl}
-                  alt={service.imageAlt}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width: 768px) 100vw, 400px"
-                />
-              </div>
-
-              {/* Card body */}
-              <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                <h3
-                  style={{
-                    marginBottom: "0.5rem",
-                    fontSize: "1.1rem",
-                    fontWeight: 700,
-                    fontFamily: `"Playfair Display", serif`,
-                    color: "var(--color-text)",
-                  }}
-                >
-                  {service.name}
-                </h3>
+              <div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "1rem", marginBottom: "0.5rem" }}>
+                  <span
+                    style={{
+                      fontSize: "0.65rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.15em",
+                      color: "var(--color-accent)",
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3
+                    style={{
+                      fontSize: "clamp(1.1rem, 2vw, 1.35rem)",
+                      fontWeight: 600,
+                      fontFamily: `"${config.fontDisplay}", serif`,
+                      color: "var(--color-text)",
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {service.name}
+                  </h3>
+                </div>
                 <p
                   style={{
-                    flex: 1,
-                    marginBottom: "1.25rem",
                     fontSize: "0.875rem",
                     lineHeight: 1.65,
                     color: "var(--color-muted)",
+                    maxWidth: "52rem",
+                    paddingLeft: "2rem",
                   }}
                 >
                   {service.description}
                 </p>
-                <button
-                  onClick={() => openQualifier(service.qualifierPreselect)}
-                  data-testid={`service-cta-${service.id}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.4rem",
-                    borderRadius: "0.75rem",
-                    padding: "0.65rem 1rem",
-                    fontSize: "0.875rem",
-                    fontWeight: 600,
-                    color: "#fff",
-                    backgroundColor: "var(--color-primary)",
-                    border: "none",
-                    cursor: "pointer",
-                    width: "100%",
-                  }}
-                >
-                  Tenho interesse
-                  <ArrowRightIcon size={16} color="#fff" />
-                </button>
               </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); openQualifier(service.qualifierPreselect); }}
+                data-testid={`service-cta-${service.id}`}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  padding: "0.65rem 1.25rem",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "var(--color-text)",
+                  backgroundColor: "transparent",
+                  border: "1px solid var(--color-primary-light)",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "background 0.15s, border-color 0.15s",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "var(--color-primary-light)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--color-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--color-primary-light)";
+                }}
+              >
+                Tenho interesse
+                <ArrowRightIcon size={14} color="var(--color-primary)" />
+              </button>
             </article>
           ))}
         </div>

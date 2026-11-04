@@ -15,7 +15,7 @@ export default function ContactSection() {
             <h2 className="text-3xl md:text-4xl font-display font-bold text-[var(--color-text)] mb-4">
               Entre em contato
             </h2>
-            <p className="text-gray-600 max-w-lg mx-auto">
+            <p className="max-w-lg mx-auto" style={{ color: `${config.palette.text}50` }}>
               Estamos prontos para atender você em {config.neighborhoods.slice(0, 2).join(", ")} e região.
             </p>
           </div>
@@ -49,7 +49,10 @@ export default function ContactSection() {
 
           {/* Info card */}
           <ScrollReveal delay={0.2}>
-            <div className="flex flex-col gap-5 p-8 rounded-2xl shadow-sm border border-gray-100 bg-white">
+            <div
+              className="flex flex-col gap-5 p-8 border"
+              style={{ backgroundColor: `${config.palette.text}06`, borderColor: `${config.palette.text}10` }}
+            >
               {config.address && (
                 <InfoRow icon={<LocationIcon />} label="Endereço" value={config.address} />
               )}
@@ -73,8 +76,8 @@ export default function ContactSection() {
                   href={config.gbpLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 pt-4 border-t border-gray-100 text-sm font-semibold transition-colors"
-                  style={{ color: "var(--color-primary)" }}
+                  className="flex items-center gap-3 pt-4 border-t text-sm font-semibold transition-opacity hover:opacity-100"
+                  style={{ borderColor: `${config.palette.text}10`, color: config.palette.accent }}
                 >
                   <GoogleIcon />
                   Ver no Google
@@ -85,8 +88,8 @@ export default function ContactSection() {
                   href={`https://instagram.com/${config.instagramLink.replace("@", "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm font-semibold transition-colors"
-                  style={{ color: "var(--color-primary)" }}
+                  className="flex items-center gap-3 text-sm font-semibold transition-opacity hover:opacity-100"
+                  style={{ color: config.palette.accent }}
                 >
                   <InstagramIcon />
                   {config.instagramLink}
@@ -114,14 +117,14 @@ function InfoRow({
   return (
     <div className="flex gap-3">
       <span
-        className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-0.5"
-        style={{ backgroundColor: "var(--color-secondary)", color: "var(--color-primary)" }}
+        className="shrink-0 w-8 h-8 flex items-center justify-center mt-0.5"
+        style={{ color: config.palette.accent }}
       >
         {icon}
       </span>
       <div>
-        <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">{label}</p>
-        <p className={`text-sm text-[var(--color-text)] mt-0.5 ${multiline ? "whitespace-pre-line" : ""}`}>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-0.5" style={{ color: `${config.palette.text}40` }}>{label}</p>
+        <p className={`text-sm ${multiline ? "whitespace-pre-line" : ""}`} style={{ color: `${config.palette.text}70` }}>
           {value}
         </p>
       </div>

@@ -2,29 +2,29 @@ import type { NicheConfig } from "../lib/niche";
 
 const estetica: NicheConfig = {
   niche: "estetica",
-  brandName: "Clínica Aurora Estética",
-  tagline: "Beleza com segurança e resultados reais",
-  heroHeadline: "Realce sua beleza com quem entende de resultados",
+  brandName: "Clínica Aurora",
+  tagline: "Medicina estética de alto padrão",
+  heroHeadline: "Resultados naturais que falam por si.",
   heroSubheadline:
-    "Procedimentos faciais personalizados, aplicados por profissionais certificados. Agende agora e descubra o tratamento ideal para você.",
+    "Procedimentos injetáveis realizados por médicos especialistas. Avaliação personalizada, sem protocolos genéricos.",
   heroImageUrl:
-    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1400&q=80",
-  heroImageAlt: "Procedimento estético facial",
+    "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1400&q=80",
+  heroImageAlt: "Clínica Aurora — ambiente",
   whatsappNumber: "5511953542831",
 
-  primaryColor: "#c97ea2",
-  primaryLight: "#f3d6e8",
-  primaryDark: "#8a4870",
+  primaryColor: "#9b6e5e",
+  primaryLight: "#f0e2dc",
+  primaryDark: "#6b4337",
   accentColor: "#c4a35a",
-  bgColor: "#fdf8fb",
+  bgColor: "#faf7f4",
   surfaceColor: "#ffffff",
-  textColor: "#1e1a1d",
-  mutedColor: "#7a6275",
+  textColor: "#1c1410",
+  mutedColor: "#7c6a62",
 
-  fontDisplay: "Playfair Display",
+  fontDisplay: "Cormorant Garamond",
   fontBody: "Inter",
   googleFontsUrl:
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap",
+    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap",
 
   services: [
     {

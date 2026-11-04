@@ -27,7 +27,7 @@ export default function ReviewsStrip() {
               </span>
               <div className="flex flex-col items-start gap-1">
                 <StarRow rating={gbpData.rating} size={22} />
-                <span className="text-sm text-gray-500">
+                <span className="text-sm" style={{ color: `${config.palette.text}50` }}>
                   {gbpData.reviewCount} avaliações no Google
                 </span>
               </div>
@@ -43,19 +43,28 @@ export default function ReviewsStrip() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {gbpData.reviews.slice(0, 3).map((review, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col gap-3">
+              <div
+                className="p-6 flex flex-col gap-4 border"
+                style={{
+                  backgroundColor: `${config.palette.text}06`,
+                  borderColor: `${config.palette.text}10`,
+                }}
+              >
                 <StarRow rating={review.rating} size={16} />
-                <p className="text-gray-700 text-sm leading-relaxed italic">
+                <p className="text-sm leading-relaxed" style={{ color: `${config.palette.text}70` }}>
                   &ldquo;{review.text}&rdquo;
                 </p>
-                <div className="flex items-center gap-2 mt-auto pt-3 border-t border-gray-50">
+                <div
+                  className="flex items-center gap-2 mt-auto pt-3 border-t"
+                  style={{ borderColor: `${config.palette.text}10` }}
+                >
                   <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    style={{ backgroundColor: "var(--color-primary)" }}
+                    className="w-8 h-8 flex items-center justify-center text-xs font-bold"
+                    style={{ backgroundColor: config.palette.accent, color: config.palette.background }}
                   >
                     {review.author.charAt(0).toUpperCase()}
                   </div>
-                  <span className="text-sm font-semibold text-[var(--color-text)]">
+                  <span className="text-sm font-semibold" style={{ color: config.palette.text }}>
                     {review.author}
                   </span>
                 </div>

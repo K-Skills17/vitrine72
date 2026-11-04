@@ -13,6 +13,17 @@ const NAV_LINKS = [
   { href: "/contato", label: "Contato" },
 ];
 
+// Is the site palette dark? (background luminance < 40%)
+function isDarkPalette() {
+  const hex = config.palette.background.replace("#", "");
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  return (r * 299 + g * 587 + b * 114) / 1000 < 100;
+}
+
+const DARK_SITE = isDarkPalette();
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -24,32 +35,39 @@ export default function Header() {
   }, []);
 
   const whatsappUrl = buildWhatsAppUrl(config.phone);
+  const { palette } = config;
+
+  const scrolledBg = DARK_SITE
+    ? `${palette.background}f5`
+    : "rgba(255,255,255,0.97)";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-sm"
+      style={{
+        backgroundColor: scrolled ? scrolledBg : "transparent",
+        borderBottom: scrolled ? `1px solid ${palette.text}10` : "1px solid transparent",
+      }}
     >
-      <div className="container-wide px-4">
+      <div className="container-wide px-4 md:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo / Business name */}
+          {/* Logo */}
           <Link
             href="/"
-            className="font-display font-bold text-lg md:text-xl text-[var(--color-primary)] hover:opacity-80 transition-opacity"
+            className="font-display font-bold text-lg md:text-xl transition-opacity hover:opacity-70"
+            style={{ color: palette.accent }}
           >
             {config.businessName}
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden md:flex items-center gap-7 lg:gap-10">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[var(--color-primary)] ${
-                  scrolled ? "text-[var(--color-text)]" : "text-[var(--color-text)]"
-                }`}
+                className="text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-100"
+                style={{ color: `${palette.text}70` }}
               >
                 {link.label}
               </Link>
@@ -61,15 +79,16 @@ export default function Header() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex btn-primary text-sm"
+            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-80"
+            style={{ backgroundColor: palette.accent, color: palette.background }}
           >
-            <WhatsAppIcon />
-            Falar pelo WhatsApp
+            Agendar
           </a>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-md text-[var(--color-text)] hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 transition-opacity hover:opacity-70"
+            style={{ color: palette.text }}
             onClick={() => setOpen(!open)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
@@ -83,27 +102,32 @@ export default function Header() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-          <nav className="flex flex-col py-2">
+        <div
+          className="md:hidden border-t"
+          style={{ backgroundColor: palette.background, borderColor: `${palette.text}10` }}
+        >
+          <nav className="flex flex-col py-3">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-6 py-3 text-sm font-medium text-[var(--color-text)] hover:bg-gray-50 hover:text-[var(--color-primary)] transition-colors"
+                className="px-6 py-3 text-sm font-medium uppercase tracking-widest transition-opacity hover:opacity-100"
+                style={{ color: `${palette.text}60` }}
                 onClick={() => setOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="px-4 py-3 border-t border-gray-100 mt-1">
+            <div className="px-6 pt-3 pb-4 mt-1 border-t" style={{ borderColor: `${palette.text}10` }}>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-accent w-full justify-center text-sm"
+                className="flex items-center justify-center gap-2 w-full py-3 text-xs font-bold uppercase tracking-widest"
+                style={{ backgroundColor: palette.accent, color: palette.background }}
               >
                 <WhatsAppIcon />
-                Falar pelo WhatsApp
+                Agendar consulta
               </a>
             </div>
           </nav>
