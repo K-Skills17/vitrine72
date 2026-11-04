@@ -59,6 +59,28 @@ export type ReferenceSite = {
   styleNotes: string;
 };
 
+/** Convert a Supabase DB row to the ReferenceSite type used by the builder. */
+export function referenceSiteFromDb(row: {
+  id: string; url: string; vertical: string; style_group: string;
+  mood: string; color_scheme: string; primary_color: string; accent_color: string;
+  background_color: string; font_personality: string; layout_variant: number; style_notes: string;
+}): ReferenceSite {
+  return {
+    id: row.id,
+    url: row.url,
+    vertical: row.vertical,
+    styleGroup: row.style_group as StyleGroup,
+    mood: row.mood as Mood,
+    colorScheme: row.color_scheme as ColorScheme,
+    primaryColor: row.primary_color,
+    accentColor: row.accent_color,
+    backgroundColor: row.background_color,
+    fontPersonality: row.font_personality as FontPersonality,
+    layoutVariant: row.layout_variant as 1 | 2 | 3,
+    styleNotes: row.style_notes,
+  };
+}
+
 // ─── ESTETICA ────────────────────────────────────────────────────────────────
 
 const ESTETICA: ReferenceSite[] = [

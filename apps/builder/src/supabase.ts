@@ -116,6 +116,30 @@ export async function getLogoPath(projectId: string): Promise<string | null> {
   return data?.storage_path ?? null;
 }
 
+export type DbReferenceSite = {
+  id: string;
+  url: string;
+  vertical: string;
+  style_group: string;
+  mood: string;
+  color_scheme: string;
+  primary_color: string;
+  accent_color: string;
+  background_color: string;
+  font_personality: string;
+  layout_variant: number;
+  style_notes: string;
+};
+
+/** Fetch reference sites from the database for a given vertical. Returns [] if none found. */
+export async function fetchReferenceSites(vertical: string): Promise<DbReferenceSite[]> {
+  const { data } = await supabase
+    .from("reference_sites")
+    .select("*")
+    .eq("vertical", vertical);
+  return (data ?? []) as DbReferenceSite[];
+}
+
 export async function insertAuditLog(params: {
   projectId: string;
   actor: string;

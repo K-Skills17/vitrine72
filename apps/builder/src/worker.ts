@@ -5,11 +5,12 @@ import {
   getUploads,
   getLogoPath,
   insertAuditLog,
+  fetchReferenceSites,
   supabase,
 } from "./supabase.js";
 import { generateSiteConfig } from "./generate-config.js";
 import { deployToVercel } from "./vercel-deploy.js";
-import { pickReferenceSite, type StyleGroup } from "./reference-sites.js";
+import { pickReferenceSite, referenceSiteFromDb, type StyleGroup, type ReferenceSite } from "./reference-sites.js";
 
 const PLATFORM_URL = process.env.VITRINE72_PLATFORM_URL!;
 const BUILD_SECRET = process.env.BUILD_WEBHOOK_SECRET!;
@@ -47,11 +48,26 @@ export async function processProject(projectId: string): Promise<void> {
       getLogoPath(projectId),
     ]);
 
-    // 3. Pick reference site based on vertical + client's chosen style group
+    // 3. Pick reference site — DB first, fall back to hardcoded
     const vertical = intake.data.vertical ?? "generico";
     const styleGroup = intake.data.style_group as StyleGroup | undefined;
-    const referenceSite = pickReferenceSite(vertical, projectId, styleGroup);
-    console.log(`[worker] Using reference site: ${referenceSite.id} (${referenceSite.mood} ${referenceSite.colorScheme})`);
+    const seed = parseInt(projectId.slice(-4), 16) || 0;
+
+    let referenceSite: ReferenceSite;
+    const dbSites = await fetchReferenceSites(vertical);
+
+    if (dbSites.length > 0) {
+      const pool = styleGroup
+        ? (dbSites.filter((s) => s.style_group === styleGroup).length > 0
+            ? dbSites.filter((s) => s.style_group === styleGroup)
+            : dbSites)
+        : dbSites;
+      referenceSite = referenceSiteFromDb(pool[seed % pool.length]!);
+      console.log(`[worker] Using DB reference site: ${referenceSite.id} (${referenceSite.styleGroup})`);
+    } else {
+      referenceSite = pickReferenceSite(vertical, projectId, styleGroup);
+      console.log(`[worker] Using hardcoded reference site: ${referenceSite.id} (${referenceSite.mood})`);
+    }
 
     // 4. Generate site config via Claude
     console.log(`[worker] Generating site config with Claude...`);
