@@ -25,6 +25,7 @@ type ReferenceSite = {
   font_personality: string;
   layout_variant: number;
   style_notes: string;
+  screenshot_url: string | null;
   created_at: string;
 };
 
@@ -104,7 +105,9 @@ export function ReferencesManager({ initialSites, initialVerticals }: Props) {
         return;
       }
       const added = json.saved as ReferenceSite[];
+      const { urlsFound = 0, screenshotsObtained = 0 } = json.meta ?? {};
       setLastAdded(added);
+      console.log(`[references] ${urlsFound} URLs · ${screenshotsObtained} screenshots`);
       setSites((prev) => [...added, ...prev]);
       setText("");
     } catch {
@@ -285,20 +288,31 @@ export function ReferencesManager({ initialSites, initialVerticals }: Props) {
               {group.map((s) => (
                 <div
                   key={s.id}
-                  className="bg-brand-dark-2 border border-white/5 rounded-lg px-4 py-3 flex items-start gap-3 group"
+                  className="bg-brand-dark-2 border border-white/5 rounded-lg overflow-hidden flex items-stretch group"
                 >
-                  {/* Color swatches */}
-                  <div className="flex gap-1 mt-0.5 shrink-0">
-                    {[s.background_color, s.primary_color, s.accent_color].map((c) => (
-                      <span
-                        key={c}
-                        className="w-3.5 h-3.5 rounded-full border border-white/10"
-                        style={{ backgroundColor: c }}
+                  {/* Screenshot thumbnail */}
+                  <div className="w-28 shrink-0 bg-brand-dark-3 relative overflow-hidden">
+                    {s.screenshot_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={s.screenshot_url}
+                        alt={`Screenshot: ${s.url}`}
+                        className="w-full h-full object-cover object-top"
+                        loading="lazy"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                       />
-                    ))}
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center min-h-[72px]">
+                        <div className="flex gap-1">
+                          {[s.background_color, s.primary_color, s.accent_color].map((c) => (
+                            <span key={c} className="w-4 h-4 rounded-full border border-white/10" style={{ backgroundColor: c }} />
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 px-4 py-3">
                     <div className="flex items-center gap-2 flex-wrap">
                       <a
                         href={s.url}
@@ -318,13 +332,15 @@ export function ReferencesManager({ initialSites, initialVerticals }: Props) {
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => handleDelete(s.id)}
-                    disabled={deleting === s.id}
-                    className="text-gray-700 hover:text-red-400 transition text-xs shrink-0 opacity-0 group-hover:opacity-100"
-                  >
-                    {deleting === s.id ? "…" : "Excluir"}
-                  </button>
+                  <div className="px-3 py-3 flex items-center">
+                    <button
+                      onClick={() => handleDelete(s.id)}
+                      disabled={deleting === s.id}
+                      className="text-gray-700 hover:text-red-400 transition text-xs shrink-0 opacity-0 group-hover:opacity-100"
+                    >
+                      {deleting === s.id ? "…" : "Excluir"}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

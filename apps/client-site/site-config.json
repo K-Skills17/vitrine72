@@ -1,67 +1,142 @@
 {
-  "projectId": "dev-placeholder",
-  "slug": "exemplo",
-  "vertical": "generico",
-  "businessName": "Empresa Exemplo",
-  "address": "Rua Exemplo, 123 - Vila Madalena, São Paulo - SP",
-  "phone": "11999999999",
-  "hours": "Seg–Sex 9h–18h\nSáb 9h–13h",
-  "hoursArray": ["Seg–Sex 9h–18h", "Sáb 9h–13h"],
-  "neighborhoods": ["Vila Madalena", "Pinheiros", "Jardins"],
+  "projectId": "demo-estetica-dark-luxury",
+  "slug": "clinica-ambar",
+  "vertical": "estetica",
+  "businessName": "Clínica Âmbar",
+  "address": "Rua Oscar Freire, 487 — Jardins, São Paulo - SP",
+  "phone": "11991234567",
+  "hours": "Seg–Sex 9h–19h\nSáb 9h–15h",
+  "hoursArray": ["Segunda a Sexta, 9h–19h", "Sábados, 9h–15h"],
+  "neighborhoods": ["Jardins", "Itaim Bibi", "Moema", "Vila Olímpia"],
   "services": [
-    { "name": "Serviço A", "description": "Descrição do serviço A.", "price": "A partir de R$ 150" },
-    { "name": "Serviço B", "description": "Descrição do serviço B.", "price": null },
-    { "name": "Serviço C", "description": "Descrição do serviço C.", "price": "R$ 80" }
+    {
+      "name": "Toxina Botulínica",
+      "description": "Suavização de expressões com precisão cirúrgica. Resultados naturais que preservam a sua identidade.",
+      "price": "A partir de R$ 1.200"
+    },
+    {
+      "name": "Preenchimento Facial",
+      "description": "Restauração de volumes e contornos com ácido hialurônico de alta densidade. Sem exageros.",
+      "price": "A partir de R$ 1.800"
+    },
+    {
+      "name": "Skinbooster",
+      "description": "Hidratação profunda e renovação celular. Sua pele visivelmente mais luminosa em 48 horas.",
+      "price": "A partir de R$ 1.400"
+    },
+    {
+      "name": "Fio de PDO",
+      "description": "Lifting não cirúrgico de efeito imediato. Sustentação e reposicionamento tissular sem bisturi.",
+      "price": "Consulta necessária"
+    },
+    {
+      "name": "Harmonização Facial",
+      "description": "Protocolo personalizado de múltiplos tratamentos combinados. Uma análise completa do seu rosto, não um procedimento isolado.",
+      "price": "A partir de R$ 3.500"
+    },
+    {
+      "name": "Bioestimulador de Colágeno",
+      "description": "Estímulo profundo à produção natural de colágeno. Resultado gradual, duradouro, definitivamente seu.",
+      "price": "A partir de R$ 2.200"
+    }
   ],
   "faqs": [
-    { "q": "Como faço para agendar?", "a": "Entre em contato pelo WhatsApp ou preencha o formulário." },
-    { "q": "Qual a forma de pagamento?", "a": "Aceitamos PIX, cartão e dinheiro." },
-    { "q": "Atende na minha região?", "a": "Atendemos Vila Madalena, Pinheiros, Jardins e região." }
+    {
+      "q": "Como é feita a primeira consulta?",
+      "a": "A consulta inicial é uma conversa. Avaliamos sua pele, escutamos o que você deseja e, juntos, desenhamos um protocolo que respeite sua identidade. Sem julgamentos, sem pressão."
+    },
+    {
+      "q": "Os procedimentos são dolorosos?",
+      "a": "Aplicamos anestésico tópico antes de qualquer procedimento. A maior parte dos tratamentos é descrita pelos pacientes como levemente desconfortável — longe de dolorosa."
+    },
+    {
+      "q": "Quanto tempo duram os resultados?",
+      "a": "Varia conforme o tratamento e o metabolismo de cada pessoa. Toxina botulínica dura de 4 a 6 meses; preenchedores, de 12 a 18 meses; bioestimuladores, até 2 anos."
+    },
+    {
+      "q": "Preciso de tempo de recuperação?",
+      "a": "A maioria dos procedimentos tem recuperação mínima — você sai caminhando e retoma sua rotina no mesmo dia. Eventuais hematomas desaparecem em 3 a 5 dias."
+    },
+    {
+      "q": "Quem realiza os procedimentos?",
+      "a": "Todos os procedimentos são realizados exclusivamente por médicos especializados em medicina estética. Não trabalhamos com técnicos ou esteticistas para procedimentos injetáveis."
+    }
   ],
   "gbpLink": null,
-  "instagramLink": null,
+  "instagramLink": "@clinica.ambar",
   "primaryAction": "whatsapp",
-  "primaryActionUrl": "https://wa.me/5511999999999?text=Ol%C3%A1%2C+vi+seu+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es.",
+  "primaryActionUrl": "https://wa.me/5511991234567?text=Ol%C3%A1%2C+gostaria+de+agendar+uma+avalia%C3%A7%C3%A3o+na+Cl%C3%ADnica+%C3%82mbar.",
   "palette": {
-    "id": "clean-blue",
-    "primary": "#1565c0",
-    "secondary": "#f5f8ff",
-    "accent": "#ff6f00",
-    "background": "#ffffff",
-    "text": "#1a1a1a"
+    "id": "dark-elegance",
+    "primary": "#c5a368",
+    "secondary": "#1e1e1e",
+    "accent": "#c5a368",
+    "background": "#111111",
+    "text": "#f5f0e8"
   },
   "fontPair": {
-    "id": "inter-inter",
-    "display": "Inter",
-    "body": "Inter",
-    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+    "id": "cormorant-raleway",
+    "display": "Cormorant Garamond",
+    "body": "Raleway",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
   },
-  "layoutVariant": 1,
-  "heroStyle": "fullscreen-photo",
-  "cardStyle": "card-shadow",
-  "aboutStyle": "about-split",
+  "layoutVariant": 3,
+  "heroStyle": "minimal-dark",
+  "cardStyle": "card-dark",
+  "aboutStyle": "about-centered",
   "photos": [],
   "logoPath": null,
-  "gbpData": null,
+  "gbpData": {
+    "placeId": "demo",
+    "rating": 4.9,
+    "reviewCount": 213,
+    "reviews": [
+      {
+        "author": "Fernanda Costa",
+        "rating": 5,
+        "text": "Resultado absolutamente natural. Fiz preenchimento e meus amigos perguntam se fiz algo, mas não conseguem identificar o quê. Exatamente o que eu queria.",
+        "date": "2026-10-15"
+      },
+      {
+        "author": "Beatriz Mendonça",
+        "rating": 5,
+        "text": "O ambiente é sofisticado, o atendimento é impecável e o resultado do skinbooster superou minhas expectativas. Minha pele está radiante.",
+        "date": "2026-09-28"
+      },
+      {
+        "author": "Luciana Tavares",
+        "rating": 5,
+        "text": "Já fui em várias clínicas antes. A diferença aqui está no cuidado com cada detalhe — do atendimento ao resultado. Não troco mais.",
+        "date": "2026-10-02"
+      }
+    ],
+    "competitors": [],
+    "customerPhrases": ["natural", "resultado", "cuidado", "sofisticado", "confiança"]
+  },
   "copyBlocks": {
-    "heroHeadline": "Serviços de qualidade em São Paulo",
-    "heroSubheadline": "Atendemos Vila Madalena, Pinheiros e Jardins com agilidade e transparência.",
-    "aboutText": "Somos uma empresa comprometida com a satisfação dos nossos clientes.",
+    "heroHeadline": "Beleza que parece sua.",
+    "heroSubheadline": "Medicina estética de alto padrão nos Jardins. Procedimentos injetáveis realizados exclusivamente por médicos especialistas.",
+    "aboutText": "A Clínica Âmbar nasceu da convicção de que a estética médica deve revelar — nunca transformar.\n\nTrabalhamos com protocolos personalizados, materiais premium e uma única premissa: que ao sair daqui, você se reconheça no espelho. Mais descansada, mais luminosa, mais você.\n\nEstamos nos Jardins desde 2019, atendendo pacientes que buscam resultados discretos e duradouros — sem o exagero que se tornou comum.",
     "serviceDescriptions": {
-      "Serviço A": "O Serviço A oferece uma solução completa para sua necessidade.",
-      "Serviço B": "O Serviço B é ideal para quem busca praticidade e resultado.",
-      "Serviço C": "O Serviço C resolve seu problema com eficiência e segurança."
+      "Toxina Botulínica": "Suavização de expressões com precisão cirúrgica. Resultados naturais que preservam a sua identidade.",
+      "Preenchimento Facial": "Restauração de volumes e contornos com ácido hialurônico de alta densidade. Sem exageros.",
+      "Skinbooster": "Hidratação profunda e renovação celular. Sua pele visivelmente mais luminosa em 48 horas.",
+      "Fio de PDO": "Lifting não cirúrgico de efeito imediato. Sustentação e reposicionamento tissular sem bisturi.",
+      "Harmonização Facial": "Protocolo personalizado de múltiplos tratamentos combinados. Uma análise completa do seu rosto, não um procedimento isolado.",
+      "Bioestimulador de Colágeno": "Estímulo profundo à produção natural de colágeno. Resultado gradual, duradouro, definitivamente seu."
     },
     "faqAnswers": {
-      "Como faço para agendar?": "Entre em contato pelo WhatsApp ou preencha o formulário de contato abaixo.",
-      "Qual a forma de pagamento?": "Aceitamos PIX, cartão de crédito/débito e dinheiro.",
-      "Atende na minha região?": "Atendemos Vila Madalena, Pinheiros, Jardins e toda a região central de São Paulo."
+      "Como é feita a primeira consulta?": "A consulta inicial é uma conversa. Avaliamos sua pele, escutamos o que você deseja e, juntos, desenhamos um protocolo que respeite sua identidade. Sem julgamentos, sem pressão.",
+      "Os procedimentos são dolorosos?": "Aplicamos anestésico tópico antes de qualquer procedimento. A maior parte dos tratamentos é descrita pelos pacientes como levemente desconfortável — longe de dolorosa.",
+      "Quanto tempo duram os resultados?": "Varia conforme o tratamento e o metabolismo de cada pessoa. Toxina botulínica dura de 4 a 6 meses; preenchedores, de 12 a 18 meses; bioestimuladores, até 2 anos.",
+      "Preciso de tempo de recuperação?": "A maioria dos procedimentos tem recuperação mínima — você sai caminhando e retoma sua rotina no mesmo dia. Eventuais hematomas desaparecem em 3 a 5 dias.",
+      "Quem realiza os procedimentos?": "Todos os procedimentos são realizados exclusivamente por médicos especializados em medicina estética. Não trabalhamos com técnicos ou esteticistas para procedimentos injetáveis."
     },
     "sourceFacts": {}
   },
   "selfEditSheetUrl": null,
-  "updatedAt": "2026-01-01",
-  "animationProfile": "standard",
+  "updatedAt": "2026-11-04",
+  "animationProfile": "minimal",
   "signatureElementEnabled": false,
   "jsonLd": {}
 }
