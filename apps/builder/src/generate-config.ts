@@ -31,6 +31,23 @@ const FONT_PAIRS: Record<string, SiteConfig["fontPair"]> = {
   "josefin-lato":        { id: "josefin-lato",        display: "Josefin Sans",     body: "Lato",      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" },
 };
 
+// ─── Visual profiles per style group ─────────────────────────────────────────
+// These drive actual structural/component differences — not just copy tone.
+
+const STYLE_GROUP_PROFILES: Record<string, {
+  heroStyle: string;
+  cardStyle: string;
+  aboutStyle: string;
+}> = {
+  "dark-luxury":       { heroStyle: "minimal-dark",          cardStyle: "card-dark",     aboutStyle: "about-centered" },
+  "clean-clinical":    { heroStyle: "split-text-left",       cardStyle: "card-bordered", aboutStyle: "about-split" },
+  "conversion-driven": { heroStyle: "fullscreen-photo",      cardStyle: "card-shadow",   aboutStyle: "about-credentials" },
+  "editorial-expert":  { heroStyle: "editorial-asymmetric",  cardStyle: "card-minimal",  aboutStyle: "about-credentials" },
+  "vibrant-boutique":  { heroStyle: "fullscreen-photo",      cardStyle: "card-shadow",   aboutStyle: "about-split" },
+};
+
+const DEFAULT_PROFILE = { heroStyle: "fullscreen-photo", cardStyle: "card-shadow", aboutStyle: "about-split" };
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type SiteConfig = {
@@ -64,6 +81,9 @@ export type SiteConfig = {
     googleFontsUrl: string;
   };
   layoutVariant: number;
+  heroStyle: string;
+  cardStyle: string;
+  aboutStyle: string;
   photos: string[];
   logoPath: string | null;
   gbpData: {
@@ -158,6 +178,9 @@ Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.`,
   const palette = PALETTES[generated.paletteId] ?? PALETTES["rose-gold"]!;
   const fontPair = FONT_PAIRS[generated.fontPairId] ?? FONT_PAIRS["playfair-lato"]!;
 
+  // Visual profile from style group — drives component structure, not just colors
+  const visualProfile = STYLE_GROUP_PROFILES[referenceSite.styleGroup] ?? DEFAULT_PROFILE;
+
   // Build primaryAction URL
   const primaryAction = intake.primary_action ?? "whatsapp";
   const cleanPhone = phone.replace(/\D/g, "");
@@ -200,6 +223,9 @@ Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.`,
     palette,
     fontPair,
     layoutVariant: referenceSite.layoutVariant,
+    heroStyle: visualProfile.heroStyle,
+    cardStyle: visualProfile.cardStyle,
+    aboutStyle: visualProfile.aboutStyle,
     photos,
     logoPath,
     gbpData,

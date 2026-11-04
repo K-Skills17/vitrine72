@@ -37,6 +37,9 @@
     "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
   },
   "layoutVariant": 1,
+  "heroStyle": "fullscreen-photo",
+  "cardStyle": "card-shadow",
+  "aboutStyle": "about-split",
   "photos": [],
   "logoPath": null,
   "gbpData": null,

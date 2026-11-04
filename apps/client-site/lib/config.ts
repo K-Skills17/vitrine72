@@ -54,6 +54,23 @@ export interface CopyBlocks {
   sourceFacts: Record<string, unknown>;
 }
 
+export type HeroStyle =
+  | "fullscreen-photo"      // full-bleed photo bg, centered text — default
+  | "split-text-left"       // text left column, photo right — clinical/editorial
+  | "minimal-dark"          // dark palette bg, oversized headline, no photo
+  | "editorial-asymmetric"; // huge display text that overflows, doctor-led
+
+export type CardStyle =
+  | "card-shadow"    // white bg, rounded, subtle shadow — default
+  | "card-bordered"  // border only, transparent bg, text-heavy
+  | "card-dark"      // dark primary bg, white text — luxury
+  | "card-minimal";  // no box decoration, just content + arrow
+
+export type AboutStyle =
+  | "about-split"       // photo left, text right — default
+  | "about-centered"    // centered narrative, no forced columns — luxury/editorial
+  | "about-credentials";// text + credential/stat pills prominently shown
+
 export interface SiteConfig {
   projectId: string;
   slug: string;
@@ -73,6 +90,9 @@ export interface SiteConfig {
   palette: ColorPalette;
   fontPair: FontPair;
   layoutVariant: number;
+  heroStyle: HeroStyle;
+  cardStyle: CardStyle;
+  aboutStyle: AboutStyle;
   photos: string[];
   logoPath: string | null;
   gbpData: GBPData | null;
