@@ -7,8 +7,9 @@ import { IntakeStep3 } from "./steps/IntakeStep3";
 import { IntakeStep4 } from "./steps/IntakeStep4";
 import { IntakeStep5 } from "./steps/IntakeStep5";
 import { IntakeStepContract } from "./steps/IntakeStepContract";
+import { IntakeStepStyle } from "./steps/IntakeStepStyle";
 
-export const TOTAL_STEPS = 6;
+export const TOTAL_STEPS = 7;
 
 export const VERTICALS = [
   { value: "estetica", label: "Estética e beleza" },
@@ -136,7 +137,8 @@ export function IntakeForm({ projectId, token, existingData, submissionId }: Pro
       )}
       {step === 4 && <IntakeStep4 data={data} onNext={nextStep} onBack={prevStep} />}
       {step === 5 && <IntakeStep5 data={data} onNext={nextStep} onBack={prevStep} />}
-      {step === 6 && (
+      {step === 6 && <IntakeStepStyle data={data} onNext={nextStep} onBack={prevStep} />}
+      {step === 7 && (
         <IntakeStepContract
           onSubmit={submit}
           onBack={prevStep}

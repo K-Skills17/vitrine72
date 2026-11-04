@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient, createAnonClient } from "@/lib/supabase/server";
 import { canTransition, transition } from "@vitrine72/core";
 import type { ProjectStatus } from "@vitrine72/core";
+import { sendEmail } from "@/lib/email/send";
+import { siteDeliveryEmail } from "@/lib/email/templates";
 
 export const runtime = "nodejs";
 
@@ -33,7 +35,7 @@ export async function POST(
 
   const { data: project } = await supabase
     .from("projects")
-    .select("id, status, revision_count, golive_earliest_at")
+    .select("id, status, revision_count, golive_earliest_at, preview_url, edit_token")
     .eq("id", id)
     .maybeSingle();
 
@@ -77,6 +79,37 @@ export async function POST(
     to_status: newStatus,
     metadata: null,
   });
+
+  // When entering preview_sent, email client with preview + edit link
+  if (newStatus === "preview_sent" && project.preview_url) {
+    const { data: intake } = await supabase
+      .from("intake_submissions")
+      .select("data")
+      .eq("project_id", id)
+      .maybeSingle();
+
+    const clientEmail = intake?.data?.email as string | undefined;
+    const clientName = (intake?.data?.name as string | undefined) ?? "Cliente";
+    const businessName = (intake?.data?.business_name as string | undefined) ?? clientName;
+
+    if (clientEmail) {
+      const editUrl = project.edit_token
+        ? `${process.env.NEXT_PUBLIC_SITE_URL}/edits/${project.edit_token}`
+        : null;
+
+      await sendEmail({
+        to: clientEmail,
+        ...siteDeliveryEmail({
+          clientName,
+          businessName,
+          previewUrl: project.preview_url,
+          editUrl,
+        }),
+      }).catch(() => {
+        // Don't fail the transition if email fails
+      });
+    }
+  }
 
   return NextResponse.json({ ok: true, status: newStatus });
 }

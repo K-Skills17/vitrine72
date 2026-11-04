@@ -42,6 +42,50 @@ export function intakeLinkEmail(params: {
   };
 }
 
+export function siteDeliveryEmail(params: {
+  clientName: string;
+  businessName: string;
+  previewUrl: string;
+  editUrl: string | null;
+}) {
+  const { clientName, businessName, previewUrl, editUrl } = params;
+
+  return {
+    subject: `Vitrine72 — Seu site está pronto para revisão!`,
+    html: `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><title>Site pronto — Vitrine72</title></head>
+<body style="font-family: system-ui, sans-serif; background: #111; color: #fff; padding: 32px;">
+  <div style="max-width: 520px; margin: 0 auto;">
+    <h1 style="color: #c5a368; font-size: 24px;">Seu site está pronto! 🎉</h1>
+    <p>Olá, <strong>${clientName}</strong>!</p>
+    <p>O site de <strong>${businessName}</strong> foi desenvolvido e está aguardando sua aprovação. Clique abaixo para visualizar:</p>
+    <p style="margin: 32px 0;">
+      <a href="${previewUrl}" style="background: #c5a368; color: #111; font-weight: bold; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">
+        Ver prévia do site
+      </a>
+    </p>
+    ${editUrl ? `
+    <p style="color: #ccc; font-size: 14px;">Quer solicitar alguma alteração? Use o link exclusivo abaixo:</p>
+    <p style="margin: 16px 0;">
+      <a href="${editUrl}" style="background: transparent; color: #c5a368; font-weight: bold; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block; border: 1px solid #c5a368;">
+        Solicitar revisão
+      </a>
+    </p>
+    ` : ""}
+    <p style="color: #666; font-size: 13px;">
+      Se tiver dúvidas, responda este e-mail ou entre em contato pelo WhatsApp.
+    </p>
+    <hr style="border-color: #333; margin: 24px 0;">
+    <p style="color: #555; font-size: 12px;">Vitrine72</p>
+  </div>
+</body>
+</html>`,
+    text: `Olá, ${clientName}! O site de ${businessName} está pronto para revisão: ${previewUrl}${editUrl ? `\n\nPara solicitar alterações: ${editUrl}` : ""}`,
+  };
+}
+
 export function intakeReminderEmail(params: {
   clientName: string;
   intakeUrl: string;
