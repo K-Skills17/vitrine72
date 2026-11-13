@@ -1,6 +1,16 @@
 # Changelog — ÁUREA
 
-Remaining phase: 9 SEO, end-to-end tests, QA report.
+All phases complete.
+
+## 2026-11-13 — Phase 9: SEO, end-to-end tests, QA
+
+### Added
+- `sitemap.ts` (all 12 routes), `robots.ts` (disallows everything unless `NEXT_PUBLIC_ALLOW_INDEXING=true`), `opengraph-image.tsx` (typographic share image in the palette).
+- Playwright suite (`playwright.config.ts`, `tests/`): routes, 404, robots, sitemap, qualification gate, inquiry form, overflow on every route, alt text, skip link, viewport-specific CTAs. Runs on desktop and Pixel 7.
+- `docs/QA_REPORT.md`; README status, environment variables and deployment.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (33/33), `build`, `test:e2e` (44/44): pass.
 
 ## 2026-11-13 — Phase 8: motion
 

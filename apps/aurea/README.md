@@ -6,7 +6,7 @@ Third Vitrini72 demo site: a fictional premium aesthetic clinic in Brazil. Next.
 
 ## Status
 
-Phases 0–3 complete: specification, design system, app foundation (layout, header, mobile navigation, footer, buttons, WhatsApp and analytics utilities). The homepage is a holding page until Phase 4. See `docs/CHANGELOG.md`.
+All nine phases complete: homepage, treatment index and six treatment pages, clinic, professionals, contact and privacy pages, qualification gate before WhatsApp, photo-enabled chatbot, inquiry form, sticky and floating CTAs, scroll reveals, sitemap/robots/OG, unit and end-to-end tests. See `docs/QA_REPORT.md` for results and open items, `docs/CHANGELOG.md` for detail.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ pnpm --filter aurea start          # serves the production build on :3003
 pnpm --filter aurea typecheck
 pnpm --filter aurea lint
 pnpm --filter aurea test           # Vitest unit tests
-pnpm --filter aurea test:e2e       # Playwright (from Phase 4 onward)
+pnpm --filter aurea test:e2e       # Playwright against the production build (run build first)
 ```
 
 ## Configuration
@@ -38,6 +38,8 @@ Copy `.env.example` to `.env.local`.
 | `NEXT_PUBLIC_PHONE_NUMBER` | `tel:` links | empty: phone links hidden |
 | `NEXT_PUBLIC_GA4_ID` | GA4 measurement ID | empty: analytics is a no-op |
 | `NEXT_PUBLIC_ALLOW_INDEXING` | Allow search engines | `false` (demo is `noindex`) |
+| `NEXT_PUBLIC_CHATBOT_TENANT_ID` | lk-chatbot tenant for this site (needs its own tenant) | empty: chat forwards text to WhatsApp, no photos |
+| `NEXT_PUBLIC_INQUIRY_ENDPOINT` | POST endpoint for the inquiry form | empty: demo, nothing is sent |
 
 Every other clinic detail (name, address, hours, legal identifiers) lives in `src/config/site.ts`. Placeholders are typed as `Placeholder` so they are easy to find before a real launch.
 
@@ -62,3 +64,7 @@ Create a separate Vercel project with Root Directory `apps/aurea`, install comma
 
 - **Styles missing after a rebuild while `next start` is running:** the old `next-server` process is still serving HTML that points at deleted CSS chunks. Stop it (`pkill -f next-server`) and start again.
 - **Vitest peer warning about Vite:** `vite` is pinned in this package because a sibling workspace hoists Vite 5.
+
+## Deployment
+
+Its own Vercel project: Root Directory `apps/aurea`, framework Next.js, environment variables as in the table above.
