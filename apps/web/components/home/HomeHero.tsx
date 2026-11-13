@@ -31,7 +31,7 @@ export function HomeHero() {
         </div>
 
         <div className="relative pb-10 lg:pb-16">
-          <BrowserFrame src={work.featured.desktop} alt="Página inicial do site de demonstração ÁUREA, clínica de estética" url="aurea · demonstração" priority />
+          <BrowserFrame src={work.featured.desktop} alt="Página inicial do site de demonstração ÁUREA, clínica de estética" url={work.featured.url.replace("https://", "")} priority />
           <PhoneFrame
             src={work.items[0]!.mobile}
             alt="Versão para celular do site de demonstração Clínica Aurora"
