@@ -1,3 +1,4 @@
+import { InquiryForm } from "@/components/conversion/InquiryForm";
 import { WhatsAppLink } from "@/components/conversion/WhatsAppLink";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -34,6 +35,15 @@ export default function ContactPage() {
             Conversar pelo WhatsApp
           </WhatsAppLink>
         </div>
+        <section aria-labelledby="form-titulo" className="flex flex-col gap-6 pt-6">
+          <div className="flex flex-col gap-3">
+            <h2 id="form-titulo" className="font-display text-h2 font-normal">
+              Prefere deixar uma mensagem?
+            </h2>
+            <p className="max-w-prose text-body text-umber">A equipe retorna pelo contato informado para combinar a avaliação.</p>
+          </div>
+          <InquiryForm />
+        </section>
       </div>
 
       <div className="flex flex-col gap-10 lg:pt-12">

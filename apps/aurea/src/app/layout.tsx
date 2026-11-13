@@ -4,6 +4,8 @@ import Script from "next/script";
 import { AnalyticsListener } from "@/components/conversion/AnalyticsListener";
 import { QualifierGate } from "@/components/conversion/QualifierGate";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { FloatingWhatsApp } from "@/components/conversion/FloatingWhatsApp";
+import { MobileStickyCta } from "@/components/conversion/MobileStickyCta";
 import { DemoNotice } from "@/components/layout/DemoNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -45,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="pt-BR" className={`${cormorant.variable} ${manrope.variable}`}>
-      <body>
+      <body className="pb-sticky-cta lg:pb-0">
         <a
           href="#conteudo"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-espresso focus:px-4 focus:py-3 focus:text-ivory"
@@ -58,6 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <AnalyticsListener />
         <QualifierGate />
+        <FloatingWhatsApp />
+        <MobileStickyCta />
         <ChatWidget />
 
         {ga4Id && (

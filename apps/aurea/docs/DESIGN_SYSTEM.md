@@ -65,7 +65,7 @@ Measures: `max-w-prose` (38rem, about 68 characters) for body text and `max-w-le
 - Container: `max-w-page` (1440px) with `px-gutter` (20 → 64px fluid).
 - Section rhythm: `py-section` (80 → 160px) and `py-section-sm` (56 → 96px).
 - Grid: 12 columns from `lg`, with `grid-golden` / `grid-golden-reverse` for the main editorial splits.
-- Header height: `h-header` (72px). The page reserves `spacing-sticky-cta` (68px) at the bottom on mobile once the sticky CTA exists (Phase 7).
+- Header height: `h-header` (72px). The page reserves `spacing-sticky-cta` (68px) at the bottom on mobile for the sticky CTA bar.
 - Breakpoints: Tailwind defaults (`sm` 640, `md` 768, `lg` 1024, `xl` 1280, `2xl` 1536). Desktop navigation appears at `lg`. The header CTA appears at `md`.
 
 ## Edges, borders and shadows

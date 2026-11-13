@@ -1,6 +1,19 @@
 # Changelog — ÁUREA
 
-Remaining phases: 7 conversion (inquiry form, floating WhatsApp, mobile sticky CTA) · 8 motion · 9 SEO, end-to-end tests, QA report.
+Remaining phases: 8 motion · 9 SEO, end-to-end tests, QA report.
+
+## 2026-11-13 — Phase 7: conversion
+
+### Added
+- `InquiryForm` (conversion/, **client**) on `/contato`: name, mobile (validated as a Brazilian number), optional e-mail, treatment, contact period, optional message (no health data, 600 characters), explicit consent linked to the privacy notice. Errors are announced per field and focus moves to the first invalid one. Honest states: with no `NEXT_PUBLIC_INQUIRY_ENDPOINT` it says nothing was sent and nothing was booked; with an endpoint it POSTs JSON and still states no time has been reserved. Events `contact_form_start` and `contact_form_submit` (no field values).
+- `lib/inquiry.ts` (validation, submission) with 4 unit tests; `ui/Field.tsx`.
+- `MobileStickyCta` (below lg): bottom bar, treatment-aware on treatment pages ("Avaliação · Skinbooster"); the body reserves its height so it never covers content.
+- `FloatingWhatsApp` (lg+): appears after 480px of scroll, so it doesn't duplicate the hero CTA. Treatment-aware.
+- Both go through the qualification gate. The chat bubble now sits above the sticky bar on mobile and above the floating button on desktop.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (33/33), `build`: pass.
+- Playwright: empty submit shows 3 errors and focuses Nome; a valid submit shows the demo state. Sticky bar visible at 390px with the treatment label; last footer line clears the bar; chat bubble sits above it. At 1440px the floating button is hidden at the top, shown after scrolling, opens the gate; sticky bar hidden.
 
 ## 2026-11-13 — Phase 6: clinic, professionals, contact, privacy
 

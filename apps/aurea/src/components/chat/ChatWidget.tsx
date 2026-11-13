@@ -187,7 +187,7 @@ export function ChatWidget() {
   const canSend = (input.trim().length > 0 || image !== null) && !loading;
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-[calc(var(--spacing-sticky-cta)+0.75rem)] right-5 z-40 flex flex-col items-end gap-3 lg:bottom-24">
       {open && (
         <section
           role="dialog"
