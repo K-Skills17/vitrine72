@@ -22,3 +22,36 @@ export interface TreatmentSummary {
   summary: string;
   reviewStatus: ReviewStatus;
 }
+
+export interface TreatmentStep {
+  title: string;
+  body: string;
+}
+
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+/**
+ * Full treatment page content. Kept in content/treatment-details.ts, apart
+ * from the summaries, so client components that import summaries (the
+ * qualification gate) do not ship page copy to the browser.
+ */
+export interface TreatmentDetail {
+  slug: string;
+  /** Opening paragraph under the page title. */
+  intro: string;
+  /** "O que é": short paragraphs. */
+  whatItIs: string[];
+  /** "Pode ser indicado para": concerns, phrased without promises. */
+  concerns: string[];
+  /** "Para quem": always ends with the evaluation caveat. */
+  candidacy: string[];
+  process: TreatmentStep[];
+  /** General guidance only; specifics come from the professional. */
+  aftercare: string[];
+  faq: FaqItem[];
+  responsibleProfessionalId: string;
+  related: string[];
+}

@@ -33,4 +33,13 @@ export const images = {
     src: null,
     alt: "Detalhe de cerâmica e toalha de linho com sombra de planta",
   },
+  proHelena: { slot: "12", subject: "Retrato profissional: médica, fundo neutro", src: null, alt: "Retrato ilustrativo da Dra. Helena Moraes, profissional fictícia" },
+  proRafael: { slot: "13", subject: "Retrato profissional: médico, fundo neutro", src: null, alt: "Retrato ilustrativo do Dr. Rafael Teixeira, profissional fictício" },
+  proLivia: { slot: "14", subject: "Retrato profissional: biomédica, fundo neutro", src: null, alt: "Retrato ilustrativo de Lívia Campos, profissional fictícia" },
+  "toxina-botulinica": { slot: "15", subject: "Testa e olhar, expressão relaxada, sem procedimento", src: null, alt: "Detalhe do olhar e da testa de uma mulher em expressão relaxada" },
+  "bioestimuladores-de-colageno": { slot: "16", subject: "Contorno do rosto em luz lateral", src: null, alt: "Perfil do rosto de uma mulher em luz lateral suave" },
+  "preenchimento-facial": { slot: "17", subject: "Perfil: lábios e queixo, natural", src: null, alt: "Perfil de lábios e queixo em luz natural" },
+  skinbooster: { slot: "18", subject: "Textura de pele hidratada, macro", src: null, alt: "Detalhe da textura de uma pele hidratada" },
+  "laser-dermatologico": { slot: "19", subject: "Pele em luz natural, uniformidade", src: null, alt: "Rosto em luz natural com pele uniforme" },
+  "qualidade-da-pele": { slot: "20", subject: "Mão tocando a bochecha, pele real", src: null, alt: "Mão tocando levemente a bochecha, com textura de pele real" },
 } satisfies Record<string, ImageRef>;

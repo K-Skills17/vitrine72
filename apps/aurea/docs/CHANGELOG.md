@@ -1,5 +1,19 @@
 # Changelog — ÁUREA
 
+## 2026-11-13 — Phase 5: treatment index and treatment pages
+
+### Added
+- `/tratamentos`: page header with jump links to the four care areas, then one section per category with its treatments as numbered rows. *Estética corporal* has no treatment page yet, so it shows an honest "definida caso a caso" note with a WhatsApp CTA (option (a) in SITE_ARCHITECTURE).
+- `/tratamentos/[slug]` for all six treatments, statically generated (`dynamicParams = false`, unknown slugs 404). Sections: hero with contextual CTA, O que é, Pode ser indicado para, Para quem (ends with the evaluation caveat), Como funciona (with a second CTA), Cuidados, Dúvidas frequentes, the demo-review note, the responsible professional, related treatments, closing CTA. Treatment CTAs make the qualification gate preselect the treatment (3 questions instead of 4).
+- `content/treatment-details.ts` (full page copy, kept apart from the summaries so the browser-side gate doesn't download it), `content/professionals.ts` (three **fictional** professionals with placeholder registrations), `types/professional.ts`, `TreatmentDetail` type.
+- Components: `ui/Accordion` (native `<details>`), `treatments/TreatmentHero`, `TreatmentSection`/`RuledList`, `TreatmentRows` (now also used by the homepage index), `ResponsibleProfessional`, `RelatedTreatments`, `DemoReviewNote`.
+- Image slots 12–20 (professional portraits, treatment heroes) registered with placeholders.
+- `content/content.test.ts`: every summary has a page, related slugs and professionals resolve, every "para quem" ends with the caveat, no banned phrases (checks 25 phrases from `config/banned-phrases.json`).
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (29/29), `build`: pass.
+- Playwright at 1440 and 390px on `/tratamentos` and a treatment page: HTTP 200, 0px overflow, no console errors. Gate from a treatment hero: 3 steps, message includes the treatment. Unknown slug: 404.
+
 ## 2026-11-13 — Qualification gate and chatbot (carried over from apps/demo)
 
 ### Added

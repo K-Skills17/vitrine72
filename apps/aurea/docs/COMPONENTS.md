@@ -40,6 +40,19 @@ Server Components unless marked **client**.
 
 Homepage sections, each reading its copy from `content/home.ts`: `HomeHero`, `Approach`, `TreatmentIndex`, `Journey`, `ClinicTeaser`, `FinalCta` (reusable closing block).
 
+## treatments/
+
+| Component | Responsibility |
+|---|---|
+| `TreatmentRows.tsx` | Numbered rows linking to treatment pages (homepage index and `/tratamentos`). |
+| `TreatmentHero.tsx` | Breadcrumb, categories, title, intro, treatment CTA, image. |
+| `TreatmentSection.tsx` → `TreatmentSection`, `RuledList` | Ruled two-column content block on the reverse golden split. |
+| `ResponsibleProfessional.tsx` | Responsible professional with registration and fictional label. |
+| `RelatedTreatments.tsx` | Two related treatments. |
+| `DemoReviewNote.tsx` | Visible note while `reviewStatus` is not `approved`. |
+
+`ui/Accordion.tsx`: FAQ on native `<details>`.
+
 ## Planned (not yet built)
 
-Accordion (Phase 5), form fields and InquiryForm (Phase 7), TreatmentIndex and TreatmentHero (Phases 5–6), ProfessionalProfile (Phase 5), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.
+form fields and InquiryForm (Phase 7), ProfessionalProfile (Phase 5), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.
