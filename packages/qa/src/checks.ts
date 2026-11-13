@@ -503,15 +503,17 @@ export function checkReviewsUsed(config: GeneratedSiteConfig): CheckResult {
 
 export function checkAboutText(config: GeneratedSiteConfig): CheckResult {
   const about = config.copyBlocks?.aboutText ?? "";
+  // Placeholder first: the fallback token is short, and reporting it as "too
+  // short" hides the real cause (no AI copy was generated).
+  if (about.toLowerCase().includes("__placeholder")) {
+    return { name: "about-text", passed: false, message: "About text is a placeholder" };
+  }
   if (!about || about.length < 80) {
     return {
       name: "about-text",
       passed: false,
       message: `About text too short or missing (${about.length} chars, min 80)`,
     };
-  }
-  if (about.toLowerCase().includes("__placeholder")) {
-    return { name: "about-text", passed: false, message: "About text is a placeholder" };
   }
   return { name: "about-text", passed: true, message: `OK (${about.length} chars)` };
 }
