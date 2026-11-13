@@ -53,6 +53,10 @@ Homepage sections, each reading its copy from `content/home.ts`: `HomeHero`, `Ap
 
 `ui/Accordion.tsx`: FAQ on native `<details>`.
 
+## professionals/
+
+`ProfessionalProfile.tsx`: portrait, role, registration, bio, specialties and links to the treatments the professional leads.
+
 ## Planned (not yet built)
 
-form fields and InquiryForm (Phase 7), ProfessionalProfile (Phase 5), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.
+form fields and InquiryForm (Phase 7), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.

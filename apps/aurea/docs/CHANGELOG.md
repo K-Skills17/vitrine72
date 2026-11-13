@@ -1,5 +1,21 @@
 # Changelog — ÁUREA
 
+Remaining phases: 7 conversion (inquiry form, floating WhatsApp, mobile sticky CTA) · 8 motion · 9 SEO, end-to-end tests, QA report.
+
+## 2026-11-13 — Phase 6: clinic, professionals, contact, privacy
+
+### Added
+- `/clinica`: header with detail image, full-width space photo, "Os ambientes" (reception, consultation room, procedure rooms on a golden split), the patient journey, and four care standards (prontuário, consentimento informado, produtos regularizados na Anvisa, materiais de uso único).
+- `/profissionais`: fictional-content notice, one `ProfessionalProfile` per professional (portrait, role, placeholder registration, bio, specialties, links to the treatments they are responsible for, derived from treatment content), technical-responsible line.
+- `/contato`: WhatsApp block (goes through the qualification gate), address, hours, other channels, all from `config/site.ts`, with a demo-data note.
+- `/privacidade`: demo draft covering the qualification gate (answers not stored by the site), the chatbot (external processing, AI image analysis, history kept), audience measurement (no personal data) and LGPD rights, flagged for LGPD review.
+- `content/pages.ts`; image slots 07–09 registered.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (29/29), `build`: pass.
+- Link crawl from `/`: 12 pages, 0 broken links. The prefetch 404s noted in earlier phases are gone.
+- Playwright at 1440 and 390px on the four new pages: 0px overflow, no console errors.
+
 ## 2026-11-13 — Phase 5: treatment index and treatment pages
 
 ### Added
@@ -79,7 +95,7 @@
 ### Verified (actual runs)
 - `typecheck`, `lint`, `test` (13/13), `build`: pass.
 - Playwright script at 1440, 768, 390 and 360px: 0px horizontal overflow, no console errors, mobile menu opens and closes with Escape. Screenshots in `docs/screenshots/phase3-*`.
-- Known and expected: Next prefetches return 404 for routes not yet built (/tratamentos, /clinica, …).
+- Known and expected at the time: Next prefetches returned 404 for routes not yet built (resolved in Phase 6).
 
 
 ## 2026-11-13 — Phase 0 & 1

@@ -27,6 +27,24 @@ export const images = {
     alt: "Sala de espera clara com painel de mármore iluminado e uma paciente sentada em poltrona",
     focal: "50% 64%",
   },
+  clinicReception: {
+    slot: "07",
+    subject: "Recepção: balcão de pedra e carvalho",
+    src: null,
+    alt: "Recepção da clínica com balcão de pedra clara e madeira",
+  },
+  clinicConsultation: {
+    slot: "08",
+    subject: "Sala de consulta: mesa e duas cadeiras, luz do dia",
+    src: null,
+    alt: "Sala de consulta com mesa e duas cadeiras sob luz natural",
+  },
+  clinicTreatmentRoom: {
+    slot: "09",
+    subject: "Sala de procedimentos em tons quentes",
+    src: null,
+    alt: "Sala de procedimentos com poltrona clínica em ambiente de tons quentes",
+  },
   clinicDetail: {
     slot: "10",
     subject: "Detalhe: cerâmica, linho e sombra de planta",
