@@ -12,11 +12,11 @@ export function intakeLinkEmail(params: {
   const { clientName, businessName, intakeUrl, previewBusinessDays } = params;
 
   return {
-    subject: `Vitrine72 — Seu link de briefing está pronto`,
+    subject: `Vitrini72 — Seu link de briefing está pronto`,
     html: `
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><title>Briefing Vitrine72</title></head>
+<head><meta charset="UTF-8"><title>Briefing Vitrini72</title></head>
 <body style="font-family: system-ui, sans-serif; background: #111; color: #fff; padding: 32px;">
   <div style="max-width: 520px; margin: 0 auto;">
     <h1 style="color: #c5a368; font-size: 24px;">Pagamento confirmado! 🎉</h1>
@@ -34,7 +34,7 @@ export function intakeLinkEmail(params: {
       Se tiver dúvidas, responda este e-mail ou entre em contato pelo WhatsApp.
     </p>
     <hr style="border-color: #333; margin: 24px 0;">
-    <p style="color: #555; font-size: 12px;">Vitrine72</p>
+    <p style="color: #555; font-size: 12px;">Vitrini72</p>
   </div>
 </body>
 </html>`,
@@ -51,11 +51,11 @@ export function siteDeliveryEmail(params: {
   const { clientName, businessName, previewUrl, editUrl } = params;
 
   return {
-    subject: `Vitrine72 — Seu site está pronto para revisão!`,
+    subject: `Vitrini72 — Seu site está pronto para revisão!`,
     html: `
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><title>Site pronto — Vitrine72</title></head>
+<head><meta charset="UTF-8"><title>Site pronto — Vitrini72</title></head>
 <body style="font-family: system-ui, sans-serif; background: #111; color: #fff; padding: 32px;">
   <div style="max-width: 520px; margin: 0 auto;">
     <h1 style="color: #c5a368; font-size: 24px;">Seu site está pronto! 🎉</h1>
@@ -78,7 +78,7 @@ export function siteDeliveryEmail(params: {
       Se tiver dúvidas, responda este e-mail ou entre em contato pelo WhatsApp.
     </p>
     <hr style="border-color: #333; margin: 24px 0;">
-    <p style="color: #555; font-size: 12px;">Vitrine72</p>
+    <p style="color: #555; font-size: 12px;">Vitrini72</p>
   </div>
 </body>
 </html>`,
@@ -95,11 +95,11 @@ export function intakeReminderEmail(params: {
   const urgency = reminderNumber === 2 ? " (urgente)" : "";
 
   return {
-    subject: `Vitrine72 — Lembrete: seu briefing está aguardando${urgency}`,
+    subject: `Vitrini72 — Lembrete: seu briefing está aguardando${urgency}`,
     html: `
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><title>Lembrete Vitrine72</title></head>
+<head><meta charset="UTF-8"><title>Lembrete Vitrini72</title></head>
 <body style="font-family: system-ui, sans-serif; background: #111; color: #fff; padding: 32px;">
   <div style="max-width: 520px; margin: 0 auto;">
     <h1 style="color: #c5a368; font-size: 22px;">Seu briefing está esperando por você</h1>
@@ -112,7 +112,7 @@ export function intakeReminderEmail(params: {
     </p>
     <p style="color: #666; font-size: 13px;">Se precisar de ajuda, responda este e-mail.</p>
     <hr style="border-color: #333; margin: 24px 0;">
-    <p style="color: #555; font-size: 12px;">Vitrine72</p>
+    <p style="color: #555; font-size: 12px;">Vitrini72</p>
   </div>
 </body>
 </html>`,

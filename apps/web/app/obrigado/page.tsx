@@ -4,7 +4,7 @@ import { PartyPopper } from "lucide-react";
 import { createServiceClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Pedido confirmado | Vitrine72",
+  title: "Pedido confirmado | Vitrini72",
   robots: { index: false },
 };
 

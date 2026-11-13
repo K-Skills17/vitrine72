@@ -6,7 +6,7 @@ import {
 } from "@vitrine72/core";
 
 export const metadata: Metadata = {
-  title: "Termos de Serviço | Vitrine72",
+  title: "Termos de Serviço | Vitrini72",
 };
 
 export default function TermosPage() {
@@ -31,7 +31,7 @@ export default function TermosPage() {
             <h2 className="text-xl font-semibold text-white">1. Partes</h2>
             <p>
               <strong className="text-white">{legalName}</strong>, inscrito no CNPJ sob o nº{" "}
-              <strong className="text-white">{cnpj}</strong>, prestador do serviço &quot;Vitrine72&quot;
+              <strong className="text-white">{cnpj}</strong>, prestador do serviço &quot;Vitrini72&quot;
               (&quot;Prestador&quot;), e a pessoa física ou jurídica que efetuou o pagamento
               (&quot;Contratante&quot;). Ao concluir o pagamento e submeter o formulário de briefing,
               o Contratante declara ter lido, compreendido e concordado com estes Termos.

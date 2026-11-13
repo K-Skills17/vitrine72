@@ -5,9 +5,9 @@ const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP ?? "PLACEHOLDER_WHATSAPP";
 const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "PLACEHOLDER_CONTACT_EMAIL";
 
 export function GET(): NextResponse {
-  const content = `# Vitrine72
+  const content = `# Vitrini72
 
-Vitrine72 é um serviço de criação de sites profissionais para negócios locais em São Paulo, Brasil.
+Vitrini72 é um serviço de criação de sites profissionais para negócios locais em São Paulo, Brasil.
 
 ## O que fazemos
 

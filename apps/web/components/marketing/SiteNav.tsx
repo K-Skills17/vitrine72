@@ -31,7 +31,7 @@ export function SiteNav() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-baseline gap-0 group">
           <span className="font-display font-bold text-ink-primary text-xl tracking-tight group-hover:opacity-80 transition">
-            Vitrine
+            Vitrini
           </span>
           <span className="font-display font-bold text-brand-gold text-xl tracking-tight">72</span>
         </a>

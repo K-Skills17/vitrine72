@@ -8,6 +8,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Vitrini72 studio palette (new homepage, light only). Contrast on
+        // paper: ink 16.5:1, muted 6.2:1, signal 4.65:1 (white on signal 5.2:1).
+        v: {
+          paper: "#F4F2ED",
+          card: "#FBFAF7",
+          ink: "#141414",
+          muted: "#5C5A54",
+          line: "#DAD6CD",
+          signal: "#C8381C",
+          "signal-dark": "#A42D16",
+        },
         brand: {
           // Themed gold — adapts for text contrast (darker on light bg)
           gold: "rgb(var(--gold-rgb) / <alpha-value>)",
@@ -33,6 +44,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "Georgia", "serif"],
+        grotesk: ["var(--font-grotesk)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       borderColor: {
         subtle: "var(--border-subtle)",

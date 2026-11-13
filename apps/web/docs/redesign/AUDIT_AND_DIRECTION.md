@@ -64,3 +64,28 @@ Rendered locally from `master` at 1440px and 390px. Findings, most important fir
 3. Homepage rebuilt section by section; checkout URLs and offer data unchanged (`@vitrine72/core`).
 4. Demo screenshots captured from the repo; client screenshots slotted in when supplied.
 5. Checks: typecheck, lint, build, Playwright at 1440/390, link check, Lighthouse-style review of first paint.
+
+## 5. Decisions (2026-11-13)
+
+- Brand spelling: **Vitrini72** (matches the domain). Changed in every visible string in `apps/web`: metadata, nav, footer, legal pages, emails, checkout item names, card statement descriptor, `llms.txt`, JSON-LD. Package names (`@vitrine72/core`) and the internal crawler User-Agent are unchanged.
+- Direction: **light studio**.
+- Promise: **"Prévia em 3 dias úteis · No ar a partir do dia 8"**.
+
+## 6. Status — homepage rebuilt
+
+Built in `components/home/` and used by `app/(marketing)/page.tsx`:
+- Palette under the Tailwind `v` namespace (paper, card, ink, muted, line, signal), Schibsted Grotesk + IBM Plex Mono loaded only on this page.
+- Sections: nav · hero (real site in a browser frame + phone) · trabalhos (ÁUREA as a multi-page project "sob consulta", the two 5-page demos with links, client sites from `config/portfolio.json`) · processo (the 72 timeline on ink) · incluso · preço (two plans, opcionais table, downsell) · regras claras · dúvidas · closing CTA · footer.
+- All prices, deadlines and rules read from `@vitrine72/core`; checkout links unchanged (`SITE_5P`, `ANCHOR_SITE_GBP_BOT`, `LANDING_1P`).
+- Demo screenshots captured from this repo into `public/work/` (WebP, 48–90 KB).
+- Cookie notice restyled as a compact neutral card (shared by all marketing routes).
+- Motion: same reveal rules as ÁUREA; nothing on screen at load is ever hidden.
+
+Verified (actual runs): typecheck, lint, unit tests (9/9), build pass. Playwright at 1440 and 390px: 0px overflow, one `h1`, all images with alt, every in-page anchor resolves, 0 elements hidden at load, all reveals shown after scroll, no console errors. `/sobre`, `/termos`, `/privacidade`, `/obrigado`, `/llms.txt` return 200.
+
+## 7. Not yet done
+
+- **Client screenshots** for Biodonth, Studio Afro Rosas and Gymera: until supplied, they show as typographic cards linking to the live sites. Add the file path to `screenshotUrl` in `config/portfolio.json` and the homepage picks it up.
+- **Partner and seller pages** (`/p/[handle]`, `/s/[seller]`) still use the old dark components; move them to the new sections once the homepage is approved.
+- **`/sobre`** still uses the old dark design and needs the founder photo and story.
+- No testimonials yet: add only real ones, with permission.

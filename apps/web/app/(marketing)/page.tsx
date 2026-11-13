@@ -1,47 +1,46 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/marketing/HeroSection";
-import { ComoFunciona } from "@/components/marketing/ComoFunciona";
-import { OQueVemNoSite } from "@/components/marketing/OQueVemNoSite";
-import { Portfolio } from "@/components/marketing/Portfolio";
-import { Preco } from "@/components/marketing/Preco";
-import { RegrasEClaras } from "@/components/marketing/RegrasEClaras";
-import { FAQ } from "@/components/marketing/FAQ";
-import { FinalCTA } from "@/components/marketing/FinalCTA";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
+import { HomeFooter } from "@/components/home/HomeFooter";
+import { HomeHero } from "@/components/home/HomeHero";
+import { HomeNav } from "@/components/home/HomeNav";
+import { Included } from "@/components/home/Included";
+import { Pricing } from "@/components/home/Pricing";
+import { RevealObserver } from "@/components/home/RevealObserver";
+import { Rules } from "@/components/home/Rules";
+import { Timeline } from "@/components/home/Timeline";
+import { Work } from "@/components/home/Work";
+import { grotesk, mono } from "@/components/home/fonts";
 import { generateMarketingJsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "Vitrine72 — Site profissional em 72h para negócios em São Paulo",
+  title: { absolute: "Vitrini72 — Sites para negócios locais, prévia em 3 dias úteis" },
   description:
-    "Seu site até 5 páginas pronto em 72 horas úteis. Mobile, WhatsApp, Google Meu Negócio. A partir de R$ 1.797 no Pix.",
+    "Site profissional de até 5 páginas para negócios locais em São Paulo: celular, WhatsApp e Google Meu Negócio. Prévia em 3 dias úteis. A partir de R$ 1.797 no Pix.",
 };
 
 export default function HomePage() {
   const jsonLd = generateMarketingJsonLd();
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <SiteNav />
-      <main>
-        <HeroSection partnerBanner={null} checkoutUrl="/api/checkout?sku=SITE_5P" />
-        <ComoFunciona />
-        <OQueVemNoSite />
-        <Portfolio />
-        <Preco
-          partnerBonus={false}
-          coreUrl="/api/checkout?sku=SITE_5P"
-          anchorUrl="/api/checkout?sku=ANCHOR_SITE_GBP_BOT"
-        />
-        <RegrasEClaras />
-        <FAQ />
-        <FinalCTA checkoutUrl="/api/checkout?sku=SITE_5P" />
+    <div className={`v72-home ${grotesk.variable} ${mono.variable} min-h-screen bg-v-paper font-grotesk text-v-ink antialiased`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-v-ink focus:px-5 focus:py-3 focus:text-v-paper">
+        Pular para o conteúdo
+      </a>
+      <HomeNav />
+      <main id="conteudo">
+        <HomeHero />
+        <Work />
+        <Timeline />
+        <Included />
+        <Pricing />
+        <Rules />
+        <Faq />
+        <FinalCta />
       </main>
-      <SiteFooter />
-    </>
+      <HomeFooter />
+      <RevealObserver />
+    </div>
   );
 }

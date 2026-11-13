@@ -6,7 +6,7 @@ import { EditRequestForm } from "@/components/edits/EditRequestForm";
 import { MAINTENANCE } from "@vitrine72/core";
 
 export const metadata: Metadata = {
-  title: "Solicitar edição | Vitrine72",
+  title: "Solicitar edição | Vitrini72",
   robots: { index: false },
 };
 

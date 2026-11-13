@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
           <div>
             <a href="#" className="flex items-baseline gap-0 mb-2">
-              <span className="font-display font-bold text-ink-primary text-lg tracking-tight">Vitrine</span>
+              <span className="font-display font-bold text-ink-primary text-lg tracking-tight">Vitrini</span>
               <span className="font-display font-bold text-brand-gold text-lg">72</span>
             </a>
             <p className="text-ink-subtle text-xs leading-relaxed">
@@ -36,7 +36,7 @@ export function SiteFooter() {
           }}
         />
         <p className="text-ink-faint text-xs text-center mt-6">
-          © {new Date().getFullYear()} Vitrine72. Todos os direitos reservados.
+          © {new Date().getFullYear()} Vitrini72. Todos os direitos reservados.
         </p>
       </div>
     </footer>

@@ -77,7 +77,7 @@ export async function POST(
           access_token: asaasKey,
         },
         body: JSON.stringify({
-          name: `Edição ${editType} — Vitrine72`,
+          name: `Edição ${editType} — Vitrini72`,
           value: price,
           description: description.slice(0, 200),
           externalReference: `EDIT:${project.id}`,

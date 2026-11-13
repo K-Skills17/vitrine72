@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Globe, Bot, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sobre | Vitrine72",
+  title: "Sobre | Vitrini72",
   description:
     "Especialista em marketing digital que ajuda negócios locais a solidificar sua presença online e atrair clientes qualificados com sites, chatbots e Google Meu Negócio.",
 };
@@ -63,7 +63,7 @@ export default function SobrePage() {
 
             {/* Text */}
             <div className="space-y-6">
-              <span className="section-label">Quem está por trás da Vitrine72</span>
+              <span className="section-label">Quem está por trás da Vitrini72</span>
               <h1 className="text-4xl md:text-5xl font-display font-bold text-ink-primary leading-tight">
                 Especialista em presença{" "}
                 <span className="text-gradient-gold">digital local</span>
@@ -74,7 +74,7 @@ export default function SobrePage() {
                 clientes certos — sem depender só de indicação.
               </p>
               <p className="text-ink-muted leading-relaxed">
-                A Vitrine72 nasceu da necessidade real que vi em centenas de negócios:
+                A Vitrini72 nasceu da necessidade real que vi em centenas de negócios:
                 ter um site de qualidade, aparecer no Google e nunca perder um cliente
                 por falta de atendimento. Resolvo esses três problemas com soluções
                 práticas e rápidas.
@@ -121,7 +121,7 @@ export default function SobrePage() {
         {/* Why section */}
         <section className="py-20 px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <span className="section-label">Por que a Vitrine72</span>
+            <span className="section-label">Por que a Vitrini72</span>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-ink-primary">
               Seu negócio merece mais do que um site bonito
             </h2>

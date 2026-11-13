@@ -1,17 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
+/** Compact consent notice. Neutral ink/white so it fits light and dark pages. */
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("v72_cookie_consent");
-    if (!consent) setVisible(true);
+    try {
+      if (!localStorage.getItem("v72_cookie_consent")) setVisible(true);
+    } catch {
+      setVisible(true);
+    }
   }, []);
 
   function accept() {
-    localStorage.setItem("v72_cookie_consent", "1");
+    try {
+      localStorage.setItem("v72_cookie_consent", "1");
+    } catch {
+      /* storage blocked: hide for this page view only */
+    }
     setVisible(false);
   }
 
@@ -21,24 +29,21 @@ export function CookieBanner() {
     <div
       role="dialog"
       aria-live="polite"
-      className="fixed bottom-0 inset-x-0 z-50 bg-brand-dark-2 border-t border-white/10 px-4 py-4"
+      aria-label="Aviso de cookies"
+      className="fixed inset-x-3 bottom-3 z-50 flex items-center gap-4 rounded-2xl bg-[#141414] px-4 py-3 text-[0.82rem] leading-snug text-white/75 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.5)] sm:inset-x-auto sm:left-5 sm:max-w-md"
     >
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <p className="text-sm text-gray-400 flex-1">
-          Usamos cookies essenciais e um cookie de atribuição de origem. Veja
-          nossa{" "}
-          <a href="/privacidade" className="text-brand-gold underline">
-            Política de Privacidade
-          </a>
-          .
-        </p>
-        <button
-          onClick={accept}
-          className="flex-shrink-0 bg-brand-gold text-brand-dark text-sm font-semibold px-5 py-2 rounded-lg hover:brightness-110 transition"
-        >
-          Entendi
-        </button>
-      </div>
+      <p className="flex-1">
+        Usamos cookies essenciais e um de atribuição de origem.{" "}
+        <a href="/privacidade" className="text-white underline underline-offset-2">
+          Privacidade
+        </a>
+      </p>
+      <button
+        onClick={accept}
+        className="min-h-10 shrink-0 rounded-full bg-white px-4 text-[0.82rem] font-semibold text-[#141414] transition-opacity hover:opacity-85"
+      >
+        Entendi
+      </button>
     </div>
   );
 }

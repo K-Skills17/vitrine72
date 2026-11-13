@@ -17,10 +17,10 @@ function verifyDiscount(sku: string, discount: number, expires: number, sig: str
 export const runtime = "nodejs";
 
 const SKU_LABELS: Partial<Record<Sku, string>> = {
-  SITE_5P: "Site até 5 páginas — Vitrine72",
-  ANCHOR_SITE_GBP_BOT: "Site + Google Meu Negócio + Agente IA — Vitrine72",
-  LANDING_1P: "Landing page 1 página — Vitrine72",
-  MANUT: "Manutenção + hospedagem — Vitrine72",
+  SITE_5P: "Site até 5 páginas — Vitrini72",
+  ANCHOR_SITE_GBP_BOT: "Site + Google Meu Negócio + Agente IA — Vitrini72",
+  LANDING_1P: "Landing page 1 página — Vitrini72",
+  MANUT: "Manutenção + hospedagem — Vitrini72",
 };
 
 const VALID_SKUS: Sku[] = ["SITE_5P", "ANCHOR_SITE_GBP_BOT", "LANDING_1P", "MANUT"];
@@ -72,7 +72,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     items: [
       {
         id: sku,
-        title: SKU_LABELS[sku] ?? `Vitrine72 — ${sku}`,
+        title: SKU_LABELS[sku] ?? `Vitrini72 — ${sku}`,
         quantity: 1,
         currency_id: "BRL",
         // Card price is the base for the preference; MP will offer Pix as a
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     },
     auto_return: "approved",
     notification_url: `${siteUrl}/api/webhooks/mercadopago`,
-    statement_descriptor: "Vitrine72",
+    statement_descriptor: "Vitrini72",
   };
 
   let initPoint: string;

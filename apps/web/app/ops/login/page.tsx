@@ -32,7 +32,7 @@ export default function OpsLogin() {
     <main className="min-h-screen bg-brand-dark flex items-center justify-center px-4">
       <div className="max-w-sm w-full space-y-6">
         <h1 className="text-2xl font-display font-bold text-white text-center">
-          Vitrine<span className="text-brand-gold">72</span> Ops
+          Vitrini<span className="text-brand-gold">72</span> Ops
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -1,5 +1,5 @@
 /**
- * JSON-LD generators for the Vitrine72 marketing site.
+ * JSON-LD generators for the Vitrini72 marketing site.
  * AI visibility layer — section 8.4 of the spec.
  */
 
@@ -8,12 +8,12 @@ export function generateMarketingJsonLd() {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br";
   const phone = process.env.NEXT_PUBLIC_WHATSAPP;
   const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
-  const legalName = process.env.LEGAL_NAME ?? "Vitrine72";
+  const legalName = process.env.LEGAL_NAME ?? "Vitrini72";
 
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Vitrine72",
+    name: "Vitrini72",
     legalName,
     url: siteUrl,
     description:
