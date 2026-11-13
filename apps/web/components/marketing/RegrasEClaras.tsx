@@ -11,7 +11,7 @@ const RULES_LIST = [
   {
     Icon: Timer,
     title: `${CORE_OFFER.previewBusinessDays} dias úteis contam do briefing`,
-    desc: "O prazo começa quando você termina de preencher o formulário, não quando paga.",
+    desc: "O prazo começa quando você termina de preencher o formulário, não quando paga. Dias úteis pelo calendário de São Paulo.",
   },
   {
     Icon: CalendarCheck,

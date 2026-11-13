@@ -6,7 +6,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { IntakeForm } from "@/components/intake/IntakeForm";
 
 export const metadata: Metadata = {
-  title: "Formulário de briefing | Vitrine72",
+  title: "Formulário de briefing | Vitrini72",
   robots: { index: false },
 };
 

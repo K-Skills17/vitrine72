@@ -13,8 +13,8 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    q: "O prazo de 72 horas úteis começa quando?",
-    a: `O prazo começa quando você termina de preencher o formulário de briefing com todas as informações e fotos. Não começa no pagamento.`,
+    q: `O prazo de ${CORE_OFFER.previewBusinessDays} dias úteis começa quando?`,
+    a: `O prazo começa quando você termina de preencher o formulário de briefing com todas as informações e fotos. Não começa no pagamento. Os dias úteis são contados pelo calendário de São Paulo, onde a equipe trabalha.`,
   },
   {
     q: "Quantas páginas vêm no site?",

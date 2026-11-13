@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
   if (!partner) return {};
   return {
-    title: `Vitrine72 — Oferta especial de ${partner.name}`,
+    title: `Vitrini72 — Oferta especial de ${partner.name}`,
     robots: { index: false },
   };
 }

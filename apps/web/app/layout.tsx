@@ -18,18 +18,18 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Vitrine72 — Site profissional para o seu negócio em São Paulo",
-    template: "%s | Vitrine72",
+    default: "Vitrini72 — Site profissional para o seu negócio",
+    template: "%s | Vitrini72",
   },
   description:
-    "Seu site pronto em 72 horas úteis. Site até 5 páginas para negócios locais em São Paulo. Mobile, WhatsApp, Google-ready.",
+    "Site profissional de até 5 páginas para negócios locais em todo o Brasil. Prévia em 3 dias úteis. Celular, WhatsApp e Google Meu Negócio.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://vitrini72.com.br"
   ),
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    siteName: "Vitrine72",
+    siteName: "Vitrini72",
   },
   robots: {
     index: true,

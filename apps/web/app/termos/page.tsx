@@ -6,7 +6,7 @@ import {
 } from "@vitrine72/core";
 
 export const metadata: Metadata = {
-  title: "Termos de Serviço | Vitrine72",
+  title: "Termos de Serviço | Vitrini72",
 };
 
 export default function TermosPage() {
@@ -31,7 +31,7 @@ export default function TermosPage() {
             <h2 className="text-xl font-semibold text-white">1. Partes</h2>
             <p>
               <strong className="text-white">{legalName}</strong>, inscrito no CNPJ sob o nº{" "}
-              <strong className="text-white">{cnpj}</strong>, prestador do serviço &quot;Vitrine72&quot;
+              <strong className="text-white">{cnpj}</strong>, prestador do serviço &quot;Vitrini72&quot;
               (&quot;Prestador&quot;), e a pessoa física ou jurídica que efetuou o pagamento
               (&quot;Contratante&quot;). Ao concluir o pagamento e submeter o formulário de briefing,
               o Contratante declara ter lido, compreendido e concordado com estes Termos.
@@ -56,7 +56,7 @@ export default function TermosPage() {
               O prazo de entrega da prévia é de até{" "}
               <strong className="text-white">{CORE_OFFER.previewBusinessDays} (três) dias úteis</strong>{" "}
               contados a partir do recebimento completo do formulário de briefing, incluindo o envio de
-              todas as fotos exigidas. Dias úteis não incluem sábados, domingos e feriados nacionais.
+              todas as fotos exigidas. Dias úteis são contados pelo calendário da cidade de São Paulo, onde a equipe trabalha: não incluem sábados, domingos, feriados nacionais, feriados do estado e do município de São Paulo, Carnaval (de segunda a Quarta-feira de Cinzas) e Corpus Christi.
             </p>
             <p>
               O prazo será suspenso caso o Prestador necessite de informações adicionais não fornecidas

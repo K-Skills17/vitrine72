@@ -13,7 +13,10 @@ interface SiteEntry {
 
 const VERTICAL_LABELS: Record<string, string> = {
   estetica: "Estética",
-  "fisioterapia-pilates": "Fitness & Pilates",
+  odontologia: "Odontologia",
+  trancas: "Tranças e beleza afro",
+  "loja-online": "Loja online",
+  "fisioterapia-pilates": "Fitness e pilates",
 };
 
 export function Portfolio() {
@@ -32,7 +35,7 @@ export function Portfolio() {
           </h2>
           <span className="divider-gold mt-6" />
           <p className="text-ink-muted mt-4 max-w-xl mx-auto">
-            Negócios reais em São Paulo que já estão recebendo clientes online.
+            Negócios reais que já estão recebendo clientes online.
           </p>
         </Reveal>
 

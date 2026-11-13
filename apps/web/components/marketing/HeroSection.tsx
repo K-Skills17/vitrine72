@@ -54,7 +54,7 @@ export function HeroSection({ checkoutUrl }: Props) {
         variants={stagger}
       >
         <motion.span variants={item} className="section-label">
-          Sites para negócios locais em São Paulo
+          Sites para negócios locais em todo o Brasil
         </motion.span>
 
         <motion.h1

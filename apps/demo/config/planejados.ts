@@ -173,7 +173,7 @@ const planejados: NicheConfig = {
   chatbotTenantId: "fe1c1d4e-c7f2-4dfb-9c67-6e00bda9135d",
 
   privacyPolicyExtra:
-    "Este site utiliza um assistente virtual (chatbot) para atendimento. As conversas são processadas por serviço externo e não são armazenadas após o atendimento.",
+    "Este site utiliza um assistente virtual (chatbot) para atendimento. As mensagens e as fotos enviadas no chat são processadas por serviço externo, incluindo análise automatizada de imagens por inteligência artificial, e o histórico da conversa fica registrado para dar continuidade ao atendimento. Não envie dados de saúde sensíveis pelo chat.",
 
   metaTitle: "Atelier Madeira Planejados — Site Demonstrativo | Vitrine72",
   metaDescription:

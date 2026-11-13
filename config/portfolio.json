@@ -1,29 +1,30 @@
 {
-  "_comment": "Portfolio sites. NEEDS #11: Yohanny fix. NEEDS #12: screenshots.",
+  "_comment": "Portfolio sites. Screenshots captured 2026-11-13 at 1440px (desktop, served from /public/work/clients). NEEDS #11: Yohanny fix.",
   "sites": [
     {
       "slug": "biodonth",
       "name": "Biodonth",
       "url": "https://biodonth.com.br",
-      "vertical": "estetica",
-      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_BIODONTH",
+      "vertical": "odontologia",
+      "screenshotUrl": "/work/clients/biodonth-desktop.webp",
       "enabled": true
     },
     {
       "slug": "studioafrorosas",
       "name": "Studio Afro Rosas",
       "url": "https://studioafrorosas.com.br",
-      "vertical": "estetica",
-      "screenshotUrl": "PLACEHOLDER_SCREENSHOT_STUDIOAFROROSAS",
+      "vertical": "trancas",
+      "screenshotUrl": "/work/clients/studioafrorosas-desktop.webp",
       "enabled": true
     },
     {
       "slug": "gymera",
       "name": "Gymera",
       "url": "https://gymeraactive.com",
-      "vertical": "fisioterapia-pilates",
+      "vertical": "loja-online",
       "screenshotUrl": "PLACEHOLDER_SCREENSHOT_GYMERA",
-      "enabled": true
+      "enabled": false,
+      "_reason": "Removed 2026-11-13: English-language US store, outside the Brazil local-business positioning."
     },
     {
       "slug": "yohanny",

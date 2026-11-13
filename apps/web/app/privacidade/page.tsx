@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade | Vitrine72",
+  title: "Política de Privacidade | Vitrini72",
 };
 
 export default function PrivacidadePage() {
@@ -30,7 +30,7 @@ export default function PrivacidadePage() {
           </h2>
           <p>
             <strong>{legalName}</strong>, CNPJ {cnpj}, doravante chamada
-            &quot;Vitrine72&quot;, é responsável pelo tratamento dos dados
+            &quot;Vitrini72&quot;, é responsável pelo tratamento dos dados
             pessoais coletados neste site, conforme a Lei Geral de Proteção de
             Dados (Lei nº 13.709/2018 — LGPD).
           </p>
