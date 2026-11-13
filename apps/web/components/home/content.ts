@@ -46,6 +46,9 @@ interface ClientSite {
 
 const VERTICAL_LABELS: Record<string, string> = {
   estetica: "Estética",
+  odontologia: "Odontologia",
+  trancas: "Tranças e beleza afro",
+  "loja-online": "Loja online",
   "fisioterapia-pilates": "Fitness e pilates",
 };
 

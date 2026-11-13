@@ -58,15 +58,25 @@ export function Work() {
         {clientSites.length > 0 && (
           <div data-reveal className="flex flex-col gap-6 border-t border-v-line pt-10">
             <Kicker>{work.clientsTitle}</Kicker>
-            <ul className="grid gap-px overflow-hidden rounded-[14px] border border-v-line bg-v-line sm:grid-cols-3">
+            <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {clientSites.map((c) => (
-                <li key={c.url} className="bg-v-paper">
-                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col gap-2 p-6 transition-colors hover:bg-v-card">
-                    <span className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-v-muted">{c.vertical}</span>
-                    <span className="font-grotesk text-[1.3rem] font-semibold tracking-[-0.015em]">{c.name}</span>
-                    <span className="mt-auto flex items-center justify-between pt-4 font-mono text-[0.8rem] text-v-muted group-hover:text-v-ink">
-                      {c.domain}
-                      <span aria-hidden>↗</span>
+                <li key={c.url}>
+                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col gap-4">
+                    {c.screenshot ? (
+                      <BrowserFrame src={c.screenshot} alt={`Página inicial do site ${c.name}`} url={c.domain} className="transition-transform duration-300 group-hover:-translate-y-1" />
+                    ) : (
+                      <div className="flex aspect-[16/10] items-end rounded-[14px] border border-v-line bg-v-paper p-6">
+                        <span className="font-grotesk text-[1.6rem] font-semibold tracking-[-0.02em]">{c.name}</span>
+                      </div>
+                    )}
+                    <span className="flex items-baseline justify-between gap-4 border-t border-v-line pt-4">
+                      <span>
+                        <span className="block font-grotesk text-[1.2rem] font-semibold tracking-[-0.015em]">{c.name}</span>
+                        <span className="font-mono text-[0.75rem] uppercase tracking-[0.08em] text-v-muted">{c.vertical}</span>
+                      </span>
+                      <span className="font-mono text-[0.8rem] text-v-muted group-hover:text-v-ink">
+                        {c.domain} <span aria-hidden>↗</span>
+                      </span>
                     </span>
                   </a>
                 </li>

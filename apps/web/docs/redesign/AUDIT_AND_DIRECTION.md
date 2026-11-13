@@ -85,7 +85,7 @@ Verified (actual runs): typecheck, lint, unit tests (9/9), build pass. Playwrigh
 
 ## 7. Not yet done
 
-- **Client screenshots** for Biodonth, Studio Afro Rosas and Gymera: until supplied, they show as typographic cards linking to the live sites. Add the file path to `screenshotUrl` in `config/portfolio.json` and the homepage picks it up.
+- **Client screenshots:** Biodonth and Studio Afro Rosas captured at 1440px (2026-11-13) into `public/work/clients/`, shown in the "Clientes no ar" grid. Labels corrected: Biodonth is odontologia (was "estética"), Studio Afro Rosas is tranças e beleza afro. **Gymera** is an English-language US activewear store; it stays a text card with no screenshot (its desktop nav is hard to read over the hero photo) until Vitrini72 decides whether to list it.
 - **Partner and seller pages** (`/p/[handle]`, `/s/[seller]`) still use the old dark components; move them to the new sections once the homepage is approved.
 - **`/sobre`** still uses the old dark design and needs the founder photo and story.
 - No testimonials yet: add only real ones, with permission.

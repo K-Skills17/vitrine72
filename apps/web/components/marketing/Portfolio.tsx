@@ -13,7 +13,10 @@ interface SiteEntry {
 
 const VERTICAL_LABELS: Record<string, string> = {
   estetica: "Estética",
-  "fisioterapia-pilates": "Fitness & Pilates",
+  odontologia: "Odontologia",
+  trancas: "Tranças e beleza afro",
+  "loja-online": "Loja online",
+  "fisioterapia-pilates": "Fitness e pilates",
 };
 
 export function Portfolio() {
