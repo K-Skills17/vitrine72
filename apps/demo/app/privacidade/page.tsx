@@ -62,7 +62,7 @@ export default function PrivacidadePage() {
             </h2>
             <p>
               Este site é uma demonstração criada pela{" "}
-              <strong>Vitrine72</strong> (
+              <strong>Vitrini72</strong> (
               <a
                 href="https://vitrini72.com.br"
                 target="_blank"
@@ -136,7 +136,7 @@ export default function PrivacidadePage() {
             <p>
               Para exercer seus direitos como titular de dados, entre em
               contato com {config.brandName} pelos canais informados no site ou
-              com a Vitrine72 em{" "}
+              com a Vitrini72 em{" "}
               <a
                 href="https://vitrini72.com.br"
                 target="_blank"

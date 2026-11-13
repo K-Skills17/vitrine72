@@ -1,4 +1,4 @@
-# Vitrine72 Demo Sites — apps/demo
+# Vitrini72 Demo Sites — apps/demo
 
 Two cold-call demos, one codebase. The prospect opens the link on WhatsApp while still on the phone.
 

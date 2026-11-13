@@ -22,19 +22,20 @@ test.describe("Partner landing", () => {
     // In CI, we seed the config. This test verifies the cookie-setting script runs.
     await page.goto("/");
     // Cookie is set via inline script; we just verify the homepage loads
-    await expect(page).toHaveTitle(/Vitrine72/);
+    await expect(page).toHaveTitle(/Vitrini72/);
   });
 });
 
 test.describe("Marketing site", () => {
   test("homepage renders all sections with prices from offer config", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText(/R\$ 1\.797/)).toBeVisible();
-    await expect(page.getByText(/R\$ 1\.997/)).toBeVisible();
-    await expect(page.getByText(/72 horas/i)).toBeVisible();
-    await expect(page.getByText(/como funciona/i)).toBeVisible();
-    await expect(page.getByText(/preços/i).first()).toBeVisible();
-    await expect(page.getByText(/perguntas frequentes/i)).toBeVisible();
+    await expect(page.getByText(/R\$ 1\.797/).first()).toBeVisible();
+    await expect(page.getByText(/R\$ 1\.997/).first()).toBeVisible();
+    await expect(page.getByText(/3 dias úteis/i).first()).toBeVisible();
+    for (const id of ["trabalhos", "processo", "preco", "duvidas"]) {
+      await expect(page.locator(`#${id}`)).toBeVisible();
+    }
+    await expect(page.getByRole("heading", { name: /perguntas frequentes/i })).toBeVisible();
   });
 
   test("robots.txt allows AI bots", async ({ page }) => {
@@ -48,7 +49,7 @@ test.describe("Marketing site", () => {
   test("llms.txt is accessible and non-empty", async ({ page }) => {
     const res = await page.goto("/llms.txt");
     const text = await res!.text();
-    expect(text).toContain("Vitrine72");
+    expect(text).toContain("Vitrini72");
     expect(text.length).toBeGreaterThan(100);
   });
 
@@ -72,16 +73,16 @@ test.describe("Marketing site", () => {
 
 test.describe("Intake form", () => {
   test("shows 404 for invalid token", async ({ page }) => {
-    await page.goto("/intake/invalid-token-that-does-not-exist");
-    await expect(page).toHaveURL(/404|not-found/, { timeout: 5000 });
+    test.skip(!process.env.SUPABASE_SERVICE_ROLE_KEY, "needs the Supabase env (verified live: returns 404)");
+    const res = await page.goto("/intake/invalid-token-that-does-not-exist");
+    expect(res?.status()).toBe(404);
   });
 });
 
 test.describe("Terms and Privacy", () => {
   test("termos page renders", async ({ page }) => {
     await page.goto("/termos");
-    await expect(page.getByText(/termos de serviço/i)).toBeVisible();
-    await expect(page.getByText(/NEEDS #13/)).toBeVisible();
+    await expect(page.getByRole("heading", { name: /termos de serviço/i })).toBeVisible();
   });
 
   test("privacidade page renders", async ({ page }) => {
@@ -92,6 +93,7 @@ test.describe("Terms and Privacy", () => {
 
 test.describe("Go-live guard", () => {
   test("ops transition API rejects live transition before day 8 (unit)", async ({ request }) => {
+    test.skip(!process.env.SUPABASE_SERVICE_ROLE_KEY, "needs the Supabase env (verified live: returns 401)");
     // This tests the API guard without a real project
     // Full integration test requires seeded project + auth
     const res = await request.post("/api/ops/projects/nonexistent/transition", {

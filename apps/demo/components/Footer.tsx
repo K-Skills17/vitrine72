@@ -131,7 +131,7 @@ export default function Footer({ config }: Props) {
               textDecoration: "underline",
             }}
           >
-            Vitrine72
+            Vitrini72
           </a>
         </p>
       </div>

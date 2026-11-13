@@ -175,9 +175,9 @@ const estetica: NicheConfig = {
   privacyPolicyExtra:
     "Este site utiliza um assistente virtual (chatbot) para atendimento. As mensagens e as fotos enviadas no chat são processadas por serviço externo, incluindo análise automatizada de imagens por inteligência artificial, e o histórico da conversa fica registrado para dar continuidade ao atendimento. Não envie dados de saúde sensíveis pelo chat.",
 
-  metaTitle: "Clínica Aurora Estética — Site Demonstrativo | Vitrine72",
+  metaTitle: "Clínica Aurora Estética — Site Demonstrativo | Vitrini72",
   metaDescription:
-    "Demonstração Vitrine72: site profissional para clínicas estéticas com qualificação automática de clientes no WhatsApp.",
+    "Demonstração Vitrini72: site profissional para clínicas estéticas com qualificação automática de clientes no WhatsApp.",
 };
 
 export default estetica;
