@@ -8,3 +8,7 @@ generated/
 dist/
 
 .vercel
+
+# Playwright output
+test-results/
+playwright-report/
