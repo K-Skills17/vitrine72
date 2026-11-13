@@ -14,8 +14,12 @@
 - Playwright at 1440 and 390px: 0px horizontal overflow, no console errors other than the expected prefetch 404s.
 - The tall circumflex on "Ciência" is Cormorant's normal glyph, checked at full size; not a rendering bug.
 
+### Photographs
+- First three photos placed: hero portrait (slot 01, converted to an espresso→ivory duotone so a black-and-white stock image matches the palette), editorial still life for the approach section (slot 02), waiting area with marble panel for the clinic teaser (slot 11). Metadata stripped, JPEG q82.
+- Rejected two supplied photos: a reception with a teal mural and clinical clutter (breaks the palette rules), and a clinic interior showing another business's logo and name (can't be used on a demo for a fictional clinic).
+
 ### Known
-- No photographs yet: every image slot shows its placeholder. Treatment, clinic, professionals and contact links 404 until Phases 5–7.
+- The marble-panel photo is 1375px wide and shows at up to 1338px, so it will look slightly soft on high-density screens. Treatment, clinic, professionals and contact links 404 until Phases 5–7.
 
 ## 2026-11-13 — Phases 2 & 3: design system and foundation
 
