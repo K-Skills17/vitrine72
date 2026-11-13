@@ -17,7 +17,7 @@ export const siteConfig: ClinicConfig = {
   name: "ÁUREA",
   descriptor: "Clínica de Estética Avançada",
   messageName: "Clínica ÁUREA",
-  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? "https://aurea.vitrini72.com.br" : "http://localhost:3003")).replace(/\/$/, ""),
+  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? "https://vitrine72-seven.vercel.app" : "http://localhost:3003")).replace(/\/$/, ""),
   locale: "pt_BR",
   isDemo: true,
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",

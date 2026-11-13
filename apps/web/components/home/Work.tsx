@@ -17,7 +17,7 @@ export function Work() {
         {/* Featured: ÁUREA */}
         <article data-reveal className="grid gap-10 border-t border-v-ink pt-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-14">
           <div className="relative pb-8">
-            <BrowserFrame src={f.desktop} alt="Site de demonstração ÁUREA no computador" url={f.url.replace("https://", "")} />
+            <BrowserFrame src={f.desktop} alt="Site de demonstração ÁUREA no computador" url="aurea · demonstração" />
             <PhoneFrame src={f.mobile} alt="Site de demonstração ÁUREA no celular" className="absolute -bottom-2 right-4 w-[24%] max-w-[170px]" />
           </div>
           <div className="flex flex-col gap-5 lg:pt-4">

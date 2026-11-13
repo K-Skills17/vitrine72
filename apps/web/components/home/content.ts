@@ -74,7 +74,8 @@ export const work = {
     body: "Páginas por tratamento, perguntas de qualificação antes do WhatsApp e atendimento com IA que aceita fotos. Um exemplo do que fazemos em projetos maiores.",
     desktop: "/work/aurea-desktop.webp",
     mobile: "/work/aurea-mobile.webp",
-    url: "https://aurea.vitrini72.com.br",
+    /** Production alias of the ÁUREA Vercel project. Swap for aurea.vitrini72.com.br once that domain exists. */
+    url: "https://vitrine72-seven.vercel.app",
     cta: "Falar sobre um projeto assim",
   },
   items: [
