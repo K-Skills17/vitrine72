@@ -8,7 +8,8 @@ Server Components unless marked **client**.
 |---|---|---|
 | `Button.tsx` → `ButtonLink`, `buttonStyles()` | The only button implementation. `ButtonLink` renders `next/link` for internal paths and `<a target="_blank">` for external URLs. `buttonStyles()` gives the same classes to `<button>` elements (e.g. form submit). | `variant: primary \| secondary \| text`, `tone: light \| dark`, `size: default \| compact`, `fullWidth` |
 | `Container.tsx` | Page width and side gutter | `as`, `className` |
-| `SectionHeading.tsx` → `SectionHeading`, `Eyebrow` | Eyebrow, heading and lead. Heading level (`as`) is set separately from visual `size`. | `as`, `size`, `tone`, `eyebrow`, `lead` |
+| `SectionHeading.tsx` → `SectionHeading`, `Eyebrow` | Eyebrow, heading and lead. Heading level (`as`) is set separately from visual `size`. | `as`, `size`, `tone`, `eyebrow`, `lead`, `id` |
+| `EditorialImage.tsx` | Every photograph. Fixed ratio, `next/image`, labelled placeholder while `src` is null. | `image: ImageRef`, `ratio`, `sizes`, `priority` |
 
 ## conversion/
 
@@ -28,6 +29,10 @@ Server Components unless marked **client**.
 | `DemoNotice.tsx` | Slim, non-sticky notice that the clinic is fictional. Renders only when `siteConfig.isDemo`. |
 | `Footer.tsx` | Navigation, treatment links, address, hours and contact placeholders, legal placeholders, demo disclaimer. All data comes from `config/site.ts` and `content/*`. |
 
+## sections/
+
+Homepage sections, each reading its copy from `content/home.ts`: `HomeHero`, `Approach`, `TreatmentIndex`, `Journey`, `ClinicTeaser`, `FinalCta` (reusable closing block).
+
 ## Planned (not yet built)
 
-Accordion (Phase 5), form fields and InquiryForm (Phase 7), EditorialImage (Phase 4), TreatmentIndex and TreatmentHero (Phases 5–6), ProfessionalProfile (Phase 5), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.
+Accordion (Phase 5), form fields and InquiryForm (Phase 7), TreatmentIndex and TreatmentHero (Phases 5–6), ProfessionalProfile (Phase 5), FloatingWhatsApp and MobileStickyCta (Phase 7). Components are created when a page first needs them.

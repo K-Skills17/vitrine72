@@ -1,5 +1,22 @@
 # Changelog — ÁUREA
 
+## 2026-11-13 — Phase 4: homepage
+
+### Added
+- `EditorialImage` (ui/): the only way photographs render. Fixed aspect ratio (no layout shift), `next/image` when `src` is set, and a labelled sand placeholder ("IMG 01 — subject") while it is `null`.
+- `types/image.ts` (`ImageRef`) and `content/images.ts`: one registry of every photograph, numbered to match `docs/ASSETS.md`. Adding a photo means dropping the file in `public/images/<folder>/` and setting `src`.
+- `content/home.ts`: all homepage copy in one place.
+- Homepage sections (sections/): `HomeHero` (golden split, portrait right), `Approach` (reverse split, three numbered principles), `TreatmentIndex` (numbered rows linking to treatment pages), `Journey` (four steps on espresso), `ClinicTeaser` (wide architecture image, then clinic and professionals), `FinalCta` (sand, reusable at the end of pages).
+- `SectionHeading` takes an `id` so sections can use `aria-labelledby`.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (13/13), `build`: pass. Copy checked against `config/banned-phrases.json`: no hits.
+- Playwright at 1440 and 390px: 0px horizontal overflow, no console errors other than the expected prefetch 404s.
+- The tall circumflex on "Ciência" is Cormorant's normal glyph, checked at full size; not a rendering bug.
+
+### Known
+- No photographs yet: every image slot shows its placeholder. Treatment, clinic, professionals and contact links 404 until Phases 5–7.
+
 ## 2026-11-13 — Phases 2 & 3: design system and foundation
 
 ### Added

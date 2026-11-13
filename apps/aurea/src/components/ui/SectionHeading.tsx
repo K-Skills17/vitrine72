@@ -12,6 +12,8 @@ interface SectionHeadingProps {
   as?: HeadingLevel;
   size?: HeadingSize;
   tone?: "light" | "dark";
+  /** id on the heading element, for aria-labelledby on the section. */
+  id?: string;
   className?: string;
 }
 
@@ -36,11 +38,11 @@ export function Eyebrow({ children, tone = "light", className }: { children: Rea
   );
 }
 
-export function SectionHeading({ eyebrow, title, lead, as: Tag = "h2", size = "h2", tone = "light", className }: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, title, lead, as: Tag = "h2", size = "h2", tone = "light", id, className }: SectionHeadingProps) {
   return (
     <div className={cx("flex flex-col gap-5", className)}>
       {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
-      <Tag className={cx("font-display font-normal text-balance", sizes[size], tone === "light" ? "text-espresso" : "text-ivory")}>
+      <Tag id={id} className={cx("font-display font-normal text-balance", sizes[size], tone === "light" ? "text-espresso" : "text-ivory")}>
         {title}
       </Tag>
       {lead && (

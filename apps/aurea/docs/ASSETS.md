@@ -20,6 +20,8 @@ Art direction for every image: natural daylight, warm neutral grade (ivory, sand
 | 12–14 | Professionals (3) | Portraits: neutral background, white coat or smart casual, natural expression | 4:5 | — | — |
 | 15–20 | Treatment heroes (6) | One per treatment: face or skin detail, no procedure shown | 4:5 / 4:5 | — | — |
 
+How to add a photo: save it under `public/images/<folder>/`, then set `src` (and `focal` if the crop needs it) on the matching entry in `src/content/images.ts`. Until then the slot shows a placeholder with its number and subject.
+
 Rules:
 - Portraits of real people are **never** captioned as clinic staff or patients without a "fictional / illustrative" note. Professionals are labelled "Profissional fictício — imagem ilustrativa".
 - Files are stored in `public/images/{hero,treatments,clinic,professionals,editorial}/` with descriptive kebab-case names, optimised to a 2400px long edge maximum. `next/image` produces the responsive variants.
