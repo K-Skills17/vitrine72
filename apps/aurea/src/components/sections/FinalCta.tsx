@@ -9,7 +9,7 @@ export function FinalCta() {
   return (
     <section aria-labelledby="cta-final" className="border-t border-line bg-sand py-section">
       <Container className="grid gap-10 lg:grid-golden lg:items-end lg:gap-20">
-        <SectionHeading eyebrow={finalCta.eyebrow} id="cta-final" title={finalCta.title} lead={finalCta.lead} />
+        <SectionHeading reveal eyebrow={finalCta.eyebrow} id="cta-final" title={finalCta.title} lead={finalCta.lead} />
         <div className="flex flex-col items-start gap-5">
           <WhatsAppLink location="final-cta" />
           <ButtonLink href="/contato" variant="text">

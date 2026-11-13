@@ -9,7 +9,7 @@ export function TreatmentRows({ treatments, showCategories = true }: { treatment
   return (
     <ol className="border-t border-espresso">
       {treatments.map((t, i) => (
-        <li key={t.slug} className="border-b border-line">
+        <li key={t.slug} data-reveal data-reveal-delay={Math.min(i, 5) * 60} className="border-b border-line">
           <Link
             href={treatmentPath(t.slug)}
             className="group grid gap-3 py-8 transition-colors hover:bg-ivory md:grid-cols-[4rem_minmax(0,1.618fr)_minmax(0,1fr)_2rem] md:items-baseline md:gap-8 md:px-4"

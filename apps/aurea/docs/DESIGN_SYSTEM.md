@@ -84,7 +84,7 @@ Measures: `max-w-prose` (38rem, about 68 characters) for body text and `max-w-le
 
 Tokens: `--ease-aurea` = `cubic-bezier(0.22, 1, 0.36, 1)`. This value is mirrored in `src/config/motion.ts` and checked by a unit test. Durations are 0.24s (UI), 0.6s (reveals) and 0.9s (hero image). Reveals move only 16px.
 
-Principles: motion clarifies hierarchy or orientation, or it isn't used. Content is never hidden behind an animation on the first paint. `prefers-reduced-motion` turns transitions and animations off globally. Motion for React components will also check `useReducedMotion` (Phase 8).
+Principles: motion clarifies hierarchy or orientation, or it isn't used. Content is never hidden behind an animation on the first paint. `prefers-reduced-motion` turns transitions and animations off globally. Reveals are CSS transitions driven by `RevealObserver`, which does nothing when reduced motion is requested.
 
 ## Accessibility baseline
 

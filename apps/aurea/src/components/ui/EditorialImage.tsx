@@ -16,6 +16,8 @@ interface EditorialImageProps {
   /** Responsive `sizes` hint for next/image. */
   sizes: string;
   priority?: boolean;
+  /** Fade/slide in when scrolled into view (RevealObserver). */
+  reveal?: boolean;
   className?: string;
 }
 
@@ -23,9 +25,9 @@ interface EditorialImageProps {
  * The only way photographs are rendered. Square-edged, fixed aspect ratio
  * (no layout shift), and a labelled sand placeholder while `src` is null.
  */
-export function EditorialImage({ image, ratio, sizes, priority = false, className }: EditorialImageProps) {
+export function EditorialImage({ image, ratio, sizes, priority = false, reveal, className }: EditorialImageProps) {
   return (
-    <figure className={cx("relative overflow-hidden bg-sand", ratios[ratio], className)}>
+    <figure data-reveal={reveal ? "" : undefined} className={cx("relative overflow-hidden bg-sand", ratios[ratio], className)}>
       {image.src ? (
         <Image
           src={image.src}
@@ -33,7 +35,7 @@ export function EditorialImage({ image, ratio, sizes, priority = false, classNam
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={cx("object-cover", priority && "animate-hero-settle")}
           style={image.focal ? { objectPosition: image.focal } : undefined}
         />
       ) : (

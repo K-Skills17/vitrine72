@@ -4,6 +4,7 @@ import Script from "next/script";
 import { AnalyticsListener } from "@/components/conversion/AnalyticsListener";
 import { QualifierGate } from "@/components/conversion/QualifierGate";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { RevealObserver } from "@/components/motion/RevealObserver";
 import { FloatingWhatsApp } from "@/components/conversion/FloatingWhatsApp";
 import { MobileStickyCta } from "@/components/conversion/MobileStickyCta";
 import { DemoNotice } from "@/components/layout/DemoNotice";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="conteudo">{children}</main>
         <Footer />
         <AnalyticsListener />
+        <RevealObserver />
         <QualifierGate />
         <FloatingWhatsApp />
         <MobileStickyCta />

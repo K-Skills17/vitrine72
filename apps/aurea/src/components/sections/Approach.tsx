@@ -9,12 +9,12 @@ export function Approach() {
   return (
     <section aria-labelledby="abordagem" className="border-t border-line py-section">
       <Container className="grid gap-12 lg:grid-golden-reverse lg:gap-20">
-        <EditorialImage image={images.homeIntro} ratio="3/4" sizes="(min-width: 1024px) 34vw, 100vw" className="max-lg:aspect-[4/3]" />
+        <EditorialImage reveal image={images.homeIntro} ratio="3/4" sizes="(min-width: 1024px) 34vw, 100vw" className="max-lg:aspect-[4/3]" />
         <div className="flex flex-col gap-14">
-          <SectionHeading eyebrow={approach.eyebrow} id="abordagem" title={approach.title} lead={approach.lead} />
+          <SectionHeading reveal eyebrow={approach.eyebrow} id="abordagem" title={approach.title} lead={approach.lead} />
           <ol className="border-t border-line">
             {approach.principles.map((p, i) => (
-              <li key={p.title} className="grid gap-2 border-b border-line py-7 sm:grid-cols-[4rem_1fr] sm:gap-6">
+              <li key={p.title} data-reveal data-reveal-delay={i * 90} className="grid gap-2 border-b border-line py-7 sm:grid-cols-[4rem_1fr] sm:gap-6">
                 <span className="font-display text-h3 text-taupe" aria-hidden>
                   {String(i + 1).padStart(2, "0")}
                 </span>

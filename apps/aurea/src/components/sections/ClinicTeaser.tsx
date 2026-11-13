@@ -10,7 +10,7 @@ export function ClinicTeaser() {
   return (
     <section aria-labelledby="clinica-titulo" className="py-section">
       <Container className="flex flex-col gap-section-sm">
-        <EditorialImage image={images.clinicSpace} ratio="16/10" sizes="(min-width: 1440px) 1312px, 100vw" className="max-md:aspect-[4/5]" />
+        <EditorialImage reveal image={images.clinicSpace} ratio="16/10" sizes="(min-width: 1440px) 1312px, 100vw" className="max-md:aspect-[4/5]" />
         <div className="grid gap-12 lg:grid-golden lg:gap-20">
           <div className="flex flex-col items-start gap-8">
             <SectionHeading eyebrow={clinicTeaser.eyebrow} id="clinica-titulo" title={clinicTeaser.title} lead={clinicTeaser.body} />

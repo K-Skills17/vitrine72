@@ -9,7 +9,7 @@ import type { TreatmentSummary } from "@/types/treatment";
 /** Full profile: portrait beside name, role, registration, bio and the treatments they lead. */
 export function ProfessionalProfile({ professional, leads }: { professional: Professional; leads: TreatmentSummary[] }) {
   return (
-    <article aria-labelledby={professional.id} className="grid gap-8 border-t border-line py-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.618fr)] md:gap-16">
+    <article data-reveal aria-labelledby={professional.id} className="grid gap-8 border-t border-line py-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.618fr)] md:gap-16">
       <EditorialImage image={professional.image} ratio="4/5" sizes="(min-width: 768px) 36vw, 100vw" className="max-w-sm" />
       <div className="flex flex-col gap-5">
         <Eyebrow>{professional.role}</Eyebrow>

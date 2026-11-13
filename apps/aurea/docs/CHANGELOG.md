@@ -1,6 +1,21 @@
 # Changelog — ÁUREA
 
-Remaining phases: 8 motion · 9 SEO, end-to-end tests, QA report.
+Remaining phase: 9 SEO, end-to-end tests, QA report.
+
+## 2026-11-13 — Phase 8: motion
+
+### Added
+- `RevealObserver` (motion/, **client**): one IntersectionObserver for every `[data-reveal]` element, re-run on route change. Elements still below the fold after mount fade in and rise 16px over 0.6s with `--ease-aurea`; anything already on screen is never hidden, and nothing is hidden without JavaScript. Optional `data-reveal-delay` staggers list items.
+- `reveal` prop on `SectionHeading` and `EditorialImage`. Applied to section headings, the approach image and principles, journey steps, treatment rows, treatment content sections, professional profiles, the clinic teaser image and the closing CTA.
+- Hero images (`priority`) settle from a 1.04 zoom over 0.9s (`animate-hero-settle`); the image is visible from the first frame.
+
+### Decisions
+- **CSS transitions driven by one observer instead of Motion for React components.** Sections stay Server Components and no animation library ships to the browser. The `motion` package stays installed but is not imported; `config/motion.ts` remains the token reference and its sync test still runs.
+- Reduced motion: the observer does nothing, and the global CSS rule already disables transitions and animations.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (33/33), `build`: pass.
+- Playwright, homepage at 1440px: 18 reveal elements; at load 0 visible elements hidden; after scrolling all 18 shown. With `reducedMotion: "reduce"` none is ever set to pending.
 
 ## 2026-11-13 — Phase 7: conversion
 

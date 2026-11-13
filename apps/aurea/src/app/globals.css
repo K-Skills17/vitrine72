@@ -110,6 +110,35 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr);
 }
 
+/*
+ * Reveal motion (RevealObserver). Elements only become "pending" when they
+ * are below the fold after mount, so first paint never hides content.
+ */
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.6s var(--ease-aurea),
+    transform 0.6s var(--ease-aurea);
+}
+
+/* Hero image settles from a slight zoom; never starts hidden. */
+@keyframes hero-settle {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@utility animate-hero-settle {
+  animation: hero-settle 0.9s var(--ease-aurea) both;
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
