@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-type Vertical = { value: string; label: string; active: boolean };
+type Vertical = { value: string; label: string; active: boolean | null };
 
 const STYLE_GROUP_LABELS: Record<string, string> = {
   "dark-luxury": "Dark Luxury",
@@ -26,7 +26,7 @@ type ReferenceSite = {
   layout_variant: number;
   style_notes: string;
   screenshot_url: string | null;
-  created_at: string;
+  created_at: string | null;
 };
 
 interface Props {

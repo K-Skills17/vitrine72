@@ -113,13 +113,13 @@ export type Database = {
       };
       verticals: {
         Row: Vertical;
-        Insert: Omit<Vertical, "active" | "created_at"> & { active?: boolean };
+        Insert: NullOptional<Vertical>;
         Update: Partial<Vertical>;
         Relationships: never[];
       };
       reference_sites: {
         Row: ReferenceSite;
-        Insert: NullOptional<Omit<ReferenceSite, "id" | "created_at">> & { id?: string };
+        Insert: NullOptional<ReferenceSite>;
         Update: Partial<ReferenceSite>;
         Relationships: never[];
       };
@@ -334,14 +334,14 @@ export type ContractVersion = {
 
 export type Vertical = {
   value: string;
-  created_at: string;
   label: string;
-  active: boolean;
+  active: boolean | null;
+  created_at: string | null;
 }
 
 export type ReferenceSite = {
   id: string;
-  created_at: string;
+  created_at: string | null;
   url: string;
   vertical: string;
   style_group: string;
