@@ -58,7 +58,7 @@ export function Work() {
         {clientSites.length > 0 && (
           <div data-reveal className="flex flex-col gap-6 border-t border-v-line pt-10">
             <Kicker>{work.clientsTitle}</Kicker>
-            <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className={`grid gap-8 sm:grid-cols-2 ${clientSites.length >= 3 ? "lg:grid-cols-3" : ""}`}>
               {clientSites.map((c) => (
                 <li key={c.url}>
                   <a href={c.url} target="_blank" rel="noopener noreferrer" className="group flex h-full flex-col gap-4">

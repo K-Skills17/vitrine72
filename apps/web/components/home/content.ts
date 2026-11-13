@@ -173,7 +173,7 @@ export const rules = {
   title: "O que está combinado desde o primeiro dia.",
   items: [
     { figure: `${RULES.maxRevisionRounds}`, unit: "rodada", title: "de revisão incluída", body: `Você tem ${RULES.revisionWindowHours} h após a prévia para pedir ajustes.` },
-    { figure: `${CORE_OFFER.previewBusinessDays}`, unit: "dias úteis", title: "contados do briefing", body: "O prazo começa quando você termina o formulário, não no pagamento." },
+    { figure: `${CORE_OFFER.previewBusinessDays}`, unit: "dias úteis", title: "contados do briefing", body: "O prazo começa quando você termina o formulário, não no pagamento. Contados pelo calendário de São Paulo." },
     { figure: `${RULES.goLiveMinDays}`, unit: "º dia", title: "mínimo para ir ao ar", body: "Publicação após a sua aprovação, a partir do dia 8 após o pagamento." },
     { figure: "100", unit: "%", title: "do domínio é seu", body: "Registrado no seu CPF ou CNPJ, mesmo se você cancelar qualquer plano." },
   ],
@@ -185,7 +185,7 @@ export const faq = {
   items: [
     {
       q: `O prazo de ${CORE_OFFER.previewBusinessDays} dias úteis começa quando?`,
-      a: "Quando você termina de preencher o formulário de briefing com todas as informações e fotos. Não começa no pagamento.",
+      a: "Quando você termina de preencher o formulário de briefing com todas as informações e fotos. Não começa no pagamento. Os dias úteis são contados pelo calendário de São Paulo, onde a equipe trabalha: fins de semana, feriados nacionais, feriados de São Paulo, Carnaval e Corpus Christi não contam.",
     },
     {
       q: "Quando o site vai ao ar?",

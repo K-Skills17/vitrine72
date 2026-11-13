@@ -23,8 +23,8 @@
       "url": "https://gymeraactive.com",
       "vertical": "loja-online",
       "screenshotUrl": "PLACEHOLDER_SCREENSHOT_GYMERA",
-      "enabled": true,
-      "_note": "English-language US activewear store; screenshot not shown on the homepage (nav hard to read over hero). Decide whether to keep."
+      "enabled": false,
+      "_reason": "Removed 2026-11-13: English-language US store, outside the Brazil local-business positioning."
     },
     {
       "slug": "yohanny",

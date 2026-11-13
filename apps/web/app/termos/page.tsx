@@ -56,7 +56,7 @@ export default function TermosPage() {
               O prazo de entrega da prévia é de até{" "}
               <strong className="text-white">{CORE_OFFER.previewBusinessDays} (três) dias úteis</strong>{" "}
               contados a partir do recebimento completo do formulário de briefing, incluindo o envio de
-              todas as fotos exigidas. Dias úteis não incluem sábados, domingos e feriados nacionais.
+              todas as fotos exigidas. Dias úteis são contados pelo calendário da cidade de São Paulo, onde a equipe trabalha: não incluem sábados, domingos, feriados nacionais, feriados do estado e do município de São Paulo, Carnaval (de segunda a Quarta-feira de Cinzas) e Corpus Christi.
             </p>
             <p>
               O prazo será suspenso caso o Prestador necessite de informações adicionais não fornecidas
