@@ -111,6 +111,18 @@ export type Database = {
         Update: Record<string, never>;
         Relationships: never[];
       };
+      verticals: {
+        Row: Vertical;
+        Insert: Omit<Vertical, "active"> & { active?: boolean };
+        Update: Partial<Vertical>;
+        Relationships: never[];
+      };
+      reference_sites: {
+        Row: ReferenceSite;
+        Insert: NullOptional<Omit<ReferenceSite, "id" | "created_at">> & { id?: string };
+        Update: Partial<ReferenceSite>;
+        Relationships: never[];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -318,4 +330,27 @@ export type ContractVersion = {
   created_at: string;
   version: string;
   content_hash: string;
+}
+
+export type Vertical = {
+  value: string;
+  label: string;
+  active: boolean;
+}
+
+export type ReferenceSite = {
+  id: string;
+  created_at: string;
+  url: string;
+  vertical: string;
+  style_group: string;
+  mood: string;
+  color_scheme: string;
+  primary_color: string;
+  accent_color: string;
+  background_color: string;
+  font_personality: string;
+  layout_variant: number;
+  style_notes: string;
+  screenshot_url: string | null;
 }

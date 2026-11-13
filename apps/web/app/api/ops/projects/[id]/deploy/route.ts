@@ -99,7 +99,7 @@ export async function POST(
 
   // Insert QA report (default: passed = true so it doesn't block preview_sent)
   const qaPassed = body.qa?.passed ?? true;
-  const { data: qaReport } = await supabase
+  await supabase
     .from("qa_reports")
     .insert({
       project_id: id,
