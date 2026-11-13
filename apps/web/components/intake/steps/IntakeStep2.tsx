@@ -24,7 +24,7 @@ interface Props {
   data: Record<string, unknown>;
   onNext: (_update: Record<string, unknown>) => void;
   onBack: () => void;
-  verticals: VerticalOption[];
+  verticals: readonly VerticalOption[];
 }
 
 export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
@@ -74,7 +74,7 @@ export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
           className="input-field"
         >
           <option value="">Selecione…</option>
-          {VERTICALS.map((v) => (
+          {verticals.map((v) => (
             <option key={v.value} value={v.value}>{v.label}</option>
           ))}
         </select>
