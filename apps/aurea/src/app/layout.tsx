@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Script from "next/script";
 import { AnalyticsListener } from "@/components/conversion/AnalyticsListener";
+import { QualifierGate } from "@/components/conversion/QualifierGate";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { DemoNotice } from "@/components/layout/DemoNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -55,6 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="conteudo">{children}</main>
         <Footer />
         <AnalyticsListener />
+        <QualifierGate />
+        <ChatWidget />
 
         {ga4Id && (
           <>

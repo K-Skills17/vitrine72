@@ -16,7 +16,14 @@ Server Components unless marked **client**.
 | Component | Responsibility |
 |---|---|
 | `WhatsAppLink.tsx` | Every WhatsApp CTA. Gets its URL only from `lib/whatsapp.ts` and sets the `data-track` attributes. Props: `location` (required, typed `CtaLocation`), `intent`, `treatmentSlug`, plus the button props. |
+| `QualifierGate.tsx` (**client**) | Four-question gate before every WhatsApp hand-off. Delegated listener on `a[data-destination="whatsapp"]`; set `data-qualify="false"` on a link to bypass it. Builds the message with `buildQualifiedMessage()`. |
 | `AnalyticsListener.tsx` (**client**) | A single delegated click listener that turns `data-track` / `data-cta-location` / `data-treatment` / `data-destination` attributes into `track()` calls. This lets CTAs stay Server Components. |
+
+## chat/
+
+| Component | Responsibility |
+|---|---|
+| `ChatWidget.tsx` (**client**) | lk-chatbot web chat with photo upload. Tenant from `NEXT_PUBLIC_CHATBOT_TENANT_ID`; falls back to WhatsApp (text only) without one. |
 
 ## layout/
 

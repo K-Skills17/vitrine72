@@ -1,5 +1,22 @@
 # Changelog — ÁUREA
 
+## 2026-11-13 — Qualification gate and chatbot (carried over from apps/demo)
+
+### Added
+- `QualifierGate` (conversion/, **client**): the four-question gate from the estética and planejados demos (name, interest, timing, budget) in front of every WhatsApp CTA. One delegated listener intercepts `a[data-destination="whatsapp"]`, so CTAs stay Server Components and still work as plain links if the script fails. Treatment CTAs preselect the treatment and skip that question. Native `<dialog>`.
+- `content/qualifier.ts`: steps, low-fit answers (tracked only, as in the demos' "tag" mode) and copy. `buildQualifiedMessage()` in `lib/whatsapp.ts`, with 2 unit tests.
+- `ChatWidget` (chat/, **client**): lk-chatbot web chat in ÁUREA's style, with **photo upload**. Photos are downscaled in the browser to 1600px JPEG before upload (`lib/chat-image.ts`) and sent as `imageBase64`/`imageMimeType`, which the lk-chatbot `/message` endpoint analyses. Session kept in localStorage; auto-opens once per browser session, as in the demos. Notice under the input that photos go to an external service.
+- `config/chatbot.ts` and `NEXT_PUBLIC_CHATBOT_TENANT_ID`. Without a tenant, typed text goes to WhatsApp and photo upload is hidden.
+- Analytics events: `qualifier_open`, `qualifier_step` (step number only), `qualifier_complete`, `lead_low_fit`, `whatsapp_redirect`.
+
+### Decisions
+- **No "skip the questions" link**, to keep the gate identical in effect to the demos.
+- **Budget ranges kept from the estética demo.** They may be low for a premium clinic; revisit with Vitrini72.
+
+### Verified (actual runs)
+- `typecheck`, `lint`, `test` (15/15), `build`: pass.
+- Playwright at 390px: the hero CTA opens the gate; after 4 answers the gate closes and opens `wa.me` with the expected message. With the chatbot API intercepted in the browser, a photo plus text is sent as `{ sessionId, text, imageBase64, imageMimeType: "image/jpeg" }` (89 KB after downscaling) and the reply renders.
+
 ## 2026-11-13 — Phase 4: homepage
 
 ### Added

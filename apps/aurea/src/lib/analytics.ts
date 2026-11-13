@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-const ALLOWED_PARAMS: ReadonlyArray<keyof AnalyticsParams> = ["page_path", "treatment_slug", "cta_location", "destination"];
+const ALLOWED_PARAMS: ReadonlyArray<keyof AnalyticsParams> = ["page_path", "treatment_slug", "cta_location", "destination", "qualifier_step"];
 
 /** Drops any key that is not on the allow-list, so personal data cannot leak through. */
 export function sanitizeParams(params: object): AnalyticsParams {

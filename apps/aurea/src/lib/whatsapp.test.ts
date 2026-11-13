@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildWhatsAppMessage, buildWhatsAppUrl, normalizeBrazilianNumber } from "./whatsapp";
+import { buildQualifiedMessage, buildWhatsAppMessage, buildWhatsAppUrl, normalizeBrazilianNumber } from "./whatsapp";
 
 describe("normalizeBrazilianNumber", () => {
   it("keeps a valid mobile number with country code", () => {
@@ -68,5 +68,21 @@ describe("buildWhatsAppUrl", () => {
     const url = new URL(buildWhatsAppUrl(message, null));
     expect(url.pathname).toBe("/");
     expect(url.searchParams.get("text")).toBe(message);
+  });
+});
+
+describe("buildQualifiedMessage", () => {
+  it("lists every answer on its own line", () => {
+    const msg = buildQualifiedMessage(
+      { name: "Ana", service: "Skinbooster", timing: "Este mês", budget: "R$500–1.500" },
+      "Clínica ÁUREA",
+    );
+    expect(msg).toBe(
+      "Olá! Sou Ana e vim pelo site da Clínica ÁUREA.\nInteresse: Skinbooster\nQuando: Este mês\nInvestimento previsto: R$500–1.500\nGostaria de agendar uma avaliação.",
+    );
+  });
+
+  it("leaves out missing answers", () => {
+    expect(buildQualifiedMessage({}, "Clínica ÁUREA")).toBe("Olá! Vim pelo site da Clínica ÁUREA.\nGostaria de agendar uma avaliação.");
   });
 });

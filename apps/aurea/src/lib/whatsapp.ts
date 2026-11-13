@@ -41,6 +41,21 @@ export function normalizeBrazilianNumber(raw: string | null | undefined): string
   return digits;
 }
 
+/** Message sent after the qualification gate. Empty answers are left out. */
+export function buildQualifiedMessage(
+  answers: { name?: string; service?: string; timing?: string; budget?: string },
+  clinicName = siteConfig.messageName,
+): string {
+  const lines = [
+    answers.name ? `Olá! Sou ${answers.name} e vim pelo site da ${clinicName}.` : `Olá! Vim pelo site da ${clinicName}.`,
+    answers.service && `Interesse: ${answers.service}`,
+    answers.timing && `Quando: ${answers.timing}`,
+    answers.budget && `Investimento previsto: ${answers.budget}`,
+    "Gostaria de agendar uma avaliação.",
+  ];
+  return lines.filter(Boolean).join("\n");
+}
+
 export function buildWhatsAppMessage(intent: WhatsAppIntent, clinicName = siteConfig.messageName): string {
   const opening = `Olá! Estava conhecendo o site da ${clinicName}`;
   switch (intent.kind) {

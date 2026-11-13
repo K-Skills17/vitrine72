@@ -13,6 +13,11 @@ export const analyticsEvents = [
   "contact_form_start",
   "contact_form_submit",
   "phone_click",
+  "qualifier_open",
+  "qualifier_step",
+  "qualifier_complete",
+  "lead_low_fit",
+  "whatsapp_redirect",
 ] as const;
 
 export type AnalyticsEvent = (typeof analyticsEvents)[number];
@@ -26,4 +31,6 @@ export interface AnalyticsParams {
   treatment_slug?: string;
   cta_location?: string;
   destination?: "whatsapp" | "phone" | "form" | "internal";
+  /** Qualifier step number ("1"–"4"). Never the answer itself. */
+  qualifier_step?: string;
 }
