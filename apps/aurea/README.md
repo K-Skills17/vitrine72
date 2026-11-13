@@ -67,4 +67,4 @@ Create a separate Vercel project with Root Directory `apps/aurea`, install comma
 
 ## Deployment
 
-Its own Vercel project: Root Directory `apps/aurea`, framework Next.js, environment variables as in the table above.
+Its own Vercel project: Root Directory `apps/aurea`, environment variables as in the table above. `apps/aurea/vercel.json` pins the install, build and output settings, so they override anything left in the project's dashboard (for example a build command copied from the main site).
