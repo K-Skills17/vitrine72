@@ -7,11 +7,11 @@ const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "PLACEHOLDER_CONTACT_EMAI
 export function GET(): NextResponse {
   const content = `# Vitrini72
 
-Vitrini72 é um serviço de criação de sites profissionais para negócios locais em São Paulo, Brasil.
+Vitrini72 é um serviço de criação de sites profissionais para negócios locais em todo o Brasil.
 
 ## O que fazemos
 
-Criamos sites institucionais de até 5 páginas para pequenas e médias empresas em São Paulo.
+Criamos sites institucionais de até 5 páginas para pequenas e médias empresas de todo o Brasil. O atendimento é 100% online.
 A prévia do site fica pronta em até 3 dias úteis após o recebimento do briefing completo.
 O site é publicado no mínimo 8 dias após a confirmação do pagamento.
 
@@ -23,7 +23,7 @@ O site é publicado no mínimo 8 dias após a confirmação do pagamento.
 
 ## Área atendida
 
-São Paulo (estado e capital). Negócios locais de todos os segmentos.
+Todo o Brasil, com atendimento online. Negócios locais de todos os segmentos.
 
 ## Segmentos que atendemos
 

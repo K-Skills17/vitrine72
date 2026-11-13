@@ -17,11 +17,11 @@ export function generateMarketingJsonLd() {
     legalName,
     url: siteUrl,
     description:
-      "Serviço de criação de sites profissionais para negócios locais em São Paulo. Site até 5 páginas com prévia em 72 horas úteis.",
+      "Serviço de criação de sites profissionais para negócios locais em todo o Brasil. Site até 5 páginas com prévia em 3 dias úteis.",
     areaServed: {
-      "@type": "State",
-      name: "São Paulo",
-      "@id": "https://www.wikidata.org/wiki/Q175",
+      "@type": "Country",
+      name: "Brasil",
+      "@id": "https://www.wikidata.org/wiki/Q155",
     },
     ...(phone
       ? {

@@ -12,7 +12,7 @@ export function HomeFooter() {
         <div className="flex flex-col gap-3">
           <Wordmark />
           <p className="font-grotesk text-[0.85rem] text-v-muted">
-            {legalName && cnpj ? `${legalName} · CNPJ ${cnpj}` : "Sites para negócios locais em São Paulo"}
+            {legalName && cnpj ? `${legalName} · CNPJ ${cnpj}` : "Sites para negócios locais em todo o Brasil"}
           </p>
           {email && (
             <a href={`mailto:${email}`} className="font-mono text-[0.8rem] text-v-muted hover:text-v-ink">

@@ -16,7 +16,7 @@ import { generateMarketingJsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: { absolute: "Vitrini72 — Sites para negócios locais, prévia em 3 dias úteis" },
   description:
-    "Site profissional de até 5 páginas para negócios locais em São Paulo: celular, WhatsApp e Google Meu Negócio. Prévia em 3 dias úteis. A partir de R$ 1.797 no Pix.",
+    "Site profissional de até 5 páginas para negócios locais em todo o Brasil: celular, WhatsApp e Google Meu Negócio. Prévia em 3 dias úteis. A partir de R$ 1.797 no Pix.",
 };
 
 export default function HomePage() {

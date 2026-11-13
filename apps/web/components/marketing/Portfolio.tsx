@@ -35,7 +35,7 @@ export function Portfolio() {
           </h2>
           <span className="divider-gold mt-6" />
           <p className="text-ink-muted mt-4 max-w-xl mx-auto">
-            Negócios reais em São Paulo que já estão recebendo clientes online.
+            Negócios reais que já estão recebendo clientes online.
           </p>
         </Reveal>
 

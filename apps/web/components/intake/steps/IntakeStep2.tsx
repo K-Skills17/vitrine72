@@ -30,7 +30,7 @@ interface Props {
 export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
   const [form, setForm] = useState<Partial<Step2Data>>({
     vertical: (data.vertical as string) ?? "",
-    city: (data.city as string) ?? "São Paulo",
+    city: (data.city as string) ?? "",
     neighborhoods: (data.neighborhoods as string) ?? "",
     exactAddress: (data.exactAddress as string) ?? "",
     hours: (data.hours as string) ?? "",
@@ -98,7 +98,7 @@ export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
           type="text"
           value={form.neighborhoods ?? ""}
           onChange={(e) => setForm({ ...form, neighborhoods: e.target.value })}
-          placeholder="Pinheiros, Vila Madalena, Lapa"
+          placeholder="Ex.: Centro, Jardim América, Vila Nova"
           className="input-field"
         />
       </FormField>
@@ -111,7 +111,7 @@ export function IntakeStep2({ data, onNext, onBack, verticals }: Props) {
           type="text"
           value={form.exactAddress ?? ""}
           onChange={(e) => setForm({ ...form, exactAddress: e.target.value })}
-          placeholder="Rua Exemplo, 123 — Pinheiros, São Paulo - SP"
+          placeholder="Rua Exemplo, 123 — Bairro, Cidade - UF"
           className="input-field"
         />
       </FormField>

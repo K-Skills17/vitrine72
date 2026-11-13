@@ -14,7 +14,7 @@ export function SiteFooter() {
             <p className="text-ink-subtle text-xs leading-relaxed">
               {legalName} — CNPJ {cnpj}
             </p>
-            <p className="text-ink-faint text-xs mt-1">São Paulo, Brasil</p>
+            <p className="text-ink-faint text-xs mt-1">Atendimento em todo o Brasil</p>
           </div>
 
           {/* Footer nav — improved contrast: text-ink-muted instead of text-gray-600 */}
