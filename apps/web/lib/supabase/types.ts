@@ -113,7 +113,7 @@ export type Database = {
       };
       verticals: {
         Row: Vertical;
-        Insert: Omit<Vertical, "active"> & { active?: boolean };
+        Insert: Omit<Vertical, "active" | "created_at"> & { active?: boolean };
         Update: Partial<Vertical>;
         Relationships: never[];
       };
@@ -334,6 +334,7 @@ export type ContractVersion = {
 
 export type Vertical = {
   value: string;
+  created_at: string;
   label: string;
   active: boolean;
 }
