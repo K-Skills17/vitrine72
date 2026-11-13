@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/*
+ * ÁUREA design tokens — single source of truth.
+ * Documented in docs/DESIGN_SYSTEM.md. Motion easing is mirrored in
+ * src/config/motion.ts and kept in sync by src/config/motion.test.ts.
+ */
+
+@theme {
+  /* Remove Tailwind's default palette so off-brand colours cannot be used. */
+  --color-*: initial;
+
+  /* Surfaces */
+  --color-ivory: #f4efe8; /* main background */
+  --color-porcelain: #fcfaf7; /* raised / secondary surfaces */
+  --color-sand: #e9e1d5; /* image placeholders, quiet section variation */
+  --color-espresso: #292720; /* primary text, dark sections, primary button */
+
+  /* Text */
+  --color-umber: #62594e; /* secondary text — 6.0:1 on ivory */
+  --color-sage-deep: #5e6055; /* eyebrows / small accent text — 5.6:1 on ivory */
+
+  /* Accents (non-text on light surfaces) */
+  --color-taupe: #a99b8b; /* supporting lines; text only on espresso (5.5:1) */
+  --color-champagne: #d5c2a5; /* restrained accent; text on espresso (8.6:1) */
+  --color-sage: #85877a; /* decorative only on light (3.2:1) */
+  --color-line: #ddd5ca; /* dividers and borders */
+
+  /* Feedback */
+  --color-error: #8a3b2e;
+
+  /* Type scale — fluid between 360px and 1440px viewports */
+  --text-display: clamp(2.75rem, 1.6rem + 4.6vw, 5rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.015em;
+
+  --text-h1: clamp(2.5rem, 1.7rem + 3.2vw, 4.25rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.01em;
+
+  --text-h2: clamp(2.125rem, 1.6rem + 2vw, 3.25rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.005em;
+
+  --text-h3: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+  --text-h3--line-height: 1.18;
+
+  --text-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --text-body--line-height: 1.7;
+
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.6;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --text-nav: 0.8125rem;
+  --text-nav--line-height: 1.4;
+  --text-nav--letter-spacing: 0.06em;
+
+  --text-button: 0.8125rem;
+  --text-button--line-height: 1.2;
+  --text-button--letter-spacing: 0.12em;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  --text-legal: 0.75rem;
+  --text-legal--line-height: 1.55;
+
+  /* Spacing additions (Tailwind's 0.25rem base scale stays available) */
+  --spacing-gutter: clamp(1.25rem, 0.5rem + 3vw, 4rem);
+  --spacing-section: clamp(5rem, 3rem + 7vw, 10rem);
+  --spacing-section-sm: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  --spacing-header: 4.5rem;
+  --spacing-sticky-cta: 4.25rem;
+
+  /* Content widths */
+  --container-page: 90rem; /* 1440px */
+  --container-prose: 38rem; /* ~68 characters of body text */
+  --container-lead: 34rem;
+
+  /* Radii — the identity is square-edged; 2px only for inputs and focus */
+  --radius-xs: 2px;
+
+  /* Motion */
+  --ease-aurea: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 240ms;
+  --default-transition-timing-function: var(--ease-aurea);
+}
+
+/*
+ * Font families. `inline` because the values reference variables that
+ * next/font sets on <html> (see layout.tsx).
+ */
+@theme inline {
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+}
+
+/* Golden-ratio column split: the compositional idea behind the name. */
+@utility grid-golden {
+  grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr);
+}
+@utility grid-golden-reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne);
+    color: var(--color-espresso);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-espresso);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+      transition-duration: 0.01ms;
+    }
+  }
+}
