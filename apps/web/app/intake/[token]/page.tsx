@@ -71,7 +71,7 @@ export default async function IntakePage({ params }: Props) {
             (existingSubmission?.data as Record<string, unknown>) ?? {}
           }
           submissionId={existingSubmission?.id ?? null}
-          verticals={verticalsData ?? undefined}
+          verticals={verticalsData?.length ? verticalsData : undefined}
         />
       </div>
     </main>
