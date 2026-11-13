@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { MAX_IMAGE_BYTES, prepareChatImage, type PreparedImage } from "../lib/chat-image";
 
 interface Props {
   tenantId?: string;
@@ -12,6 +13,8 @@ interface Props {
 interface Message {
   content: string;
   role: "user" | "assistant";
+  /** Local preview of a photo the visitor sent (not reloaded from history). */
+  imageUrl?: string;
 }
 
 const API_BASE = "https://lk-chatbot-production.up.railway.app/api/webchat";
@@ -25,6 +28,9 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
   const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<PreparedImage | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
 
   const storageKey = tenantId ? `lk_chat_session_${tenantId}` : null;
 
@@ -86,12 +92,30 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
     return id;
   }, [tenantId, storageKey]);
 
+  const onPickFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      setImage(await prepareChatImage(file));
+      setImageError(null);
+    } catch (err) {
+      setImageError(
+        (err as Error).message === "too-large"
+          ? `Imagem muito grande. Máximo ${MAX_IMAGE_BYTES / 1024 / 1024} MB.`
+          : "Não foi possível ler este arquivo. Envie uma foto (JPG ou PNG)."
+      );
+    }
+  };
+
   const sendMessage = async () => {
     const text = input.trim();
-    if (!text || loading || !tenantId) return;
+    const sentImage = image;
+    if ((!text && !sentImage) || loading || !tenantId) return;
 
     setInput("");
-    setMessages((prev) => [...prev, { content: text, role: "user" }]);
+    setImage(null);
+    setMessages((prev) => [...prev, { content: text, role: "user", imageUrl: sentImage?.dataUrl }]);
     setLoading(true);
 
     try {
@@ -101,7 +125,11 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
       const res = await fetch(`${API_BASE}/${tenantId}/message`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId: sid, text }),
+        body: JSON.stringify({
+          sessionId: sid,
+          text,
+          ...(sentImage ? { imageBase64: sentImage.base64, imageMimeType: sentImage.mimeType } : {}),
+        }),
       });
       const data = await res.json();
 
@@ -186,7 +214,9 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
             {messages.length === 0 && !loading && (
               <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
                 <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "#1e293b", margin: "0 0 0.25rem" }}>Olá! Como posso ajudar?</p>
-                <p style={{ fontSize: "0.75rem", color: "#94a3b8", margin: 0 }}>Digite sua dúvida abaixo.</p>
+                <p style={{ fontSize: "0.75rem", color: "#94a3b8", margin: 0 }}>
+                  Digite sua dúvida abaixo.{tenantId ? " Você também pode enviar uma foto." : ""}
+                </p>
               </div>
             )}
             {messages.map((msg, i) => (
@@ -199,7 +229,11 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
                   borderBottomRightRadius: msg.role === "user" ? "0.25rem" : "0.875rem",
                   borderBottomLeftRadius: msg.role === "user" ? "0.875rem" : "0.25rem",
                 }}>
-                  {formatText(msg.content)}
+                  {msg.imageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element -- local data URL preview
+                    <img src={msg.imageUrl} alt="Foto enviada" style={{ display: "block", width: "100%", maxHeight: "12rem", objectFit: "cover", borderRadius: "0.5rem", marginBottom: msg.content ? "0.5rem" : 0 }} />
+                  )}
+                  {msg.content && formatText(msg.content)}
                 </div>
               </div>
             ))}
@@ -215,8 +249,45 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Photo preview / error */}
+          {(image || imageError) && (
+            <div style={{ padding: "0.5rem 1rem 0", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              {image && (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- local data URL preview */}
+                  <img src={image.dataUrl} alt="Pré-visualização da foto" style={{ width: "3rem", height: "3rem", objectFit: "cover", borderRadius: "0.5rem" }} />
+                  <span style={{ flex: 1, fontSize: "0.75rem", color: "#64748b" }}>Foto pronta para enviar</span>
+                  <button onClick={() => setImage(null)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.75rem", color: "#64748b", textDecoration: "underline", padding: "0.5rem" }}>
+                    Remover
+                  </button>
+                </>
+              )}
+              {imageError && <span style={{ fontSize: "0.75rem", color: "#b91c1c" }}>{imageError}</span>}
+            </div>
+          )}
+
           {/* Input */}
           <div style={{ padding: "0.75rem 1rem", borderTop: "1px solid #e2e8f0", display: "flex", gap: "0.5rem", alignItems: "flex-end" }}>
+            {tenantId && (
+              <>
+                <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onPickFile} />
+                <button
+                  onClick={() => fileRef.current?.click()}
+                  aria-label="Enviar foto"
+                  style={{
+                    width: "2.5rem", height: "2.5rem", flexShrink: 0, borderRadius: "0.625rem",
+                    border: "1px solid #e2e8f0", background: "#f8fafc", cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <circle cx="9" cy="10" r="1.75" />
+                    <path d="m21 16-5-5-8 8" />
+                  </svg>
+                </button>
+              </>
+            )}
             <textarea
               ref={inputRef}
               value={input}
@@ -232,11 +303,11 @@ export default function ChatbotEmbed({ tenantId, primaryColor = "#2563eb", heade
             />
             <button
               onClick={() => tenantId ? sendMessage() : sendToWhatsApp()}
-              disabled={!input.trim() || loading}
+              disabled={(!input.trim() && !image) || loading}
               style={{
                 width: "2.5rem", height: "2.5rem", flexShrink: 0, borderRadius: "0.625rem",
-                backgroundColor: input.trim() ? primaryColor : "#e2e8f0",
-                border: "none", cursor: input.trim() ? "pointer" : "default",
+                backgroundColor: input.trim() || image ? primaryColor : "#e2e8f0",
+                border: "none", cursor: input.trim() || image ? "pointer" : "default",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 transition: "background-color 0.15s",
               }}
