@@ -1,0 +1,115 @@
+{
+  "projectId": "fixture-buffet",
+  "slug": "buffet-casa-amarela",
+  "vertical": "buffet-eventos",
+  "businessName": "Buffet Casa Amarela",
+  "address": "Av. Getúlio Vargas, 450 — Savassi, Belo Horizonte - MG",
+  "phone": "31991112233",
+  "hours": "Visitas com hora marcada\nSeg–Sáb 10h–19h",
+  "hoursArray": [],
+  "neighborhoods": [
+    "Savassi",
+    "Funcionários",
+    "Lourdes"
+  ],
+  "services": [
+    {
+      "name": "Aniversários",
+      "description": "",
+      "price": "A partir de R$ 6.500"
+    },
+    {
+      "name": "Casamentos",
+      "description": "",
+      "price": "Sob orçamento"
+    },
+    {
+      "name": "Eventos corporativos",
+      "description": "",
+      "price": "Sob orçamento"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Qual a capacidade do salão?",
+      "a": ""
+    },
+    {
+      "q": "Posso levar meu próprio bolo?",
+      "a": ""
+    }
+  ],
+  "gbpLink": "https://maps.google.com/?cid=0",
+  "instagramLink": null,
+  "primaryAction": "phone",
+  "primaryActionUrl": "tel:+5531991112233",
+  "palette": {
+    "id": "graphite-signal",
+    "primary": "#b23c17",
+    "secondary": "#f1efec",
+    "accent": "#b23c17",
+    "background": "#fbfaf8",
+    "text": "#1b1a19"
+  },
+  "fontPair": {
+    "id": "bricolage-dm-sans",
+    "display": "Bricolage Grotesque",
+    "body": "DM Sans",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=DM+Sans:wght@400;500;600&display=swap"
+  },
+  "layoutVariant": 2,
+  "heroStyle": "fullscreen-photo",
+  "cardStyle": "card-bordered",
+  "aboutStyle": "about-credentials",
+  "photos": [
+    "/_fixtures/corredor-marmore.jpg"
+  ],
+  "logoPath": null,
+  "gbpData": {
+    "placeId": "x",
+    "rating": 4.8,
+    "reviewCount": 214,
+    "competitors": [],
+    "customerPhrases": [],
+    "reviews": [
+      {
+        "author": "Carla M.",
+        "rating": 5,
+        "text": "Fizemos o aniversário de 15 anos da minha filha. A equipe resolveu tudo no dia, sem a gente precisar se preocupar.",
+        "date": "2026-09-02"
+      },
+      {
+        "author": "Rafael T.",
+        "rating": 5,
+        "text": "Comida boa e serviço no horário combinado. O salão é exatamente como nas fotos.",
+        "date": "2026-08-11"
+      },
+      {
+        "author": "Juliana P.",
+        "rating": 4,
+        "text": "Organização muito boa. Só o estacionamento que é apertado em dia de evento grande.",
+        "date": "2026-07-20"
+      }
+    ]
+  },
+  "copyBlocks": {
+    "heroHeadline": "Festas na Savassi, do convite ao último convidado",
+    "heroSubheadline": "Salão para até 180 pessoas, cozinha própria e equipe de serviço. Visite com hora marcada.",
+    "aboutText": "O Buffet Casa Amarela funciona num casarão reformado na Savassi, com cozinha própria e equipe fixa de serviço.",
+    "serviceDescriptions": {
+      "Aniversários": "Cardápio, decoração e equipe para festas de até 180 convidados.",
+      "Casamentos": "Cerimônia e recepção no mesmo espaço, com degustação antes do contrato.",
+      "Eventos corporativos": "Almoços, lançamentos e confraternizações em dias úteis."
+    },
+    "faqAnswers": {
+      "Qual a capacidade do salão?": "Até 180 pessoas em pé ou 120 sentadas.",
+      "Posso levar meu próprio bolo?": "Pode. Cobramos apenas o serviço de corte e montagem."
+    },
+    "sourceFacts": {}
+  },
+  "selfEditSheetUrl": null,
+  "updatedAt": "2026-11-04",
+  "animationProfile": "minimal",
+  "signatureElementEnabled": false,
+  "jsonLd": {}
+}

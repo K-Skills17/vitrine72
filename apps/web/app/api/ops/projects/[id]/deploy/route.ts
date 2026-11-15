@@ -21,10 +21,11 @@
  *
  * On success:
  *   - Sets preview_url on the project
- *   - Inserts a qa_reports row (passed = true unless overridden)
+ *   - Inserts a qa_reports row. Fails closed: passed is true only when the
+ *     caller sends qa.passed === true (a missing QA result is not a pass)
  *   - Generates edit_token if missing
- *   - Auto-transitions: in_production → qa → preview_sent
- *   - Emails the client with the preview link + revision link
+ *   - Auto-transitions: in_production → qa → preview_sent (preview_sent only if QA passed)
+ *   - Emails the client with the preview link + revision link (only on preview_sent)
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -97,8 +98,9 @@ export async function POST(
     .update({ preview_url: body.preview_url, edit_token: editToken })
     .eq("id", id);
 
-  // Insert QA report (default: passed = true so it doesn't block preview_sent)
-  const qaPassed = body.qa?.passed ?? true;
+  // Insert QA report. Fail closed: only an explicit pass may reach
+  // preview_sent and email the client. Anything else stays in `qa` for the operator.
+  const qaPassed = body.qa?.passed === true;
   await supabase
     .from("qa_reports")
     .insert({

@@ -32,7 +32,8 @@ export type Mood =
   | "natural"
   | "vibrant"
   | "classic"
-  | "artisan";
+  | "artisan"
+  | "modern";
 
 export type ColorScheme = "light" | "dark" | "colorful";
 export type FontPersonality = "elegant" | "modern" | "friendly" | "bold" | "clean";

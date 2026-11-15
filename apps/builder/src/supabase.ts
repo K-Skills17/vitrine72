@@ -21,6 +21,10 @@ export type IntakeData = {
   instagram_link?: string;
   whatsapp?: string;
   vertical?: string;
+  /** Client confirmed their professional council allows showing reviews. */
+  show_reviews?: boolean;
+  /** Style chosen in the intake style picker (see reference-sites.ts StyleGroup). */
+  style_group?: string;
   primary_action?: "whatsapp" | "phone" | "form";
 };
 

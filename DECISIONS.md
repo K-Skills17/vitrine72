@@ -24,3 +24,7 @@
 | Annual holidays list seeded for 2026–2027; flagged in NEEDS for operator confirmation | Reduces blocking; operator must verify before first production intake. |
 | Before/after slider hidden unless client supplies paired images in intake | Avoids showing one-sided images; better UX. |
 | Portfolio `biodonth.com.br`, `studioafrorosas.com.br`, `gymeraactive.com` included; `yohanny-kamilly.vercel.app` gated behind `enabled: false` in portfolio.json | Spec requirement. |
+| Builder QA fails closed (2026-11) | `apps/builder/src/qa.ts` runs real checks; the deploy endpoint treats a missing QA result as a fail, so no client is emailed an unchecked preview. |
+| Builder palettes and fonts are a checked preset list (2026-11) | `apps/builder/src/design-presets.ts`; a test enforces WCAG AA for the colour pairs the template renders. 10 of the previous 11 palettes failed. |
+| Client-site template rebuilt on the editorial framework (2026-11) | Same config contract and routes; variants map to editorial compositions; `framer-motion` removed; fixture-based checks in `apps/client-site/scripts/fixtures`. See `apps/client-site/README.md`. |
+| `primaryAction: "form"` opens WhatsApp (2026-11) | The template has no form backend; linking to a contact page without a form created a loop. |

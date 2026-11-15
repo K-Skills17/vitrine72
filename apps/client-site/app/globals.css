@@ -2,85 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Palette — overridden inline by layout.tsx */
-  --color-primary: #1565c0;
-  --color-secondary: #f5f8ff;
-  --color-accent: #ff6f00;
-  --color-bg: #ffffff;
-  --color-text: #1a1a1a;
+/*
+ * Colour and font variables are set inline on <html> by app/layout.tsx from
+ * the generated site-config (lib/theme.ts). Nothing here redeclares them.
+ */
 
-  /* Fonts — overridden inline by layout.tsx */
-  --font-display: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    text-wrap: balance;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  line-height: 1.2;
-}
+  ::selection {
+    background-color: var(--c-accent);
+    color: #ffffff;
+  }
 
-/* Focus ring — accessible */
-*:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
+  :focus-visible {
+    outline: 2px solid var(--c-ink);
+    outline-offset: 3px;
+  }
 
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  /* Native <details> accordion: no default marker */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary {
+    list-style: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+      transition-duration: 0.01ms;
+    }
   }
 }
 
-/* Utility classes */
-.btn-primary {
-  @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-200;
-  background-color: var(--color-primary);
-}
-.btn-primary:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-accent {
-  @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-200;
-  background-color: var(--color-accent);
-}
-.btn-accent:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-}
-
-.section-padding {
-  @apply py-16 px-4 md:py-24;
-}
-
-.container-narrow {
-  @apply max-w-5xl mx-auto;
-}
-
-.container-wide {
-  @apply max-w-7xl mx-auto;
+/* Scroll reveal (components/motion/RevealObserver.tsx). Content is visible
+   by default; only when JS has run and motion is allowed does it start hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .js-reveal [data-reveal] {
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }

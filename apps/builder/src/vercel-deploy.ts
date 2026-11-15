@@ -74,7 +74,7 @@ async function uploadFile(file: VercelFile, token: string, teamId?: string): Pro
       "x-vercel-digest": file.sha,
       "Content-Length": String(file.size),
     },
-    body: file.content,
+    body: new Uint8Array(file.content),
   });
 
   if (!res.ok && res.status !== 200) {

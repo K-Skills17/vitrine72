@@ -1,0 +1,6 @@
+.next
+node_modules
+public/_fixtures
+scripts/fixtures/out
+*.tsbuildinfo
+next-env.d.ts

@@ -1,35 +1,10 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { IntakeData, Research } from "./supabase.js";
 import type { ReferenceSite } from "./reference-sites.js";
+import { FONT_PAIRS, PALETTES, resolveFontPair, resolvePalette, type FontPair, type Palette } from "./design-presets.js";
+import { isRegulatedVertical, loadBannedPhrases } from "./qa.js";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-// ─── Palettes ─────────────────────────────────────────────────────────────────
-
-const PALETTES: Record<string, SiteConfig["palette"]> = {
-  "dark-elegance":   { id: "dark-elegance",   primary: "#c5a368", secondary: "#1e1e1e", accent: "#c5a368", background: "#111111", text: "#ffffff" },
-  "rose-gold":       { id: "rose-gold",        primary: "#b76e79", secondary: "#fff5f5", accent: "#8b5e3c", background: "#ffffff", text: "#1a1a1a" },
-  "deep-plum":       { id: "deep-plum",        primary: "#5b2d6a", secondary: "#f8f4ff", accent: "#c5a368", background: "#ffffff", text: "#1a1a1a" },
-  "sage-green":      { id: "sage-green",       primary: "#2d6a4f", secondary: "#f4f9f4", accent: "#d4a853", background: "#ffffff", text: "#1a1a1a" },
-  "midnight-teal":   { id: "midnight-teal",    primary: "#0d5c63", secondary: "#f0f8f8", accent: "#f4a261", background: "#ffffff", text: "#1a1a1a" },
-  "clean-blue":      { id: "clean-blue",       primary: "#1565c0", secondary: "#f5f8ff", accent: "#ff6f00", background: "#ffffff", text: "#1a1a1a" },
-  "warm-terracotta": { id: "warm-terracotta",  primary: "#c0522c", secondary: "#fff5ef", accent: "#2d6a4f", background: "#ffffff", text: "#1a1a1a" },
-  "coral-energy":    { id: "coral-energy",     primary: "#ff6b35", secondary: "#fff4ee", accent: "#2d4a6e", background: "#ffffff", text: "#1a1a1a" },
-  "dark-teal":       { id: "dark-teal",        primary: "#7fffd4", secondary: "#0d1f1f", accent: "#7fffd4", background: "#0a1a1a", text: "#ffffff" },
-  "dark-plum":       { id: "dark-plum",        primary: "#c77dff", secondary: "#1a0a2e", accent: "#ff6b9d", background: "#1a0a2e", text: "#ffffff" },
-  "classic-gold":    { id: "classic-gold",     primary: "#8b6914", secondary: "#fffdf5", accent: "#d4af37", background: "#fdfcfb", text: "#1a1a1a" },
-};
-
-// ─── Font pairs ───────────────────────────────────────────────────────────────
-
-const FONT_PAIRS: Record<string, SiteConfig["fontPair"]> = {
-  "playfair-lato":       { id: "playfair-lato",       display: "Playfair Display", body: "Lato",      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" },
-  "cormorant-raleway":   { id: "cormorant-raleway",   display: "Cormorant Garamond", body: "Raleway", googleFontsUrl: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&display=swap" },
-  "montserrat-opensans": { id: "montserrat-opensans", display: "Montserrat",      body: "Open Sans",  googleFontsUrl: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" },
-  "inter-inter":         { id: "inter-inter",         display: "Inter",            body: "Inter",      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" },
-  "dm-serif-dm-sans":    { id: "dm-serif-dm-sans",    display: "DM Serif Display", body: "DM Sans",   googleFontsUrl: "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" },
-  "josefin-lato":        { id: "josefin-lato",        display: "Josefin Sans",     body: "Lato",      googleFontsUrl: "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" },
-};
 
 // ─── Visual profiles per style group ─────────────────────────────────────────
 // These drive actual structural/component differences — not just copy tone.
@@ -66,20 +41,8 @@ export type SiteConfig = {
   instagramLink: string | null;
   primaryAction: string;
   primaryActionUrl: string;
-  palette: {
-    id: string;
-    primary: string;
-    secondary: string;
-    accent: string;
-    background: string;
-    text: string;
-  };
-  fontPair: {
-    id: string;
-    display: string;
-    body: string;
-    googleFontsUrl: string;
-  };
+  palette: Palette;
+  fontPair: FontPair;
   layoutVariant: number;
   heroStyle: string;
   cardStyle: string;
@@ -139,7 +102,11 @@ export async function generateSiteConfig(params: {
   const faqs = intake.faqs ?? [];
   const neighborhoods = intake.neighborhoods ?? [];
 
-  const gbpData = research ? {
+  // Councils for regulated professions restrict testimonials and ratings in
+  // advertising, so reviews are off for those verticals unless the client
+  // explicitly confirms they may show them (intake.show_reviews).
+  const showReviews = !isRegulatedVertical(vertical) || intake.show_reviews === true;
+  const gbpData = research && showReviews ? {
     placeId: research.gbp_place_id ?? "",
     rating: research.rating ?? 0,
     reviewCount: research.review_count ?? 0,
@@ -156,7 +123,13 @@ export async function generateSiteConfig(params: {
     max_tokens: 2048,
     system: `Você é um especialista em copywriting para pequenos negócios locais brasileiros.
 Você gera conteúdo para sites de empresas do setor de ${vertical} em São Paulo.
-Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.`,
+Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.
+
+Regras de texto:
+- Português brasileiro natural, frases curtas, substantivos concretos, sem superlativos.
+- Use apenas fatos fornecidos. Nunca invente números, anos de experiência, prêmios, registros profissionais, depoimentos ou avaliações.
+- Nunca use estas expressões: ${loadBannedPhrases().join("; ")}.${isRegulatedVertical(vertical) ? `
+- Este é um setor regulado por conselho profissional: não prometa resultados, não use "garantido", "100%", "sem dor", "sem risco", "antes e depois" ou "resultado definitivo". Indicações são sempre definidas em avaliação.` : ""}`,
     messages: [{ role: "user", content: prompt }],
   });
 
@@ -174,9 +147,9 @@ Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.`,
     throw new Error(`Claude returned invalid JSON: ${rawText.slice(0, 200)}`);
   }
 
-  // Validate and fallback palette/font
-  const palette = PALETTES[generated.paletteId] ?? PALETTES["rose-gold"]!;
-  const fontPair = FONT_PAIRS[generated.fontPairId] ?? FONT_PAIRS["playfair-lato"]!;
+  // Unknown or retired ids resolve to the closest checked preset
+  const palette = resolvePalette(generated.paletteId);
+  const fontPair = resolveFontPair(generated.fontPairId);
 
   // Visual profile from style group — drives component structure, not just colors
   const visualProfile = STYLE_GROUP_PROFILES[referenceSite.styleGroup] ?? DEFAULT_PROFILE;
@@ -186,7 +159,7 @@ Responda APENAS com um objeto JSON válido, sem markdown, sem explicações.`,
   const cleanPhone = phone.replace(/\D/g, "");
   const intlPhone = cleanPhone.startsWith("55") ? cleanPhone : `55${cleanPhone}`;
   const primaryActionUrl = primaryAction === "whatsapp"
-    ? `https://wa.me/${intlPhone}?text=${encodeURIComponent("Olá, vi seu site e gostaria de mais informações.")}`
+    ? `https://wa.me/${intlPhone}?text=${encodeURIComponent(`Olá! Vi o site da ${businessName} e gostaria de mais informações.`)}`
     : `tel:+${intlPhone}`;
 
   // Slug from business name

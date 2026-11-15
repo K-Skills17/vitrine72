@@ -12,6 +12,9 @@ RUN npm install
 COPY apps/builder/src/ ./src/
 COPY apps/builder/tsconfig.json ./
 
+# Shared copy rules read by src/qa.ts and the generation prompt
+COPY config/banned-phrases.json ./config/banned-phrases.json
+
 # Copy client-site template (the builder reads these at runtime to upload to Vercel)
 COPY apps/client-site/ ./template/
 
