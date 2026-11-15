@@ -1,0 +1,124 @@
+{
+  "projectId": "demo-estetica-dark-luxury",
+  "slug": "clinica-ambar",
+  "vertical": "estetica",
+  "businessName": "Clínica Âmbar",
+  "address": "Rua Oscar Freire, 487 — Jardins, São Paulo - SP",
+  "phone": "11991234567",
+  "hours": "Seg–Sex 9h–19h\nSáb 9h–15h",
+  "hoursArray": [
+    "Segunda a Sexta, 9h–19h",
+    "Sábados, 9h–15h"
+  ],
+  "neighborhoods": [
+    "Jardins",
+    "Itaim Bibi",
+    "Moema",
+    "Vila Olímpia"
+  ],
+  "services": [
+    {
+      "name": "Toxina Botulínica",
+      "description": "Suavização de expressões com precisão cirúrgica. Resultados naturais que preservam a sua identidade.",
+      "price": "A partir de R$ 1.200"
+    },
+    {
+      "name": "Preenchimento Facial",
+      "description": "Restauração de volumes e contornos com ácido hialurônico de alta densidade. Sem exageros.",
+      "price": "A partir de R$ 1.800"
+    },
+    {
+      "name": "Skinbooster",
+      "description": "Hidratação profunda e renovação celular. Sua pele visivelmente mais luminosa em 48 horas.",
+      "price": "A partir de R$ 1.400"
+    },
+    {
+      "name": "Fio de PDO",
+      "description": "Lifting não cirúrgico de efeito imediato. Sustentação e reposicionamento tissular sem bisturi.",
+      "price": "Consulta necessária"
+    },
+    {
+      "name": "Harmonização Facial",
+      "description": "Protocolo personalizado de múltiplos tratamentos combinados. Uma análise completa do seu rosto, não um procedimento isolado.",
+      "price": "A partir de R$ 3.500"
+    },
+    {
+      "name": "Bioestimulador de Colágeno",
+      "description": "Estímulo profundo à produção natural de colágeno. Resultado gradual, duradouro, definitivamente seu.",
+      "price": "A partir de R$ 2.200"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Como é feita a primeira consulta?",
+      "a": "A consulta inicial é uma conversa. Avaliamos sua pele, escutamos o que você deseja e, juntos, desenhamos um protocolo que respeite sua identidade. Sem julgamentos, sem pressão."
+    },
+    {
+      "q": "Os procedimentos são dolorosos?",
+      "a": "Aplicamos anestésico tópico antes de qualquer procedimento. A maior parte dos tratamentos é descrita pelos pacientes como levemente desconfortável — longe de dolorosa."
+    },
+    {
+      "q": "Quanto tempo duram os resultados?",
+      "a": "Varia conforme o tratamento e o metabolismo de cada pessoa. Toxina botulínica dura de 4 a 6 meses; preenchedores, de 12 a 18 meses; bioestimuladores, até 2 anos."
+    },
+    {
+      "q": "Preciso de tempo de recuperação?",
+      "a": "A maioria dos procedimentos tem recuperação mínima — você sai caminhando e retoma sua rotina no mesmo dia. Eventuais hematomas desaparecem em 3 a 5 dias."
+    },
+    {
+      "q": "Quem realiza os procedimentos?",
+      "a": "Todos os procedimentos são realizados exclusivamente por médicos especializados em medicina estética. Não trabalhamos com técnicos ou esteticistas para procedimentos injetáveis."
+    }
+  ],
+  "gbpLink": null,
+  "instagramLink": "@clinica.ambar",
+  "primaryAction": "whatsapp",
+  "primaryActionUrl": "https://wa.me/5511991234567?text=Ol%C3%A1%21%20Vi%20o%20site%20da%20Cl%C3%ADnica%20%C3%82mbar%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.",
+  "palette": {
+    "id": "night-brass",
+    "primary": "#c9a96e",
+    "secondary": "#1d1b18",
+    "accent": "#7d5f28",
+    "background": "#121110",
+    "text": "#f3eee6"
+  },
+  "fontPair": {
+    "id": "cormorant-manrope",
+    "display": "Cormorant Garamond",
+    "body": "Manrope",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap"
+  },
+  "layoutVariant": 3,
+  "heroStyle": "minimal-dark",
+  "cardStyle": "card-dark",
+  "aboutStyle": "about-centered",
+  "photos": [],
+  "logoPath": null,
+  "gbpData": null,
+  "copyBlocks": {
+    "heroHeadline": "Pele tratada com critério, sem pressa",
+    "heroSubheadline": "Medicina estética de alto padrão nos Jardins. Procedimentos injetáveis realizados exclusivamente por médicos especialistas.",
+    "aboutText": "A Clínica Âmbar nasceu da convicção de que a estética médica deve revelar — nunca transformar.\n\nTrabalhamos com protocolos personalizados, materiais premium e uma única premissa: que ao sair daqui, você se reconheça no espelho. Mais descansada, mais luminosa, mais você.\n\nEstamos nos Jardins desde 2019, atendendo pacientes que buscam resultados discretos e duradouros — sem o exagero que se tornou comum.",
+    "serviceDescriptions": {
+      "Toxina Botulínica": "Suavização de expressões com precisão cirúrgica. Resultados naturais que preservam a sua identidade.",
+      "Preenchimento Facial": "Restauração de volumes e contornos com ácido hialurônico de alta densidade. Sem exageros.",
+      "Skinbooster": "Hidratação profunda e renovação celular. Sua pele visivelmente mais luminosa em 48 horas.",
+      "Fio de PDO": "Lifting não cirúrgico de efeito imediato. Sustentação e reposicionamento tissular sem bisturi.",
+      "Harmonização Facial": "Protocolo personalizado de múltiplos tratamentos combinados. Uma análise completa do seu rosto, não um procedimento isolado.",
+      "Bioestimulador de Colágeno": "Estímulo profundo à produção natural de colágeno. Resultado gradual, duradouro, definitivamente seu."
+    },
+    "faqAnswers": {
+      "Como é feita a primeira consulta?": "A consulta inicial é uma conversa. Avaliamos sua pele, escutamos o que você deseja e, juntos, desenhamos um protocolo que respeite sua identidade. Sem julgamentos, sem pressão.",
+      "Os procedimentos são dolorosos?": "Aplicamos anestésico tópico antes de qualquer procedimento. A maior parte dos tratamentos é descrita pelos pacientes como levemente desconfortável — longe de dolorosa.",
+      "Quanto tempo duram os resultados?": "Varia conforme o tratamento e o metabolismo de cada pessoa. Toxina botulínica dura de 4 a 6 meses; preenchedores, de 12 a 18 meses; bioestimuladores, até 2 anos.",
+      "Preciso de tempo de recuperação?": "A maioria dos procedimentos tem recuperação mínima — você sai caminhando e retoma sua rotina no mesmo dia. Eventuais hematomas desaparecem em 3 a 5 dias.",
+      "Quem realiza os procedimentos?": "Todos os procedimentos são realizados exclusivamente por médicos especializados em medicina estética. Não trabalhamos com técnicos ou esteticistas para procedimentos injetáveis."
+    },
+    "sourceFacts": {}
+  },
+  "selfEditSheetUrl": null,
+  "updatedAt": "2026-11-04",
+  "animationProfile": "minimal",
+  "signatureElementEnabled": false,
+  "jsonLd": {}
+}

@@ -1,0 +1,112 @@
+{
+  "projectId": "fixture-marcenaria",
+  "slug": "oficina-pau-brasil",
+  "vertical": "moveis-planejados",
+  "businessName": "Oficina Pau-Brasil",
+  "address": "Rua Fradique Coutinho, 1120 — Pinheiros, São Paulo - SP",
+  "phone": "11987654321",
+  "hours": "Seg–Sex 8h–18h\nSáb 9h–13h",
+  "hoursArray": [
+    "Seg–Sex 8h–18h",
+    "Sáb 9h–13h"
+  ],
+  "neighborhoods": [
+    "Pinheiros",
+    "Vila Madalena",
+    "Alto de Pinheiros",
+    "Perdizes"
+  ],
+  "services": [
+    {
+      "name": "Cozinhas sob medida",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Closets e dormitórios",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Home office",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Painéis e estantes",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Restauro de móveis",
+      "description": "",
+      "price": "Sob orçamento"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Qual o prazo de entrega?",
+      "a": ""
+    },
+    {
+      "q": "Vocês fazem o projeto?",
+      "a": ""
+    },
+    {
+      "q": "Que madeiras vocês usam?",
+      "a": ""
+    }
+  ],
+  "gbpLink": null,
+  "instagramLink": "@oficinapaubrasil",
+  "primaryAction": "whatsapp",
+  "primaryActionUrl": "https://wa.me/5511987654321?text=Ol%C3%A1%21%20Vi%20o%20site%20da%20Oficina%20Pau-Brasil%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.",
+  "palette": {
+    "id": "forest-linen",
+    "primary": "#2d5a45",
+    "secondary": "#eef1ea",
+    "accent": "#2d5a45",
+    "background": "#f7f6f1",
+    "text": "#1d211c"
+  },
+  "fontPair": {
+    "id": "newsreader-public-sans",
+    "display": "Newsreader",
+    "body": "Public Sans",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap"
+  },
+  "layoutVariant": 1,
+  "heroStyle": "split-text-left",
+  "cardStyle": "card-minimal",
+  "aboutStyle": "about-split",
+  "photos": [
+    "/_fixtures/retrato-luz-janela.jpg",
+    "/_fixtures/corredor-marmore.jpg",
+    "/_fixtures/eucalipto-luz-rasante.jpg"
+  ],
+  "logoPath": null,
+  "gbpData": null,
+  "copyBlocks": {
+    "heroHeadline": "Marcenaria desenhada para o seu imóvel",
+    "heroSubheadline": "Projetamos, produzimos e instalamos cozinhas, closets e estantes em Pinheiros e arredores, com medição no local.",
+    "aboutText": "A Oficina Pau-Brasil trabalha com madeira maciça e MDF de reflorestamento.\n\nCada projeto começa com a medição no imóvel e termina com a instalação feita pela mesma equipe que produziu as peças.",
+    "serviceDescriptions": {
+      "Cozinhas sob medida": "Projeto a partir da planta e da rotina da casa, com ferragens de amortecimento.",
+      "Closets e dormitórios": "Divisões internas pensadas para o que você guarda.",
+      "Home office": "Bancadas e estantes no tamanho do espaço disponível.",
+      "Painéis e estantes": "Painéis ripados, nichos e estantes para salas e corredores.",
+      "Restauro de móveis": "Recuperação de estrutura e acabamento de peças antigas."
+    },
+    "faqAnswers": {
+      "Qual o prazo de entrega?": "Combinado após a medição; depende do tamanho do projeto e da madeira escolhida.",
+      "Vocês fazem o projeto?": "Sim. O projeto é feito por nós e aprovado por você antes da produção.",
+      "Que madeiras vocês usam?": "Madeira maciça certificada e MDF de reflorestamento, conforme o uso de cada peça."
+    },
+    "sourceFacts": {}
+  },
+  "selfEditSheetUrl": null,
+  "updatedAt": "2026-11-04",
+  "animationProfile": "minimal",
+  "signatureElementEnabled": false,
+  "jsonLd": {}
+}

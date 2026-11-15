@@ -1,0 +1,95 @@
+{
+  "projectId": "fixture-fisio",
+  "slug": "fisio-movimento",
+  "vertical": "fisioterapia-pilates",
+  "businessName": "Movimento Fisioterapia",
+  "address": "Rua Padre Chagas, 200 — Moinhos de Vento, Porto Alegre - RS",
+  "phone": "51999887766",
+  "hours": "Seg–Sex 7h–21h",
+  "hoursArray": [],
+  "neighborhoods": [
+    "Moinhos de Vento",
+    "Independência",
+    "Bom Fim"
+  ],
+  "services": [
+    {
+      "name": "Fisioterapia ortopédica",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Pilates clínico",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "Reabilitação pós-cirúrgica",
+      "description": "",
+      "price": null
+    },
+    {
+      "name": "RPG",
+      "description": "",
+      "price": null
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Preciso de pedido médico?",
+      "a": ""
+    },
+    {
+      "q": "Atendem convênio?",
+      "a": ""
+    }
+  ],
+  "gbpLink": null,
+  "instagramLink": null,
+  "primaryAction": "form",
+  "primaryActionUrl": "/contato",
+  "palette": {
+    "id": "ivory-espresso",
+    "primary": "#5e6055",
+    "secondary": "#e9e1d5",
+    "accent": "#292720",
+    "background": "#f4efe8",
+    "text": "#292720"
+  },
+  "fontPair": {
+    "id": "fraunces-manrope",
+    "display": "Fraunces",
+    "body": "Manrope",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600&display=swap"
+  },
+  "layoutVariant": 1,
+  "heroStyle": "editorial-asymmetric",
+  "cardStyle": "card-shadow",
+  "aboutStyle": "about-credentials",
+  "photos": [
+    "/_fixtures/eucalipto-luz-rasante.jpg"
+  ],
+  "logoPath": null,
+  "gbpData": null,
+  "copyBlocks": {
+    "heroHeadline": "Fisioterapia com avaliação antes de qualquer exercício",
+    "heroSubheadline": "Atendimento individual no Moinhos de Vento. O plano é definido na primeira sessão, a partir da sua avaliação.",
+    "aboutText": "A Movimento atende com hora marcada e um fisioterapeuta por paciente em cada sessão.",
+    "serviceDescriptions": {
+      "Fisioterapia ortopédica": "Tratamento de dores e lesões de coluna, ombro, joelho e tornozelo.",
+      "Pilates clínico": "Exercícios em aparelhos, prescritos e acompanhados por fisioterapeuta.",
+      "Reabilitação pós-cirúrgica": "Retorno gradual ao movimento, em contato com o seu cirurgião.",
+      "RPG": "Reeducação postural global em sessões individuais."
+    },
+    "faqAnswers": {
+      "Preciso de pedido médico?": "Não é obrigatório para a avaliação. Se você tiver exames, traga na primeira sessão.",
+      "Atendem convênio?": "Atendemos particular e emitimos recibo para reembolso."
+    },
+    "sourceFacts": {}
+  },
+  "selfEditSheetUrl": null,
+  "updatedAt": "2026-11-04",
+  "animationProfile": "minimal",
+  "signatureElementEnabled": false,
+  "jsonLd": {}
+}
