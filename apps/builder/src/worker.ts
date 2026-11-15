@@ -10,6 +10,7 @@ import {
 } from "./supabase.js";
 import { generateSiteConfig } from "./generate-config.js";
 import { deployToVercel } from "./vercel-deploy.js";
+import { checkConfig, checkDeployment, loadBannedPhrases, mergeResults } from "./qa.js";
 import { pickReferenceSite, referenceSiteFromDb, type StyleGroup, type ReferenceSite } from "./reference-sites.js";
 
 const PLATFORM_URL = process.env.VITRINE72_PLATFORM_URL!;
@@ -82,6 +83,12 @@ export async function processProject(projectId: string): Promise<void> {
 
     console.log(`[worker] Config generated: "${siteConfig.copyBlocks.heroHeadline}"`);
 
+    // QA part 1: content, compliance and contrast. A failure does not stop the
+    // deploy (the operator needs the preview to review it); it only stops the
+    // platform from sending the preview to the client.
+    const configQa = checkConfig(siteConfig, loadBannedPhrases());
+    console.log(`[worker] Config QA: ${configQa.passed ? "passed" : `FAILED\n  - ${configQa.blocking_issues.join("\n  - ")}`}`);
+
     // 5. Deploy to Vercel
     console.log(`[worker] Deploying to Vercel...`);
     const { deploymentId, previewUrl } = await deployToVercel({
@@ -93,6 +100,11 @@ export async function processProject(projectId: string): Promise<void> {
     });
 
     console.log(`[worker] Deployed: ${previewUrl}`);
+
+    // QA part 2: every template route responds and renders this business.
+    const deployQa = await checkDeployment(previewUrl, siteConfig.businessName);
+    const qa = mergeResults(configQa, deployQa);
+    console.log(`[worker] QA ${qa.passed ? "passed" : `FAILED (${qa.blocking_issues.length} issues)`}`);
 
     // 6. Store generated_sites record
     await supabase.from("generated_sites").insert({
@@ -106,7 +118,8 @@ export async function processProject(projectId: string): Promise<void> {
       build_path: `v72-${projectId.slice(0, 8)}`,
     });
 
-    // 7. Notify platform — this transitions to preview_sent and emails client
+    // 7. Notify platform. Only a passed QA moves the project to preview_sent
+    // (which emails the client); otherwise it stays in qa for the operator.
     console.log(`[worker] Notifying platform...`);
     const notifyRes = await fetch(
       `${PLATFORM_URL}/api/ops/projects/${projectId}/deploy`,
@@ -120,8 +133,9 @@ export async function processProject(projectId: string): Promise<void> {
           preview_url: previewUrl,
           generated_site_id: deploymentId,
           qa: {
-            passed: true,
-            checks: { builder: "automated", reference: referenceSite.id },
+            passed: qa.passed,
+            checks: { ...qa.checks, reference: referenceSite.id },
+            blocking_issues: qa.blocking_issues,
           },
         }),
       }

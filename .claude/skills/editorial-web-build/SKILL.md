@@ -1,17 +1,30 @@
 ---
 name: editorial-web-build
-description: Vitrini72's directive for designing and building client websites that look professionally art-directed rather than AI-generated or template-made. Use whenever building, redesigning, reviewing or generating a website, landing page, demo site or site template, including changes to apps/client-site, apps/builder, packages/site-template or any apps/* demo, and whenever writing site copy, choosing palettes or fonts, or judging whether a site "looks AI". Also use to audit an existing site against the framework.
+description: Directive for designing, building or refining websites so they look professionally art-directed rather than AI-generated or template-made. Niche- and brand-agnostic. Use whenever building, redesigning, refining, reviewing or generating a website, landing page, demo site or site template (any framework, any niche), whenever writing site copy, choosing palettes or fonts, or judging whether a site "looks AI". Has two modes, new build and refine an existing brand (keep logo, colours, fonts and copy; fix composition, components, motion, accessibility and engineering). Includes an audit script for AI/template patterns.
 ---
 
-# Editorial Web Build — Vitrini72 directive
+# Editorial Web Build
 
-The goal: a visitor and a prospective client should believe a senior independent studio designed the site by hand for this one business. Every rule below exists because its opposite is a recognisable tell of AI or template output.
+The goal: a visitor should believe a senior independent studio designed the site by hand for this one business. Every rule below exists because its opposite is a recognisable tell of AI or template output. Nothing here assumes a niche, a brand or a framework; examples are illustrations, not defaults.
 
-Reference implementation: `apps/aurea` (docs in `apps/aurea/docs/`).
+Audit script: `audit.sh` in this skill's folder (`bash <skill-dir>/audit.sh <source-dir>`).
+
+## Choose the mode first
+
+| | **New build** | **Refine an existing brand** |
+|---|---|---|
+| When | New site, new demo, generated client site | Live site whose identity the owner wants kept |
+| Brand (logo, colours, fonts) | Designed in the Design-system phase | **Frozen.** Read from the existing tokens/CSS. Only add derived tokens (e.g. a darker shade to pass contrast) and document them |
+| Copy | Written in the Brief/Copy phases | **Frozen.** Do not rewrite, shorten or "improve" text without explicit approval. Layout may change; words may not |
+| What changes | Everything | Composition, component patterns (cards → rules/lists), button and badge shapes, motion, spacing, type *scale* (not families), accessibility, performance, engineering structure |
+| First deliverable | Brief + plan | Audit: screenshots, `audit.sh` results, a written list of proposed changes per page, and what stays untouched |
+| Risk control | — | Change one page/section per commit; keep URLs, metadata, tracking, forms and integrations byte-for-byte unless asked; screenshot before and after |
+
+In refine mode, if a brand element itself is a banned pattern (e.g. the brand colour *is* a gradient), keep it and flag it to the owner rather than silently replacing it.
 
 ## 0. Non-negotiables
 
-1. **Never fabricate.** No invented reviews, ratings, testimonials, before/after images, credentials, registration numbers (CRM/CRO/CREFITO…), years in business, addresses, phone numbers or client counts. Real data comes from the client or the business's public profiles. Missing data becomes a visible, typed placeholder, not a plausible fake.
+1. **Never fabricate.** No invented reviews, ratings, testimonials, before/after images, credentials, professional registration numbers, years in business, addresses, phone numbers or client counts. Real data comes from the client or the business's public profiles. Missing data becomes a visible, typed placeholder, not a plausible fake.
 2. **Never claim a check you did not run.** "QA passed" means commands were executed and screenshots exist. If a step was skipped, say so.
 3. **A successful build is not proof of good design.** Look at screenshots of the real page at desktop and mobile before calling any visual phase done.
 
@@ -24,7 +37,7 @@ Work in phases. Each phase ends with a deliverable and a gate; do not proceed un
 | Audit | What exists (framework, deps, conventions, git) | Nothing overwritten without understanding it |
 | Brief | Audience, positioning, visitor intents, scope, constraints | Every route has a purpose and a next step |
 | References | What 3–6 relevant sites do well and what not to copy | If a reference is unreachable, record that; never invent observations |
-| Design system | Tokens, type scale, layout grid, motion rules (documented) | Contrast checked numerically, one structural idea defined |
+| Design system | Tokens, type scale, layout grid, motion rules (documented). Refine mode: extract existing tokens instead of inventing them | Contrast checked numerically, one structural idea defined |
 | Foundation | Layout, header, mobile nav, footer, buttons, config, conversion utility | Zero overflow at 360/390/768/1440, keyboard-operable nav |
 | **Hero + first two sections** | Real imagery, real copy | **Visual review gate:** screenshots reviewed; if it looks generic, recompose before continuing — never compensate with decoration or animation |
 | Rest of pages | Data-driven pages from structured content | Every route renders and links resolve |
@@ -34,7 +47,7 @@ Work in phases. Each phase ends with a deliverable and a gate; do not proceed un
 
 ## 2. Visual identity
 
-**Derive one structural idea from the brand** and let it organise layout (e.g. ÁUREA = golden ratio column split). One idea, used consistently, reads as intentional; many decorative ideas read as generated.
+**Derive one structural idea from the brand** and let it organise layout (e.g. a clinic named after the golden ratio uses a 1.618 : 1 column split; a joinery workshop might use a strict modular grid; a law firm a numbered-clause rhythm). One idea, used consistently, reads as intentional; many decorative ideas read as generated.
 
 **Colour**
 - Start from the brand, not from a preset palette menu. 4–6 colours total; any section uses at most two plus one accent.
@@ -84,17 +97,17 @@ Run `.claude/skills/editorial-web-build/audit.sh <dir>` to detect most of these 
 
 ## 4. Copy
 
-- Native language, written for the audience (pt-BR for Brazil); never translated-sounding.
+- Written natively in the audience's language; never translated-sounding.
 - Specific nouns and concrete next steps; short sentences; no superlatives.
-- Banned phrases live in `config/banned-phrases.json` and must be enforced by code, not just listed. Typical offenders: "realce sua melhor versão", "qualidade e excelência", "soluções inovadoras", "transforme sua vida", "resultados garantidos".
-- Regulated sectors (medicine, dentistry, aesthetics, physiotherapy, law): no promises, no outcome claims, no before/after, no testimonials or ratings in contexts where the professional council restricts them (e.g. CFM Res. 2.336/2023, CFO rules). Show the responsible professional. Mark medical copy for professional review in the content model.
+- Keep a banned-phrase list per language in the project and enforce it in code (a test or build check), not just in a document. Typical pt-BR offenders: "qualidade e excelência", "soluções inovadoras", "transforme sua vida", "resultados garantidos"; English: "elevate your", "unlock", "seamless", "cutting-edge", "your journey".
+- Regulated sectors (health, dentistry, aesthetics, physiotherapy, law, finance): no promises, no outcome claims, no before/after, no testimonials or ratings where the professional body restricts them (in Brazil e.g. CFM Res. 2.336/2023, CFO rules, OAB rules). Show the responsible professional. Mark regulated copy for professional review in the content model.
 
 ## 5. Conversion
 
-- Primary action is contextual: WhatsApp messages say which page/service the visitor came from. Build every WhatsApp URL in one utility with validation and unit tests.
+- Use the channel the market actually converts on (WhatsApp in Brazil, phone/booking/forms elsewhere). The primary action is contextual: the prefilled message or form says which page/service the visitor came from. Build every such URL in one utility with validation and unit tests.
 - Serve three intents: decided (act in ≤ 2 taps), researching (explain and compare), evaluating trust (people, place, process).
 - Every page ends with a next step. Floating/sticky CTAs never cover content, form fields or browser UI; on mobile use one, not both.
-- Forms collect the minimum, have real labels, accessible errors, honest success states ("we will contact you", never "booked" without a booking system), and LGPD consent.
+- Forms collect the minimum, have real labels, accessible errors, honest success states ("we will contact you", never "booked" without a booking system), and the consent the local privacy law requires (LGPD, GDPR, …).
 - Analytics through one abstraction with an allow-list of non-personal parameters; no-op without a provider.
 
 ## 6. Engineering
