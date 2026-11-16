@@ -45,8 +45,8 @@ export function hero(seasonal: boolean) {
       ? `Sua campanha de fim de ano no ar em ${o.deliveryHours} horas.`
       : "Mais pedidos de avaliação com o público que a clínica já tem.",
     lead: seasonal
-      ? "E mais pedidos de avaliação para o seu procedimento principal, vindos de quem já segue a clínica no Instagram e a encontra no Google. Sem anúncio. Tudo contado."
-      : `Uma página para o seu procedimento principal no ar em ${o.deliveryHours} horas, alimentada pelo Instagram e pelo Google da clínica. Sem anúncio. Tudo contado.`,
+      ? "E mais pedidos de avaliação para o seu procedimento principal, vindos de quem já segue a clínica no Instagram e a encontra no Google. Tudo contado."
+      : `Uma página para o seu procedimento principal no ar em ${o.deliveryHours} horas, alimentada pelo Instagram e pelo Google da clínica. Tudo contado.`,
     seasonNote: seasonal
       ? `A Black Friday é em ${fmtDate(o.blackFriday)} e a procura de verão vem logo depois.`
       : null,
@@ -109,7 +109,6 @@ export const included = {
   notNeeded: [
     "Passar dados de pacientes.",
     "Dar acesso ao WhatsApp.",
-    "Pagar anúncio.",
     "Mudar o jeito que a recepção trabalha.",
   ],
 };
@@ -186,10 +185,6 @@ export const faq = {
     {
       q: "Recebi uma prévia com o nome da minha clínica. O que é isso?",
       a: "Um rascunho montado a partir do perfil público da clínica no Google, para você ver como ficaria. Ele não aparece em buscas e apagamos no mesmo dia se você pedir.",
-    },
-    {
-      q: "Preciso investir em anúncio?",
-      a: "Não. O pacote trabalha com o público que a clínica já tem. Gestão de anúncios não faz parte da oferta.",
     },
     {
       q: "Vocês vão acessar o WhatsApp ou dados de pacientes?",
