@@ -7,6 +7,7 @@ export function GET(): NextResponse {
 
   const pages = [
     { loc: "/", priority: "1.0", changefreq: "weekly" },
+    { loc: "/clinicas", priority: "0.9", changefreq: "weekly" },
     { loc: "/#como-funciona", priority: "0.8", changefreq: "monthly" },
     { loc: "/#o-que-vem", priority: "0.8", changefreq: "monthly" },
     { loc: "/#portfolio", priority: "0.7", changefreq: "monthly" },

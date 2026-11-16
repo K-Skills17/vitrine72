@@ -184,3 +184,52 @@ export function getPrice(
       return null;
   }
 }
+
+// ─── Aesthetic clinic offer (docs: Vitrine72 Aesthetic Clinic Offer Playbook) ─
+//
+// One package, one payment, 90 days included. Sold on the owner call and paid
+// by PIX; the /clinicas page shows the price and sends the visitor to WhatsApp.
+
+export const CLINIC_OFFER = {
+  sku: "CLINIC_CAMPAIGN_90D",
+  label: "Campanha de avaliações para clínicas de estética",
+  /** Founding price for the first `foundingSpots` clinics. */
+  priceFounding: 1797,
+  priceFull: 3147,
+  foundingSpots: 10,
+  /**
+   * Founding spots already sold. UPDATE BY HAND after each founding sale;
+   * the page shows the real remainder and switches to the full price at 0.
+   */
+  foundingSold: 0,
+  deliveryHours: 72,
+  includedDays: 90,
+  guaranteeDays: 30,
+  /** Days on which the weekly count is reported. */
+  reportDays: [7, 14, 21, 30],
+  /**
+   * Guaranteed evaluation requests in 30 days, picked by the higher of the
+   * owner's Instagram profile visits or Google profile views (last 30 days).
+   * Starting values, kept low on purpose; recalibrate after the first 5 clinics.
+   */
+  guaranteeTiers: [
+    { minViews: 3001, requests: 20 }, // "over 3,000"
+    { minViews: 1000, requests: 10 }, // "between 1,000 and 3,000"
+  ],
+  /** Below this in both channels no guarantee is offered. */
+  guaranteeMinViews: 1000,
+  /** Lead angle: end-of-year campaign until this date (inclusive), then the procedure angle. */
+  seasonalAngleUntil: "2026-12-31",
+  blackFriday: "2026-11-27",
+} as const;
+
+/** Guaranteed requests for a clinic's higher 30-day view count, or null if below the minimum. */
+export function clinicGuarantee(views: number): number | null {
+  const tier = CLINIC_OFFER.guaranteeTiers.find((t) => views >= t.minViews);
+  return tier ? tier.requests : null;
+}
+
+/** Founding spots still available (never negative). */
+export function clinicFoundingLeft(): number {
+  return Math.max(0, CLINIC_OFFER.foundingSpots - CLINIC_OFFER.foundingSold);
+}
