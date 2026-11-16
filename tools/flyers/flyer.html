@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- Flyer template, rendered to a 1080x1350 PNG by render.cjs. Double-brace tokens are filled per clinic. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F2ED; --card: #FBFAF7; --ink: #141414; --muted: #5C5A54; --line: #DAD6CD;
+    --signal: #C8381C; --signal-dark: #A42D16;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Schibsted Grotesk", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .pad { padding-left: 84px; padding-right: 84px; }
+
+  header { display: flex; justify-content: space-between; align-items: baseline; gap: 40px; padding-top: 64px; }
+  .brand { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .brand b { color: var(--signal); font-weight: 700; }
+  .for { font-size: 18px; line-height: 1.45; color: var(--muted); text-align: right; max-width: 560px;
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .for strong { color: var(--ink); font-weight: 500; }
+
+  .kicker { margin-top: 60px; font-size: 20px; color: var(--muted); display: flex; align-items: center; gap: 14px; }
+  .kicker::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--signal); }
+  h1 { margin-top: 22px; font-size: 70px; line-height: 1.0; font-weight: 600; letter-spacing: -.035em; }
+  .lead { margin-top: 26px; font-size: 28px; line-height: 1.4; color: var(--muted); max-width: 860px; }
+
+  ol { list-style: none; margin-top: 40px; border-top: 2px solid var(--ink); }
+  li { display: grid; grid-template-columns: 72px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 25px; line-height: 1.35; }
+  li .n { font-size: 20px; color: var(--signal-dark); padding-top: 5px; }
+
+  .band { margin-top: auto; background: var(--ink); color: var(--paper); padding: 32px 84px 26px; font-size: 18px; display: flex; flex-wrap: nowrap; gap: 0 18px; white-space: nowrap; }
+  .band span + span::before { content: "·"; margin-right: 18px; color: #8a8780; }
+
+  footer { background: var(--ink); color: var(--paper); padding: 10px 84px 60px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+  .who { font-size: 22px; color: #C9C6BE; }
+  .name { margin-top: 8px; font-size: 44px; font-weight: 600; letter-spacing: -.02em; color: var(--paper); }
+  .phone { margin-top: 6px; font-size: 40px; font-weight: 500; color: var(--paper); }
+  .phone small { font-size: 22px; color: #C9C6BE; font-weight: 400; margin-right: 12px; }
+  .legal { text-align: right; font-size: 17px; line-height: 1.6; color: #C9C6BE; }
+  .nolink { margin-top: 14px; font-size: 21px; color: var(--paper); }
+</style>
+</head>
+<body>
+  <header class="pad">
+    <p class="brand">Vitrini<b>72</b></p>
+    <p class="for mono">{{forLine}}</p>
+  </header>
+
+  <section class="pad">
+    <p class="kicker mono">{{kicker}}</p>
+    <h1>Quantas pessoas viram o Instagram da clínica este mês e não pediram avaliação?</h1>
+    <p class="lead">Em 15 minutos, com o celular da clínica na mão, mostramos onde esses pedidos se perdem e como trazer mais deles, sem anúncio.</p>
+
+    <ol>
+      <li><span class="n mono">01</span><span>Você abre o painel do Instagram e lê dois números.</span></li>
+      <li><span class="n mono">02</span><span>Mostramos a diferença entre quem vê a clínica e quem pede avaliação.</span></li>
+      <li><span class="n mono">03</span><span>Você vê como ficaria a campanha da sua clínica e decide se faz sentido.</span></li>
+    </ol>
+  </section>
+
+  <div class="band mono">
+    <span>No ar em 72 horas</span><span>Sem anúncio</span><span>Cada pedido contado</span><span>Com garantia</span>
+  </div>
+  <footer>
+    <div>
+      <p class="who">Para marcar os 15 minutos, fale com</p>
+      <p class="name">{{sellerName}}</p>
+      <p class="phone"><small class="mono">WhatsApp</small>{{phone}}</p>
+      <p class="nolink">Sem link para clicar: é só responder esta mensagem.</p>
+    </div>
+    <p class="legal mono">Vitrini72<br>CNPJ {{cnpj}}<br>{{domain}}</p>
+  </footer>
+</body>
+</html>
