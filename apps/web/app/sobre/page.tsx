@@ -137,7 +137,7 @@ export default function SobrePage() {
             </p>
             <div className="pt-4">
               <a
-                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "5511946827777"}`}
+                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP ?? "5511953542831"}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-gold inline-flex items-center gap-2"
