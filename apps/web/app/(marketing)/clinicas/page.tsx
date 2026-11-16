@@ -6,7 +6,7 @@ import { ClinicPage } from "@/components/clinicas/ClinicPage";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: { absolute: "Vitrini72 para clínicas de estética — mais pedidos de avaliação, sem anúncio" },
+  title: { absolute: "Vitrini72 para clínicas de estética — mais pedidos de avaliação" },
   description:
     "Página de campanha, Instagram e Google da clínica trabalhando juntos, atendente virtual e contagem semanal de pedidos de avaliação. No ar em 72 horas, com garantia.",
   alternates: { canonical: "/clinicas" },

@@ -1,0 +1,9 @@
+{
+  "_comment": "Flyer settings. sellerName is the person who calls and replies; use a real name. whatsapp is digits only (55 + DDD + number).",
+  "sellerName": "Stephen Komando",
+  "whatsapp": "5511953542831",
+  "cnpj": "46.337.446/0001-07",
+  "domain": "vitrini72.com.br",
+  "seasonalUntil": "2026-12-31",
+  "blackFriday": "27/11"
+}
